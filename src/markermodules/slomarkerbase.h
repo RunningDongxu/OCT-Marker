@@ -36,6 +36,10 @@ namespace OctData
 	class CoordSLOpx;
 };
 
+/** \ingroup MarkerModule
+ *  \brief Interface class for the SLO marker modules
+ *
+ */
 class SloMarkerBase : public QObject
 {
 	Q_OBJECT

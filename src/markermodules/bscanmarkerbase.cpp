@@ -27,7 +27,7 @@
 #include<opencv/cv.hpp>
 
 #include <manager/octmarkermanager.h>
-#include<data_structure/markercommand.h>
+#include<markermodules/markercommand.h>
 
 std::size_t BscanMarkerBase::getActBScanNr() const
 {

@@ -22,7 +22,11 @@
 #include <boost/property_tree/ptree_fwd.hpp>
 
 class SloObjectMarker;
-
+/**
+ *  @ingroup SloObjectsModule
+ *  @brief SLO objects module IO functions
+ *
+ */
 class SloObjectsPtree
 {
 public:

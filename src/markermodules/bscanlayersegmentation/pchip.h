@@ -20,6 +20,11 @@
 
 #include<data_structure/point2d.h>
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief calculate the pchip interpolation from control points
+ *
+ */
 class PChip
 {
 	std::vector<double> values;

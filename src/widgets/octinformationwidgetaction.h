@@ -21,6 +21,11 @@
 
 #include<QWidgetAction>
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class OctInformationWidgetAction: public QWidgetAction
 {
 	Q_OBJECT

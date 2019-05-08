@@ -24,6 +24,11 @@
 
 class PaintSegLine;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Marching square algorithm to extract a conture from the free from segmentation data structure
+ *
+ */
 class SimpleMarchingSquare
 {
 public:

@@ -24,6 +24,11 @@
 
 #include <ui_aboutdialog.h>
 
+
+/**
+ * @ingroup Windows
+ * @brief The about dialog with program and license informations
+ */
 class AboutDialog : public QDialog, public Ui::AboutDialog
 {
 	Q_OBJECT
@@ -37,6 +42,11 @@ public slots:
 
 class QWidget;
 
+
+/**
+ * @ingroup Windows
+ * @brief Collection of info dialogs (at the moment only the about dialog)
+ */
 class InfoDialogs : public QObject
 {
 	Q_OBJECT

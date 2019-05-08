@@ -16,6 +16,13 @@
  *
  */
 
+/** \ingroup MarkerModule
+ *  \defgroup ObjectsMarkerModule Objects marker module
+ *  \brief Create marker objects (actually only rects with one category) on B-scans
+ *
+ */
+
+
 #ifndef OBJECTSMARKER_H
 #define OBJECTSMARKER_H
 
@@ -38,6 +45,11 @@ class QGraphicsItem;
 class WidgetObjectMarker;
 
 
+/**
+ *  @ingroup ObjectsMarkerModule
+ *  @brief Main class of the objects marker module
+ *
+ */
 class Objectsmarker : public BscanMarkerBase
 {
 	Q_OBJECT

@@ -20,7 +20,10 @@
 
 #include<QSlider>
 
-
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class DoubleSlider : public QSlider
 {
 	Q_OBJECT

@@ -25,6 +25,12 @@
 
 
 
+/**
+ * @ingroup Algos
+ * @brief Transform the unorderd conture to a set of orderd contures
+ *
+ * In the orderd contures is the next list element the neighbor element of this element
+ */
 class OrderdContures2D
 {
 	const std::vector<Line2D  >& lines;

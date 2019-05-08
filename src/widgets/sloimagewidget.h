@@ -45,6 +45,11 @@ class QWheelEvent;
 
 class SloCoordTranslator;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class SLOImageWidget : public CVImageWidget
 {
 	Q_OBJECT

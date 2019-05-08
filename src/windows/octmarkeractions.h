@@ -29,6 +29,11 @@ class BScanMarkerWidget;
 class CVImageWidget;
 
 
+/**
+ * @ingroup General
+ * @brief Actions that need the original and the simple version of OCT-Marker
+ *
+ */
 class OctMarkerActions : public QObject
 {
 	Q_OBJECT

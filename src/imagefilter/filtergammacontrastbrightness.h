@@ -23,6 +23,11 @@
 
 #include <cstdint>
 
+/**
+ * @ingroup ImageFilter
+ * @brief Change the gamma, contrast and brightness of a image
+ *
+ */
 class FilterGammaContrastBrightness : public FilterImage
 {
 public:

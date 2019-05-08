@@ -33,6 +33,11 @@
 class QRubberBand;
 
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Editing layer segmentation with the control points of a pchip spline
+ *
+ */
 class EditSpline : public EditBase
 {
 public:

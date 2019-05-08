@@ -33,6 +33,11 @@ class ScanClassifier;
 
 class ClassifierMarkerProxy;
 
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief The control widget for the classifier module
+ *
+ */
 class WGScanClassifier : public QWidget
 {
 	void addProxys2Layout(ScanClassifier::ClassifierProxys& proxyList, QLayout& layout);

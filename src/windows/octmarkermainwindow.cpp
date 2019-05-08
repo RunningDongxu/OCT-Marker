@@ -18,6 +18,10 @@
 
 #include "octmarkermainwindow.h"
 
+#include <boost/exception/exception.hpp>
+#include <boost/exception/diagnostic_information.hpp>
+#include <boost/algorithm/string/join.hpp>
+
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -26,11 +30,16 @@
 #include <QStringList>
 #include <QSignalMapper>
 #include <QtGui>
-
 #include <QActionGroup>
 #include <QProgressBar>
 #include <QStatusBar>
 #include <QPushButton>
+
+#include <oct_cpp_framework/cvmat/treestructbin.h>
+
+#include <octdata/datastruct/series.h>
+#include <octdata/octfileread.h>
+#include <octdata/filereadoptions.h>
 
 #include <widgets/wgsloimage.h>
 #include <widgets/bscanmarkerwidget.h>
@@ -42,36 +51,24 @@
 #include <widgets/dwdebugoutput.h>
 #include <widgets/sloimagewidget.h>
 #include <widgets/bscanchooserspinbox.h>
+#include <widgets/wgoctmarkers.h>
+#include <widgets/dwimagecoloradjustments.h>
 
-#include <data_structure/intervalmarker.h>
 #include <data_structure/programoptions.h>
 
 #include <manager/octmarkermanager.h>
 #include <manager/octdatamanager.h>
 #include <manager/octmarkerio.h>
+#include <manager/paintmarker.h>
+
 #include <markermodules/bscanmarkerbase.h>
 
 #include <model/octfilesmodel.h>
 #include <model/octdatamodel.h>
 #include <model/paintmarkermodel.h>
 
-#include <octdata/datastruct/series.h>
-#include <octdata/octfileread.h>
-#include <octdata/filereadoptions.h>
-
-#include <boost/exception/exception.hpp>
-#include <boost/exception/diagnostic_information.hpp>
-
-#include <boost/algorithm/string/join.hpp>
-
-#include <oct_cpp_framework/cvmat/treestructbin.h>
-
 #include <globaldefinitions.h>
 
-#include <widgets/dwimagecoloradjustments.h>
-
-#include <widgets/wgoctmarkers.h>
-#include <manager/paintmarker.h>
 
 DWDebugOutput* OCTMarkerMainWindow::dwDebugOutput = nullptr;
 

@@ -16,13 +16,20 @@
  *
  */
 
+
+/** \ingroup MarkerModule
+ *  \defgroup IntervallMarker Intervall marker
+ *  \brief Mark intervalls of A-scans on B-Scans
+ */
+
+
 #ifndef BSCANQUALITYMARKER_H
 #define BSCANQUALITYMARKER_H
 
 #include "../bscanmarkerbase.h"
 
 #include <boost/icl/interval_map.hpp>
-#include <data_structure/intervalmarker.h>
+#include"intervalmarker.h"
 #include"intervalllegend.h"
 #include <vector>
 
@@ -37,6 +44,11 @@ class ScaleFactor;
 class WidgetOverlayLegend;
 
 
+/**
+ *  @ingroup IntervallMarker
+ *  @brief IntervallMarker main class
+ *
+ */
 class BScanIntervalMarker : public BscanMarkerBase
 {
 	Q_OBJECT

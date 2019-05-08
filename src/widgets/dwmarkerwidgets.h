@@ -27,6 +27,11 @@
 class OctMarkerManager;
 class BscanMarkerBase;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class DWMarkerWidgets : public QDockWidget
 {
 	Q_OBJECT

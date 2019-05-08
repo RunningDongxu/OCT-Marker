@@ -36,8 +36,7 @@
 #include <markermodules/bscanmarkerbase.h>
 #include <markermodules/slomarkerbase.h>
 
-#include <data_structure/intervalmarker.h>
-#include <data_structure/programoptions.h>
+#include<data_structure/programoptions.h>
 #include<data_structure/rect2d.h>
 
 #include<helper/slocoordtranslator.h>

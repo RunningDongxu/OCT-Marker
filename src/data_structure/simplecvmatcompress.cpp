@@ -20,17 +20,17 @@
 
 #include <opencv/cv.h>
 
+/// @todo add a check of the datatype of mat
 void SimpleCvMatCompress::readFromMat(const cv::Mat& mat)
 {
-	// TODO: check datatype
 	SimpleMatCompress::readFromMat(mat.ptr<uint8_t>(), mat.rows, mat.cols);
 }
 
 
+/// @todo add a check of the datatype of mat
 void SimpleCvMatCompress::writeToMat(cv::Mat& mat) const
 {
 	mat.create(getRows(), getCols(), cv::DataType<uint8_t>::type);
-	// TODO: check datatype
 	SimpleMatCompress::writeToMat(mat.ptr<uint8_t>(), mat.rows, mat.cols);
 }
 

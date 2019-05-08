@@ -24,6 +24,11 @@
 
 #include <data_structure/scalefactor.h>
 
+/**
+ * @ingroup HelperClasses
+ * @brief Convert the SLO coordinates (mm) to the pixelspace, it handel the actual scale factor
+ *
+ */
 class SloCoordTranslator
 {
 	OctData::ScaleFactor divide(const OctData::ScaleFactor& osf, const ScaleFactor& isf)

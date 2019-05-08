@@ -28,6 +28,11 @@ namespace OctData { class Series; }
 
 class SloBScanDistanceMap;
 
+/**
+ *  @ingroup IntervallMarker
+ *  @brief Slo image from IntervallMarker (like thicknessmap)
+ *
+ */
 class SloIntervallMap
 {
 public:

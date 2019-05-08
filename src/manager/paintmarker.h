@@ -29,6 +29,11 @@ class QRect;
 
 class BScanMarkerWidget;
 
+/**
+ * @ingroup Manager
+ * @brief
+ *
+ */
 class PaintMarker : public QObject
 {
 	Q_OBJECT

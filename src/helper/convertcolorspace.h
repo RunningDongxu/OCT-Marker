@@ -22,6 +22,11 @@
 
 
 
+/**
+ * @ingroup HelperClasses
+ * @brief Convert from HSV to RGB color space
+ *
+ */
 inline void hsv2rgb(double h, double s, double v, double& r, double& g, double& b)
 {
 	const int hi = static_cast<int>(h/60);
@@ -58,6 +63,11 @@ inline void hsv2rgb(double h, double s, double v, double& r, double& g, double& 
 	}
 }
 
+/**
+ * @ingroup HelperClasses
+ * @brief Convert from HSV to RGB color space
+ *
+ */
 inline std::tuple<double, double, double> hsv2rgb(double h, double s, double v)
 {
 	double r, g, b;

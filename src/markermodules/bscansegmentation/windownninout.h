@@ -30,6 +30,12 @@ namespace cv
 	class Mat;
 }
 
+
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Window for show the input and output from the neuronal network of free form segmentation tool
+ *
+ */
 class WindowNNInOut : public QMainWindow
 {
 	QWidget* inoutNeuronsWidget;

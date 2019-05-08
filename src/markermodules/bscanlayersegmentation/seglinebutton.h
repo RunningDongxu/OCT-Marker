@@ -27,6 +27,11 @@
 #include"bscanlayersegmentation.h"
 
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief button that hold a segmentationline type and set this with a signal on activation
+ *
+ */
 class SegLineButton : public NumberPushButton
 {
 	Q_OBJECT;

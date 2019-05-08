@@ -16,6 +16,14 @@
  *
  */
 
+
+/** \ingroup MarkerModule
+ *  \defgroup LayerSegmentation Layer segmentations module
+ *  \brief Segment retina Layers in B-scans
+ */
+
+
+
 #ifndef BSCANLAYERSEGMENTATION_H
 #define BSCANLAYERSEGMENTATION_H
 
@@ -37,6 +45,11 @@ class EditPen;
 class Colormap;
 class ThicknessmapLegend;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief LayerSegmentation main class
+ *
+ */
 class BScanLayerSegmentation : public BscanMarkerBase
 {
 	Q_OBJECT

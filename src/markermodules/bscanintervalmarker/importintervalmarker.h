@@ -24,7 +24,11 @@
 class BScanIntervalMarker;
 class IntervalMarker;
 
-
+/**
+ *  @ingroup IntervallMarker
+ *  @brief Import and export Intervall Marker from/to bin files
+ *
+ */
 class ImportIntervalMarker
 {
 public:

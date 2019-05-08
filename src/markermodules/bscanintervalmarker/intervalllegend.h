@@ -23,7 +23,11 @@
 
 class BScanIntervalMarker;
 
-
+/**
+ *  @ingroup IntervallMarker
+ *  @brief IntervallMarker legend for latex output
+ *
+ */
 class IntervallLegend : public WidgetOverlayLegend
 {
 	const BScanIntervalMarker& marker;

@@ -23,6 +23,11 @@
 
 #include"classifiermarker.h"
 
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief Collection of the marker of the classifier module
+ *
+ */
 class DefinedClassifierMarker : QObject
 {
 	Q_OBJECT

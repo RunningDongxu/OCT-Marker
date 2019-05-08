@@ -21,6 +21,11 @@
 
 #include <QPushButton>
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class NumberPushButton : public QPushButton
 {
 	Q_OBJECT

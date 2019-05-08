@@ -24,6 +24,11 @@
 
 #include<octdata/datastruct/segmentationlines.h>
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Contain predefined thicknessmap configuration
+ *
+ */
 class ThicknessmapTemplates : QObject
 {
 	Q_OBJECT

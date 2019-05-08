@@ -24,6 +24,11 @@
 
 class QLabel;
 
+/**
+ *  @ingroup DistanceMeterModule
+ *  @brief Widget to show the value set for the distance meter module
+ *
+ */
 class DistanceMeterPositionWidget : public QWidget
 {
 	Q_OBJECT
@@ -56,6 +61,11 @@ public slots:
 	void showDistance(const Distance& d);
 };
 
+/**
+ *  @ingroup DistanceMeterModule
+ *  @brief Widget to contol and show the measurements of the distance meter module
+ *
+ */
 class WGDistanceMeter : public QWidget
 {
 	Q_OBJECT

@@ -19,12 +19,18 @@
 #ifndef DEFINEDINTERVALLMARKER_H
 #define DEFINEDINTERVALLMARKER_H
 
-#include <data_structure/intervalmarker.h>
 #include <map>
-
 
 #include <QObject>
 
+#include "intervalmarker.h"
+
+
+/**
+ *  @ingroup IntervallMarker
+ *  @brief Predefined marker for the IntervallMarker tool
+ *
+ */
 class DefinedIntervalMarker : QObject
 {
 	Q_OBJECT

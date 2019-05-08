@@ -20,6 +20,11 @@
 
 #include<QObject>
 
+/**
+ * @ingroup General
+ * @brief Fill the actions of the program options with text and icons
+ *
+ */
 class PrepareProgrammOptions : public QObject
 {
 	Q_OBJECT

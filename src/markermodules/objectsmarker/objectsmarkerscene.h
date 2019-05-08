@@ -25,6 +25,12 @@
 class RectItem;
 class ObjectsmarkerFactory;
 
+
+/**
+ *  @ingroup ObjectsMarkerModule
+ *  @brief The QGraphicsScene for the objects marker module
+ *
+ */
 class ObjectsmarkerScene : public QGraphicsScene
 {
 	Q_OBJECT

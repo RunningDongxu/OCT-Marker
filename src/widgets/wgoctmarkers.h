@@ -25,6 +25,11 @@
 class PaintMarkerModel;
 class QTableView;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class WGOctMarkers : public QWidget
 {
 	Q_OBJECT

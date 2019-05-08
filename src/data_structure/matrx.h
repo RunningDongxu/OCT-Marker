@@ -21,6 +21,11 @@
 #include<cstdint>
 #include<cassert>
 
+/**
+ * @ingroup DataStructure
+ * @brief Template matrix class with some basic access functions
+ *
+ */
 template<typename T>
 class Matrix
 {

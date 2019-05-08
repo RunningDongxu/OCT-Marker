@@ -27,7 +27,11 @@
 
 namespace boost{ namespace filesystem { class path; }}
 
-
+/**
+ * @ingroup Manager
+ * @brief
+ *
+ */
 class OctMarkerIO
 {
 	static OctMarkerFileformat getDefaultFileFormat();

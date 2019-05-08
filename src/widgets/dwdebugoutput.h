@@ -27,6 +27,10 @@ class QDialogButtonBox;
 
 class Q_DebugStream;
 
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class DWDebugOutput : public QDockWidget
 {
 	Q_OBJECT

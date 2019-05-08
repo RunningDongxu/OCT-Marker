@@ -24,6 +24,10 @@
 
 class BscanMarkerBase;
 
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class PaintMarkerItem
 {
 	bool show = false;
@@ -42,6 +46,10 @@ public:
 };
 
 
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class PaintMarkerModel : public QAbstractTableModel
 {
 	Q_OBJECT

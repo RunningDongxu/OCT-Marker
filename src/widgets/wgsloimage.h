@@ -30,6 +30,11 @@ class SLOImageWidget;
 class QGridLayout;
 
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class WgSloImage : public QMainWindow
 {
 	Q_OBJECT

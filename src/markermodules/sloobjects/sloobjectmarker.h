@@ -16,6 +16,12 @@
  *
  */
 
+/** \ingroup MarkerModule
+ *  \defgroup SloObjectsModule SLO objects module
+ *  \brief Marking the ONH on the SLO image
+ *
+ */
+
 #ifndef SLOOBJECTMARKER_H
 #define SLOOBJECTMARKER_H
 
@@ -26,6 +32,11 @@
 
 class RectItem;
 
+/**
+ *  @ingroup SloObjectsModule
+ *  @brief Main class of the SLO objects module
+ *
+ */
 class SloObjectMarker : public SloMarkerBase
 {
 	Q_OBJECT
@@ -43,7 +54,7 @@ public:
 	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree& ptree) override
 	                                                                { loadState(ptree); }
 
-	virtual bool hasChangedSinceLastSave() const           override { return false; } // TODO: implement!
+	virtual bool hasChangedSinceLastSave() const           override { return false; } ///< @todo implement this!
 
 	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
 	virtual void loadState(boost::property_tree::ptree& markerTree)  override;

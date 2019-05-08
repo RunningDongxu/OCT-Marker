@@ -21,6 +21,12 @@
 
 #include <QAction>
 
+
+/**
+ * @ingroup HelperClasses
+ * @brief A QAction that send a integer value on triggered
+ *
+ */
 class IntValueAction : public QAction
 {
 	Q_OBJECT
@@ -57,6 +63,11 @@ public slots:
 	}
 };
 
+/**
+ * @ingroup HelperClasses
+ * @brief A QAction that send a std::size_t value on triggered
+ *
+ */
 class SizetValueAction : public QAction
 {
 	Q_OBJECT

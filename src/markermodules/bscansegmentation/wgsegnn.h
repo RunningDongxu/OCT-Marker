@@ -35,6 +35,11 @@ namespace BScanSegmentationMarker
 	struct NNTrainData;
 }
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Widget class for control the neuronal network from free form segmentation tool
+ *
+ */
 class WgSegNN : public QWidget, Ui::BScanSegWidgetNN
 {
 	Q_OBJECT

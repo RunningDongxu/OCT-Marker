@@ -30,6 +30,11 @@ class QButtonGroup;
 class BScanIntervalMarker;
 class IntervalMarker;
 
+/**
+ *  @ingroup IntervallMarker
+ *  @brief Widget with the controlles for IntervallMarker
+ *
+ */
 class WGIntervalMarker : public QWidget
 {
 	Q_OBJECT;

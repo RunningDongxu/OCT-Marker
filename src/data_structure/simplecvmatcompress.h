@@ -24,6 +24,11 @@
 
 namespace cv { class Mat; }
 
+/**
+ * @ingroup DataStructure
+ * @brief Compress a OpenCV mat with a simple algorithm, good for binary mats
+ *
+ */
 class SimpleCvMatCompress : public SimpleMatCompress
 {
 public:

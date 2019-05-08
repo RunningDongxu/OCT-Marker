@@ -35,7 +35,11 @@ namespace OctData
 
 namespace bpt = boost::property_tree;
 
-
+/**
+ * @ingroup DataStructure
+ * @brief Extra static meta data for one B-scan
+ *
+ */
 class ExtraImageData
 {
 	std::vector<ContureSegment> contourSegments;
@@ -46,7 +50,13 @@ public:
 };
 
 
-
+/**
+ * @ingroup DataStructure
+ * @brief Extra static meta data for the volume
+ *
+ * Static means no dependings/connection to a marker module
+ *
+ */
 class ExtraSeriesData
 {
 public:

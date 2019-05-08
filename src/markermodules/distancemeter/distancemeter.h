@@ -17,6 +17,13 @@
  */
 
 
+/** \ingroup MarkerModule
+ *  \defgroup DistanceMeterModule Distance meter module
+ *  \brief Module for measure distances on the OCT scan (on and between B-scans)
+ *
+ */
+
+
 #pragma once
 
 #include "../bscanmarkerbase.h"
@@ -30,6 +37,11 @@ class ScaleFactor;
 
 namespace OctData { class BScan; };
 
+/**
+ *  @ingroup DistanceMeterModule
+ *  @brief Main class of the distance meter module
+ *
+ */
 class DistanceMeter : public BscanMarkerBase
 {
 	Q_OBJECT

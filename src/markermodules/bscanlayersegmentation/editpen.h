@@ -24,6 +24,11 @@
 #include<vector>
 
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Editing layer segmentation with pen
+ *
+ */
 class EditPen : public EditBase
 {
 	struct SegPoint

@@ -16,6 +16,14 @@
  *
  */
 
+/** \ingroup MarkerModule
+ *  \defgroup FreeFormSegmentation Free from segmentations module
+ *  \brief Segment things on a bscan with a free from marker (only one)
+ *
+ *  Useabel for ILM segmentation on ONH or interesting areas inside of the retina
+ */
+
+
 #ifndef BSCANSEGMENTATION_H
 #define BSCANSEGMENTATION_H
 
@@ -30,8 +38,9 @@
 
 #include <octdata/datastruct/segmentationlines.h>
 
-#include <data_structure/intervalmarker.h>
 #include <data_structure/scalefactor.h>
+
+
 
 class QAction;
 class WGSegmentation;
@@ -48,6 +57,11 @@ class BScanSegLocalOpNN;
 
 class SimpleCvMatCompress;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Free form segmentation main class
+ *
+ */
 class BScanSegmentation : public BscanMarkerBase
 {
 	Q_OBJECT

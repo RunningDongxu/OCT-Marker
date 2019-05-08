@@ -16,41 +16,24 @@
  *
  */
 
-#ifndef OCTMARKERDATA_H
-#define OCTMARKERDATA_H
-
-#include <string>
-
-#include <boost/property_tree/ptree_fwd.hpp>
+#pragma once
 
 
-class OctMarkerBScanData
+
+/** \ingroup MarkerModule
+ *  \brief Interface class for an marker command with undo and redo function
+ *
+ */
+class MarkerCommand
 {
-	boost::property_tree::ptree& ptree;
-	
 public:
-	explicit OctMarkerBScanData(boost::property_tree::ptree& ptree) : ptree(ptree) {}
+	virtual ~MarkerCommand() {}
+
+	virtual bool redo()  = 0;
+	virtual bool undo()  = 0;
+	virtual void apply() = 0;
+	int getBScan() const { return bscan; }
+
+protected:
+	int bscan = -1;
 };
-
-
-class OctMarkerData
-{
-	boost::property_tree::ptree* ptree;
-	
-public:
-	OctMarkerData();
-	~OctMarkerData();
-
-	OctMarkerData(const OctMarkerData& other) = delete;
-	OctMarkerData& operator=(const OctMarkerData& other) = delete;
-	
-	OctMarkerBScanData getOctMarkerBScanData(int patient, int study, int series);
-	
-	enum class Fileformat { XML, Josn };
-	
-	bool loadData(const std::string& filename);
-	bool saveData(const std::string& filename);
-	
-};
-
-#endif // OCTMARKERDATA_H

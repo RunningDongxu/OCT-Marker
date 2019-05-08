@@ -22,6 +22,11 @@
 
 
 
+/**
+ * @ingroup HelperClasses
+ * @brief Blocks the signal until the end of the lifetime of this object
+ *
+ */
 class SignalBlocker
 {
 public:

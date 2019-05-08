@@ -39,6 +39,10 @@ class OptionDouble;
 
 
 
+/**
+ * @ingroup Windows
+ * @brief A function reduced main window of OCT-Marker (Stupid version)
+ */
 class StupidSplineWindow : public QMainWindow
 {
 	Q_OBJECT

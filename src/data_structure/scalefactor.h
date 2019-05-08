@@ -18,6 +18,12 @@
 
 #pragma once
 
+
+/**
+ * @ingroup DataStructure
+ * @brief Different scale factor for x and y with a generic base factor
+ *
+ */
 class ScaleFactor
 {
 	double x      = 1;

@@ -26,6 +26,11 @@
 class QLabel;
 class Colormap;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief generate a legend to the thickness map
+ *
+ */
 class ThicknessmapLegend : public QWidget
 {
 	QPixmap legend;

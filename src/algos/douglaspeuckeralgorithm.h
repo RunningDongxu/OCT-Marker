@@ -24,6 +24,11 @@
 
 #include<data_structure/point2d.h>
 
+/**
+ * @ingroup Algos
+ * @brief Douglas-Peucker algorithm for line simplification
+ *
+ */
 class DouglasPeuckerAlgorithm
 {
 	typedef std::list<Point2D>::iterator PtIt;

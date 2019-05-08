@@ -34,7 +34,10 @@ namespace OctData
 	class Series;
 }
 
-
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class OctSeriesItem
 {
 	const QString surename;
@@ -59,6 +62,10 @@ public:
 };
 
 
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class OctDataModel : public QAbstractTableModel
 {
 	Q_OBJECT

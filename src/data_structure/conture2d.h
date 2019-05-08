@@ -26,6 +26,11 @@
 
 #include<iostream>
 
+/**
+ * @ingroup DataStructure
+ * @brief Simple connection between to nodes defined by they ids
+ *
+ */
 class Line2D
 {
 	std::size_t nodeAid;
@@ -46,6 +51,12 @@ public:
 	float getSlope() const                                          { return slope  ; }
 };
 
+
+/**
+ * @ingroup DataStructure
+ * @brief Simple point with the id list of connected line
+ *
+ */
 class LineNode
 {
 	Point2D point;
@@ -64,6 +75,11 @@ public:
 };
 
 
+/**
+ * @ingroup DataStructure
+ * @brief Holds and managed points and they connections
+ *
+ */
 class Conture2D
 {
 	std::vector<Line2D  > lines;

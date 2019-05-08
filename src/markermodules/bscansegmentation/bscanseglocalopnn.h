@@ -31,6 +31,11 @@ class Callback;
 namespace cv { class Mat; }
 namespace FANN { class neural_net; }
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Editing tool based on neuronal network for free form segmentation
+ *
+ */
 class BScanSegLocalOpNN : public BScanSegLocalOp
 {
 public:

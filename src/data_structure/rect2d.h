@@ -23,6 +23,11 @@
 
 #include<QRect>
 
+/**
+ * @ingroup DataStructure
+ * @brief Generic 2D rect with some calculations functions
+ *
+ */
 template<typename T>
 class Rect2DBase
 {

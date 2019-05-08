@@ -30,6 +30,11 @@
 
 class QPen;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Paint the free from segmentation the a tikz image (LaTeX)
+ *
+ */
 class PaintSegmentationToTikz : public PaintSegLine
 {
 	int width;

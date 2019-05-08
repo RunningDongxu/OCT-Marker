@@ -23,7 +23,11 @@
 
 #include <boost/property_tree/ptree_fwd.hpp>
 
-
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief Hold the status from one classifier marker and provide IO
+ *
+ */
 class ClassifierMarkerState
 {
 	const ClassifierMarker* cassifierMarker;

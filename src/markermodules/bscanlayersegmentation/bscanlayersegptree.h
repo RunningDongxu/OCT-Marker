@@ -23,6 +23,11 @@
 
 class BScanLayerSegmentation;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief LayerSegmentation IO class
+ *
+ */
 class BScanLayerSegPTree
 {
 public:

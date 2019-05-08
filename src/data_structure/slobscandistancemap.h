@@ -28,6 +28,11 @@
 
 namespace OctData { class Series; }
 
+/**
+ * @ingroup DataStructure
+ * @brief Create a distance map for all B-scans on the SLO image
+ *
+ */
 class SloBScanDistanceMap
 {
 public:

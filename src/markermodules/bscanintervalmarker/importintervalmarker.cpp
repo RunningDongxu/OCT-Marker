@@ -20,16 +20,16 @@
 
 #include <algorithm>
 
+#include <opencv/cv.h>
+
 #include <oct_cpp_framework/cvmat/cvmattreestruct.h>
 #include <oct_cpp_framework/cvmat/treestructbin.h>
 
-#include <data_structure/intervalmarker.h>
+#include <octdata/datastruct/bscan.h>
 
 #include "bscanintervalmarker.h"
-
-#include <opencv/cv.h>
 #include "definedintervalmarker.h"
-#include <octdata/datastruct/bscan.h>
+#include "intervalmarker.h"
 
 
 namespace

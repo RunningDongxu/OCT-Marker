@@ -27,6 +27,11 @@
 
 #include <widgets/dwdebugoutput.h>
 
+/**
+ * @ingroup HelperClasses
+ * @brief Redict the standard streams to QDebug
+ *
+ */
 class Q_DebugStream : public std::basic_streambuf<char>
 {
 public:

@@ -47,6 +47,11 @@ namespace OctData
 
 class OctDataManagerThread;
 
+/**
+ * @ingroup Manager
+ * @brief
+ *
+ */
 class OctDataManager : public QObject
 {
 	friend class OctDataManagerThread;
@@ -131,7 +136,11 @@ private:
 	boost::property_tree::ptree* getMarkerTreeSeries(const OctData::Patient* pat, const OctData::Study* study, const OctData::Series*  series);
 };
 
-
+/**
+ * @ingroup Manager
+ * @brief
+ *
+ */
 class OctDataManagerThread : public QThread, public CppFW::Callback
 {
 	Q_OBJECT

@@ -24,6 +24,11 @@ class QGridLayout;
 class OctMarkerManager;
 class SLOImageWidget;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class SloWithLegendWidget : public QWidget
 {
 	Q_OBJECT

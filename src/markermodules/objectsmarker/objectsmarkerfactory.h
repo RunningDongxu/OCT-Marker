@@ -23,6 +23,11 @@
 class RectItem;
 
 
+/**
+ *  @ingroup ObjectsMarkerModule
+ *  @brief Factory class for create objects for objects marker module
+ *
+ */
 class ObjectsmarkerFactory
 {
 public:

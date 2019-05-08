@@ -25,6 +25,11 @@ class QSlider;
 class FilterImage;
 class FilterGammaContrastBrightness;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class DWImageColorAdjustments : public QDockWidget
 {
 	Q_OBJECT

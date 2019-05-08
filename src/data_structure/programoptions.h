@@ -29,6 +29,11 @@ class ProgramOptions;
 class QSettings;
 
 
+/**
+ * @ingroup DataStructure
+ * @brief Hold all program wide options, provide functions for load, save and access
+ *
+ */
 class ProgramOptions : public QObject
 {
 	Q_OBJECT

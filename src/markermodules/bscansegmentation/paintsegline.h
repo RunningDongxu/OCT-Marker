@@ -25,13 +25,22 @@
 #include<QPainter>
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Base class for paint the free form segmentation
+ *
+ */
 class PaintSegLine
 {
 public:
 	virtual void paintLine(const Point2D& p1, const Point2D& p2) = 0;
 };
 
-
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Base class for paint with a QPen the free form segmentation
+ *
+ */
 class PaintFactor : public PaintSegLine
 {
 protected:
@@ -42,6 +51,12 @@ public:
 	void setPen(QPen& p) { painter.setPen(p); }
 };
 
+
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Paint the free from segmentation with QPainter when the scalefactor is identical
+ *
+ */
 class PaintFactor1 : public PaintFactor
 {
 public:
@@ -54,6 +69,11 @@ public:
 	}
 };
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Paint the free from segmentation with QPainter with a free scalefactor
+ *
+ */
 class PaintFactorN : public PaintFactor
 {
 	ScaleFactor factor;
@@ -72,9 +92,4 @@ public:
 		               , static_cast<int>((p2.getY())*factorY + 0.5));
 	}
 
-// 	inline void paint(const uint8_t* p00, const uint8_t* p10, const uint8_t* p01, int w, int h, uint8_t mask, )
-// 	{
-// 		if((*p00 & mask) != (*p10 & mask)) painter.drawLine(static_cast<int>((w+1)*factor + 0.5), static_cast<int>((h  )*factor + 0.5), static_cast<int>((w+1)*factor + 0.5), static_cast<int>((h+1)*factor + 0.5));
-// 		if((*p00 & mask) != (*p01 & mask)) painter.drawLine(static_cast<int>((w  )*factor + 0.5), static_cast<int>((h+1)*factor + 0.5), static_cast<int>((w+1)*factor + 0.5), static_cast<int>((h+1)*factor + 0.5));
-// 	}
 };

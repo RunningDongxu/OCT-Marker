@@ -22,7 +22,11 @@
 
 #include<helper/convertcolorspace.h>
 
-
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Basic class for thicknessmap color
+ *
+ */
 class Colormap
 {
 protected:
@@ -40,6 +44,11 @@ public:
 	virtual double getMinValue() const                              { return minValue; }
 };
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief HSV color gradient for thicknessmap
+ *
+ */
 class ColormapHSV : public Colormap
 {
 	double fadeIn  = 0.15;
@@ -99,6 +108,11 @@ public:
 };
 
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief yellow color gradient for thicknessmap
+ *
+ */
 class ColormapYellow : public Colormap
 {
 public:

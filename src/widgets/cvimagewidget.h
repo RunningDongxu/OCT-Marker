@@ -35,6 +35,10 @@ class QContextMenuEvent;
 
 class FilterImage;
 
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class CVImageWidget : public QWidget
 {
 	Q_OBJECT

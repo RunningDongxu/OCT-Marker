@@ -21,6 +21,10 @@
 
 #include<QSpinBox>
 
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class BScanChooserSpinBox : public QSpinBox
 {
 	Q_OBJECT

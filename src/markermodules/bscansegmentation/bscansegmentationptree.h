@@ -24,6 +24,12 @@
 
 class BScanSegmentation;
 
+
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Free form segmentation IO class
+ *
+ */
 class BScanSegmentationPtree
 {
 public:

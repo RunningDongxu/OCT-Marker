@@ -23,6 +23,11 @@
 
 class BScanMarkerWidget;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class MouseCoordStatus : public QLabel
 {
 	Q_OBJECT

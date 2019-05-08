@@ -32,6 +32,11 @@ class BScanLayerSegmentation;
 class BScanMarkerWidget;
 class ScaleFactor;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Basic class for layer editing mode
+ *
+ */
 class EditBase
 {
 	BScanLayerSegmentation* parent;

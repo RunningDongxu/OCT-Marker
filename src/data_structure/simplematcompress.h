@@ -23,7 +23,11 @@
 #include <cstdint>
 
 #include <boost/serialization/vector.hpp>
-
+/**
+ * @ingroup DataStructure
+ * @brief Compress a generic mat with a simple algorithm, good for binary mats
+ *
+ */
 class SimpleMatCompress
 {
 	friend class boost::serialization::access;

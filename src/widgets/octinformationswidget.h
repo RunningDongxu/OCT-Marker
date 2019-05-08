@@ -36,6 +36,11 @@ class OctMarkerManager;
 class QLabel;
 
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class OctInformationsWidget : public QWidget, Ui::UiOctInformations
 {
 	Q_OBJECT

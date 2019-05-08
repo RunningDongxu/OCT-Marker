@@ -26,6 +26,11 @@ class QTableView;
 class OctDataModel;
 class OctFilesModel;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class WGOctDataTree : public QWidget
 {
 	Q_OBJECT

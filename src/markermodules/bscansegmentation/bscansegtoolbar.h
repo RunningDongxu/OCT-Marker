@@ -23,6 +23,11 @@
 
 class BScanSegmentation;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Free form segmentation toolbar class for direct access of some editing functions
+ *
+ */
 class BScanSegToolBar : public QToolBar
 {
 	Q_OBJECT

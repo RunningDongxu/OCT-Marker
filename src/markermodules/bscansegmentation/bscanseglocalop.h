@@ -32,6 +32,11 @@ class ScaleFactor;
 namespace cv { class Mat; }
 namespace OctData { class BScan; }
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Base class for the local editing tool on the free from segmentation
+ *
+ */
 class BScanSegLocalOp
 {
 public:
@@ -82,6 +87,11 @@ protected:
 };
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Paint/Pen editing tool for free form segmentation (Rect, Cirle and single pixel)
+ *
+ */
 class BScanSegLocalOpPaint : public BScanSegLocalOp
 {
 	BScanSegmentationMarker::PaintData localPaintData;
@@ -112,6 +122,11 @@ public:
 
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Direction based threshold tool for free form segmentation
+ *
+ */
 class BScanSegLocalOpThresholdDirection : public BScanSegLocalOp
 {
 	int  paintSizeWidth   =  4;
@@ -146,6 +161,11 @@ public:
 };
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Pixel based threshold tool for free form segmentation
+ *
+ */
 class BScanSegLocalOpThreshold : public BScanSegLocalOp
 {
 	int  paintSizeWidth   = 10;
@@ -188,6 +208,11 @@ public:
 
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Local editing tool for free form segmentation (Erode, Dilate, OpenClose, Median)
+ *
+ */
 class BScanSegLocalOpOperation : public BScanSegLocalOp
 {
 	BScanSegmentationMarker::Operation localOperation = BScanSegmentationMarker::Operation::Dilate;

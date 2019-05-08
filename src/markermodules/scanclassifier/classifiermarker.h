@@ -16,6 +16,8 @@
  *
  */
 
+
+
 #ifndef CLASSIFIERMARKER_H
 #define CLASSIFIERMARKER_H
 
@@ -24,11 +26,21 @@
 
 
 
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief One marker catergorie for the classifier module
+ *
+ */
 class ClassifierMarker
 {
 public:
 	enum class ClassifierChoiceType { Multible, Single }; // TODO
 
+	/**
+	 *  @ingroup ClassifierMarkerModule
+	 *  @brief A sub marker (like a state/button) inside a marker catergorie with name and id
+	 *
+	 */
 	class Marker
 	{
 		friend class ClassifierMarker;

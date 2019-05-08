@@ -39,7 +39,6 @@
 
 #include<markermodules/bscanmarkerbase.h>
 
-#include<data_structure/intervalmarker.h>
 #include<data_structure/programoptions.h>
 #include<data_structure/extraseriesdata.h>
 #include<data_structure/conturesegment.h>

@@ -44,6 +44,11 @@ class DWDebugOutput;
 class PaintMarker;
 
 
+
+/**
+ * @ingroup Windows
+ * @brief The main window of OCT-Marker
+ */
 class OCTMarkerMainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -120,6 +125,11 @@ public slots:
 
 
 class OptionInt;
+/**
+ * @ingroup HelperClasses
+ * @brief Translator form signal without argument to a signal with a integer
+ * @todo Replace the usage with IntValueAction
+ */
 class SendInt : public QObject
 {
 Q_OBJECT

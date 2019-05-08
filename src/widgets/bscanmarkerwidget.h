@@ -37,6 +37,10 @@ class ContureSegment;
 
 class PaintMarker;
 
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class BScanMarkerWidget : public CVImageWidget
 {
 	Q_OBJECT

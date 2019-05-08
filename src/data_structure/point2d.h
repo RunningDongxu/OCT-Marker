@@ -22,6 +22,11 @@
 
 class ScaleFactor;
 
+/**
+ * @ingroup DataStructure
+ * @brief Generic point with some calculations functions
+ *
+ */
 template<typename T>
 class Point2DBase
 {

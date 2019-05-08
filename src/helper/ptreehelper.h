@@ -23,6 +23,11 @@
 #include <boost/property_tree/ptree_fwd.hpp>
 #include <string>
 
+/**
+ * @ingroup HelperClasses
+ * @brief Collection of function that make the property_tree handling easier
+ *
+ */
 namespace PTreeHelper
 {
 	boost::property_tree::ptree& get_put      (boost::property_tree::ptree& tree, const std::string& path);

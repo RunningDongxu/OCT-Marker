@@ -21,6 +21,11 @@
 #include <cstddef>
 #include <cstdint>
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Contain configuration to contol the editing tools vor free form segmentation
+ *
+ */
 namespace BScanSegmentationMarker
 {
 	typedef uint8_t internalMatType;
@@ -112,18 +117,4 @@ namespace BScanSegmentationMarker
 		double deltaMax    = 5.0;
 	};
 
-	/*
-	struct LocalData
-	{
-
-		Method method;
-
-		// Threshold
-		ThresholdData thresholdData;
-
-		// Paint
-
-		Operation operation;
-	};
-	*/
 }

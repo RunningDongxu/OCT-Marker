@@ -25,6 +25,11 @@
 class QAbstractButton;
 
 
+/**
+ *  @ingroup ObjectsMarkerModule
+ *  @brief Widget for control the objects marker module
+ *
+ */
 class WidgetObjectMarker : public QWidget
 {
 	Q_OBJECT

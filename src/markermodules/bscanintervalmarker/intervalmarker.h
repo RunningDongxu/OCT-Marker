@@ -23,9 +23,19 @@
 #include <cstdint>
 #include <vector>
 
+/**
+ *  @ingroup IntervallMarker
+ *  @brief List of interval marker
+ *
+ */
 class IntervalMarker
 {
 public:
+	/**
+	 *  @ingroup IntervallMarker
+	 *  @brief One interval marker
+	 *
+	 */
 	class Marker
 	{
 		friend class IntervalMarker;

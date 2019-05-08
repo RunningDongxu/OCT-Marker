@@ -23,6 +23,11 @@
 
 class QInputEvent;
 
+
+/**
+ * @ingroup Widget
+ * @brief
+ */
 class ScrollAreaPan : public QScrollArea
 {
 	Q_OBJECT

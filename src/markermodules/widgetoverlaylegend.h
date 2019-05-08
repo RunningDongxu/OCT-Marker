@@ -23,6 +23,10 @@
 class QWidget;
 
 
+/** \ingroup MarkerModule
+ *  \brief Interface class for the legend of SLO overlayes (like thickness map)
+ *
+ */
 class WidgetOverlayLegend
 {
 	QWidget* widget = nullptr;

@@ -24,6 +24,11 @@
 
 class BScanIntervalMarker;
 
+/**
+ *  @ingroup IntervallMarker
+ *  @brief IntervallMarker IO class
+ *
+ */
 class BScanIntervalPTree
 {
 public:

@@ -31,6 +31,11 @@ class QAction;
 class QToolButton;
 class QComboBox;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Widget for control the layer segmentation tool
+ *
+ */
 class WGLayerSeg : public QWidget
 {
 	Q_OBJECT;

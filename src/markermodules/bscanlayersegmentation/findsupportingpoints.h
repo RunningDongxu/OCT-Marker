@@ -25,6 +25,11 @@
 
 #include<data_structure/point2d.h>
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Find supporting points for the pchip spline
+ *
+ */
 class FindSupportingPoints
 {
 public:
@@ -53,13 +58,7 @@ public:
 
 	typedef std::list<DestPoint>::iterator PtIt;
 	typedef PtSource::const_iterator PtItSource;
-/*
-	typedef std::vector<Point2D>::const_iterator SupportPtItIn;*/
 
-
-// 	FindSupportingPoints(const std::vector<Point2D>& values);
-	FindSupportingPoints(const std::vector<double >& values);
-// 	FindSupportingPoints(const std::vector<double >& values, SupportPtItIn it1, SupportPtItIn it2);
 
 	template<typename SupportPtItIn>
 	FindSupportingPoints(const std::vector<double>& values, SupportPtItIn it1, SupportPtItIn it2)
@@ -67,6 +66,7 @@ public:
 	{
 		std::transform(it1, it2, std::back_inserter(destPoints), [](const Point2D& point) { return DestPoint(point); });
 	}
+	FindSupportingPoints(const std::vector<double >& values);
 
 
 	void removePoints();

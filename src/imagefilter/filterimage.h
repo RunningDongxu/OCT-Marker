@@ -22,6 +22,11 @@
 
 namespace cv { class Mat; }
 
+/**
+ * @ingroup ImageFilter
+ * @brief Interface class for the image filter
+ *
+ */
 class FilterImage : public QObject
 {
 	Q_OBJECT

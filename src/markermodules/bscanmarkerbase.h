@@ -54,7 +54,10 @@ namespace cv
 	class Mat;
 }
 
-
+/** \ingroup MarkerModule
+ *  \brief Interface class for the B-scan marker modules
+ *
+ */
 class BscanMarkerBase : public QObject
 {
 	Q_OBJECT

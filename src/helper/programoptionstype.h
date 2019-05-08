@@ -30,6 +30,11 @@ class QSpinBox;
 class QSlider;
 class ProgramOptions;
 
+/**
+ * @ingroup HelperClasses
+ * @brief Interface class for single program option
+ *
+ */
 class Option : public QObject
 {
 	Q_OBJECT
@@ -60,6 +65,11 @@ public:
 
 
 
+/**
+ * @ingroup HelperClasses
+ * @brief A program option that hold a boolean
+ *
+ */
 class OptionBool : public Option
 {
 	Q_OBJECT
@@ -123,6 +133,11 @@ signals:
 	void falseSignal();
 };
 
+/**
+ * @ingroup HelperClasses
+ * @brief A program option that hold a integer
+ *
+ */
 class OptionInt : public Option
 {
 	Q_OBJECT
@@ -175,6 +190,11 @@ signals:
 };
 
 
+/**
+ * @ingroup HelperClasses
+ * @brief A program option that hold a double value
+ *
+ */
 class OptionDouble : public Option
 {
 	Q_OBJECT
@@ -216,6 +236,11 @@ signals:
 	void valueChanged(double v);
 };
 
+/**
+ * @ingroup HelperClasses
+ * @brief A program option that hold a string
+ *
+ */
 class OptionString : public Option
 {
 	Q_OBJECT
@@ -246,6 +271,11 @@ signals:
 };
 
 
+/**
+ * @ingroup HelperClasses
+ * @brief A program option that hold a QColor
+ *
+ */
 class OptionColor : public Option
 {
 	Q_OBJECT

@@ -19,11 +19,16 @@
 #ifndef LAYERSEGCOMMAND_H
 #define LAYERSEGCOMMAND_H
 
-#include <data_structure/markercommand.h>
+#include<markermodules/markercommand.h>
 #include<octdata/datastruct/segmentationlines.h>
 
 class BScanLayerSegmentation;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Class for supporting undo and redo function of the layer edit
+ *
+ */
 class LayerSegCommand : public MarkerCommand
 {
 	BScanLayerSegmentation* const parent = nullptr;

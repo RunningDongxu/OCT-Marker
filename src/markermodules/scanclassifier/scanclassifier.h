@@ -16,6 +16,13 @@
  *
  */
 
+
+/** \ingroup MarkerModule
+ *  \defgroup ClassifierMarkerModule Classifier module
+ *  \brief Module for classify volumes and B-scans
+ *
+ */
+
 #ifndef SCANCLASSIFIER_H
 #define SCANCLASSIFIER_H
 
@@ -25,10 +32,20 @@
 
 #include "../bscanmarkerbase.h"
 
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief Main class of the classifier module
+ *
+ */
 class ScanClassifier : public BscanMarkerBase
 {
 	Q_OBJECT
 
+	/**
+	 *  @ingroup ClassifierMarkerModule
+	 *  @brief Hold on state of all classifier marker
+	 *
+	 */
 	class ClassifierStates
 	{
 		std::vector<ClassifierMarkerState> states;
@@ -46,6 +63,12 @@ class ScanClassifier : public BscanMarkerBase
 	};
 
 public:
+	/**
+	 *  @ingroup ClassifierMarkerModule
+	 *  @brief Hold all proxys for the ClassifierStates
+	 *
+	 *  On B-scan classifier, it forwards to the state of the concrete B-scan
+	 */
 	class ClassifierProxys
 	{
 	public:

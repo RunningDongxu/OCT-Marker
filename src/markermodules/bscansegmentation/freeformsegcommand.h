@@ -21,11 +21,16 @@
 
 #include<cstddef>
 
-#include<data_structure/markercommand.h>
+#include<markermodules/markercommand.h>
 
 class BScanSegmentation;
 class SimpleCvMatCompress;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Class for supporting undo and redo function of the free form segmentation
+ *
+ */
 class FreeFormSegCommand : public MarkerCommand
 {
 	BScanSegmentation& parent;

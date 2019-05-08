@@ -25,6 +25,10 @@
 #include <vector>
 
 
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class OctFileUnloaded
 {
 	QString filename;
@@ -36,6 +40,10 @@ public:
 };
 
 
+/**
+ * @ingroup Modell
+ * @brief
+ */
 class OctFilesModel : public QAbstractListModel
 {
 	Q_OBJECT

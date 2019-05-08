@@ -38,6 +38,11 @@ namespace BScanSegmentationMarker { class ThresholdDirectionData; enum class Loc
 class WGSegmentation;
 class WgSegNN;
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Widget class for control the direction based threshold from free form segmentation tool
+ *
+ */
 class WGSegmentationThreshold : public QObject
 {
 	Q_OBJECT
@@ -86,6 +91,11 @@ signals:
 };
 
 
+/**
+ *  @ingroup FreeFormSegmentation
+ *  @brief Widget class for control the free form segmentation tools
+ *
+ */
 class WGSegmentation : public QWidget, Ui::BScanSegmentationWidget
 {
 	Q_OBJECT;

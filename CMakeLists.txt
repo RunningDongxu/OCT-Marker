@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
-project(octmarker)
+project(octmarker DESCRIPTION "A platform independent open source tool for open OCT images and create different labels on it")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_module/)
 
 set( CMAKE_CXX_STANDARD 11 )
@@ -16,9 +16,40 @@ option(BUILD_MATLAB_MEX_FUNCTIONS    "build matlab mex functions"    OFF)
 option(BUILD_OCTAVE_MEX_FUNCTIONS    "build octave mex functions"    OFF)
 option(BUILD_QT_PROGRAMM             "build main programm"           ON )
 option(BUILD_MEX_WITH_STATIC_CPP_LIB "build mex with static c++ lib" OFF)
+option(CREATE_DOCUMENTATION          "create documentation with doxygen" OFF)
 
 
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel.")
+
+
+IF(CREATE_DOCUMENTATION)
+	find_package(Doxygen REQUIRED dot OPTIONAL_COMPONENTS mscgen dia)
+	IF(CMAKE_VERSION VERSION_GREATER 3.9)
+		set(DOXYGEN_GENERATE_HTML  YES)
+		set(DOXYGEN_GENERATE_MAN   NO )
+		set(DOXYGEN_GENERATE_LATEX YES)
+
+		set(DOXYGEN_CALL_GRAPH YES)
+		set(DOXYGEN_CALLER_GRAPH YES)
+		set(DOXYGEN_EXTRACT_ALL YES)
+		set(DOXYGEN_EXCLUDE_PATTERNS moc_* ui_* */build/* */release/* *.m)
+
+		set(DOXYGEN_DOT_IMAGE_FORMAT svg)
+		set(DOXYGEN_INTERACTIVE_SVG  YES)
+
+		set(DOXYGEN_PROJECT_NAME "OCT-Marker")
+
+		doxygen_add_docs(
+		    doxygen
+		    ${PROJECT_SOURCE_DIR}/src/
+		    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/
+		    COMMENT "Generate man pages"
+		)
+	ELSE()
+		message(WARNING "CMAKE >= 3.9 is need for automatic doxygen generation")
+	ENDIF()
+ENDIF()
+
 
 if(BUILD_QT_PROGRAMM)
 

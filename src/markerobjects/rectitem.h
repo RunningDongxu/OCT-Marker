@@ -21,6 +21,10 @@
 
 #include<QGraphicsRectItem>
 
+/** \ingroup MarkerModule
+ *  \brief Rect item for the objects marker modules
+ *
+ */
 class RectItem : public QGraphicsRectItem
 {
 

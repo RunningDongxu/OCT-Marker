@@ -23,6 +23,12 @@
 
 class BScanLayerSegmentation;
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Save layersegmentation to a bin file
+ *
+ *  mainly used in the stupid version
+ */
 class LayerSegmentationIO
 {
 public:

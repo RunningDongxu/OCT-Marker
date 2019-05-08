@@ -38,6 +38,11 @@ class QPaintEvent;
 
 class BScanMarkerWidget;
 
+/**
+ * @ingroup Manager
+ * @brief
+ *
+ */
 class OctMarkerManager : public QObject
 {
 public:

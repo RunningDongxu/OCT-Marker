@@ -24,6 +24,11 @@
 class Objectsmarker;
 class ObjectsmarkerFactory;
 
+/**
+ *  @ingroup ObjectsMarkerModule
+ *  @brief Objects marker IO class
+ *
+ */
 class ObjectsMarkerPTree
 {
 

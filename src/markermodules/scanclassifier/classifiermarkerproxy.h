@@ -27,6 +27,12 @@ class ClassifierMarker;
 class ClassifierMarkerState;
 class QActionGroup;
 
+/**
+ *  @ingroup ClassifierMarkerModule
+ *  @brief Proxy class for classifier module to handel the actual choosen B-scans
+ *
+ *  It provide also QActions for the direct access to the right status
+ */
 class ClassifierMarkerProxy : public QObject
 {
 	std::vector<QAction*> actions;

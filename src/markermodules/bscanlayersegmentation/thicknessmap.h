@@ -32,6 +32,11 @@
 class Colormap;
 namespace cv { class Mat; }
 
+/**
+ *  @ingroup LayerSegmentation
+ *  @brief Creating a thicknessmap from the layer segmentation
+ *
+ */
 class ThicknessMap
 {
 public:
