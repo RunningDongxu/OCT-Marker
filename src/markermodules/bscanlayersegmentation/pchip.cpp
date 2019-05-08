@@ -128,8 +128,8 @@ PChip::PChip(const std::vector<Point2D>& points, std::size_t length)
 	std::size_t firstPos = points[0].getX()>0?static_cast<std::size_t>(points[0].getX()):0;
 	std::size_t lastPos  = static_cast<std::size_t>(points[points.size()-1].getX());
 
-	if(lastPos > length)
-		lastPos = length;
+	if(lastPos > length-1)
+		lastPos = length-1;
 
 	for(std::size_t actPos = firstPos; actPos <= lastPos; ++actPos)
 	{
