@@ -38,6 +38,7 @@ public:
 	Point2DBase(T x, T y) : x(x), y(y) {}
 	Point2DBase() = default;
 	Point2DBase(const Point2DBase<T>& other) = default;
+	virtual ~Point2DBase() = default;
 
 
 	const T& getX() const                                          { return x; }

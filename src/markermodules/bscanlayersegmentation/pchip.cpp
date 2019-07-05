@@ -34,19 +34,19 @@ namespace
 {
 	std::tuple<std::vector<double>, std::vector<double>> diff(const std::vector<Point2D>& points)
 	{
-		std::vector<double> resultX;
-		std::vector<double> resultY;
+		const std::size_t resultSize = points.size()-1;
+		std::vector<double> resultX(resultSize);
+		std::vector<double> resultY(resultSize);
 
-		      std::vector<Point2D>::const_iterator it    = points.begin();
-		const std::vector<Point2D>::const_iterator itEnd = points.end();
+		std::vector<Point2D>::const_iterator it = points.begin();
 
 		Point2D lastPoint = *it;
 		++it;
 
-		while(it != itEnd)
+		for(std::size_t i = 0; i < resultSize; ++i)
 		{
-			resultX.push_back(it->getX() - lastPoint.getX());
-			resultY.push_back(it->getY() - lastPoint.getY());
+			resultX[i] = it->getX() - lastPoint.getX();
+			resultY[i] = it->getY() - lastPoint.getY();
 			lastPoint = *it;
 			++it;
 		}
@@ -84,8 +84,8 @@ namespace
 		}
 
 		// Slopes at endpoints
-		d[0  ] = pchipendpoint(h[0  ], h[1  ], delta[0  ], delta[1  ]);
-		d[n  ] = pchipendpoint(h[n-1], h[n-2], delta[n-1], delta[n-2]);
+		d[0] = pchipendpoint(h[0  ], h[1  ], delta[0  ], delta[1  ]);
+		d[n] = pchipendpoint(h[n-1], h[n-2], delta[n-1], delta[n-2]);
 		return d;
 	}
 }
@@ -96,7 +96,7 @@ PChip::PChip(const std::vector<Point2D>& points, std::size_t length)
 // 	values.clear();
 	values.assign(length, std::numeric_limits<double>::quiet_NaN());
 
-	if(points.size() < 2 || length == 0)
+	if(points.size() <= 2 || length == 0)
 		return;
 
 	// First derivatives
@@ -118,8 +118,8 @@ PChip::PChip(const std::vector<Point2D>& points, std::size_t length)
 	double pointYValue = 0;
 	double pointXValue = 0;
 
-	double c;
-	double b;
+	double c = 0;
+	double b = 0;
 /*
 	std::cout << "d.size()     : " << d.size() << std::endl;
 	std::cout << "delta.size() : " << delta.size() << std::endl;

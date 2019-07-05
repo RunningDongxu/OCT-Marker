@@ -18,6 +18,7 @@
 
 #include "layersegcommand.h"
 
+#include<cassert>
 
 #include "bscanlayersegmentation.h"
 
@@ -29,6 +30,7 @@ LayerSegCommand::LayerSegCommand(BScanLayerSegmentation* parent, std::size_t sta
 , oldPart(std::move(oldPart))
 , startPos(start)
 {
+	assert(parent);
 	MarkerCommand::bscan = static_cast<int>(bscanNr);
 }
 

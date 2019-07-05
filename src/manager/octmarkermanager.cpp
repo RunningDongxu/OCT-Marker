@@ -84,8 +84,8 @@ OctMarkerManager::OctMarkerManager()
 
 	sloMarkerObj.push_back(new SloObjectMarker(this));
 	
-	setBscanMarker(ProgramOptions::bscanMarkerToolId());
-	setSloMarker  (ProgramOptions::  sloMarkerToolId());
+	OctMarkerManager::setBscanMarker(ProgramOptions::bscanMarkerToolId());
+	OctMarkerManager::setSloMarker  (ProgramOptions::  sloMarkerToolId());
 }
 
 
