@@ -86,29 +86,29 @@ public:
 	enum class SegMethod { None, Pen, Spline };
 
 	BScanLayerSegmentation(OctMarkerManager* markerManager);
-	~BScanLayerSegmentation();
+	~BScanLayerSegmentation() override;
 
-	virtual void drawMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& /*drawrect*/) const override;
-	virtual bool drawSLOOverlayImage(const cv::Mat& sloImage, cv::Mat& outSloImage, double alpha) const override;
+	void drawMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& /*drawrect*/) const override;
+	bool drawSLOOverlayImage(const cv::Mat& sloImage, cv::Mat& outSloImage, double alpha) const override;
 
-	virtual RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
-	virtual void contextMenuEvent(QContextMenuEvent* event) override;
+	RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
+	void contextMenuEvent(QContextMenuEvent* event) override;
 
-	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
-	virtual void loadState(boost::property_tree::ptree& markerTree)  override;
+	void saveState(boost::property_tree::ptree& markerTree)  override;
+	void loadState(boost::property_tree::ptree& markerTree)  override;
 
 
-	virtual void setActBScan(std::size_t bscan) override;
-	virtual bool hasChangedSinceLastSave() const override;
+	void setActBScan(std::size_t bscan) override;
+	bool hasChangedSinceLastSave() const override;
 
-	virtual bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
+	bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
 
-	virtual QWidget* getWidget   ()          override               { return widgetPtr2WGLayerSeg; }
-	virtual WidgetOverlayLegend* getSloLegendWidget() override;
+	QWidget* getWidget   ()          override               { return widgetPtr2WGLayerSeg; }
+	WidgetOverlayLegend* getSloLegendWidget() override;
 
-	virtual void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& ptree) override;
+	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& ptree) override;
 
 	OctData::Segmentationlines::SegmentlineType getActEditSeglineType() const { return actEditType; }
 

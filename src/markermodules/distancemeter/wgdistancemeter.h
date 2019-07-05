@@ -78,5 +78,5 @@ class WGDistanceMeter : public QWidget
 	DistanceMeterDistanceWidget* clickDistance;
 public:
 	WGDistanceMeter(DistanceMeter* parent);
-	virtual ~WGDistanceMeter();
+	~WGDistanceMeter() override;
 };

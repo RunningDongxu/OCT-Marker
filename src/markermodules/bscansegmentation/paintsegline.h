@@ -62,7 +62,7 @@ class PaintFactor1 : public PaintFactor
 public:
 	PaintFactor1(QPainter& painter) : PaintFactor(painter) {}
 
-	void paintLine(const Point2D& p1, const Point2D& p2)
+	void paintLine(const Point2D& p1, const Point2D& p2) override
 	{
 		painter.drawPoint(static_cast<int>(p1.getX()), static_cast<int>(p1.getY()));
 		painter.drawPoint(static_cast<int>(p2.getX()), static_cast<int>(p2.getY()));
@@ -84,7 +84,7 @@ public:
 	PaintFactorN(QPainter& painter, const ScaleFactor& factor) : PaintFactor(painter), factor(factor), factorX(factor.getFactorX()), factorY(factor.getFactorY()) {}
 
 
-	void paintLine(const Point2D& p1, const Point2D& p2)
+	void paintLine(const Point2D& p1, const Point2D& p2) override
 	{
 		painter.drawLine(static_cast<int>((p1.getX())*factorX + 0.5)
 		               , static_cast<int>((p1.getY())*factorY + 0.5)

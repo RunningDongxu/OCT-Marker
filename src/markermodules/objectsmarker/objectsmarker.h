@@ -60,22 +60,22 @@ public:
 
 
 	Objectsmarker(OctMarkerManager* markerManager);
-	~Objectsmarker();
+	~Objectsmarker() override;
 
-	virtual bool drawBScan() const                         override { return true;  }
+	bool drawBScan() const                         override { return true;  }
 
-	virtual bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
+	bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
 
-	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
-	virtual void loadState(boost::property_tree::ptree& markerTree)  override;
+	void saveState(boost::property_tree::ptree& markerTree)  override;
+	void loadState(boost::property_tree::ptree& markerTree)  override;
 
 
-	virtual       QGraphicsScene* getGraphicsScene()       override;
-	virtual const QGraphicsScene* getGraphicsScene() const override;
+	      QGraphicsScene* getGraphicsScene()       override;
+	const QGraphicsScene* getGraphicsScene() const override;
 
 	QWidget* getWidget() override;
 
-	virtual void drawMarker(QPainter&, BScanMarkerWidget*, const QRect& drawrect) const override;
+	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect& drawrect) const override;
 
 
 // 	virtual RedrawRequest mouseMoveEvent   (QMouseEvent* event, BScanMarkerWidget* markerWidget) override;
@@ -84,8 +84,8 @@ public:
 // 	virtual void contextMenuEvent (QContextMenuEvent* /*event*/) {}
 
 
-	virtual void setActBScan(std::size_t bscan)  override;
-	virtual void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void setActBScan(std::size_t bscan)  override;
+	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
 
 private:
 	void resetMarkerObjects(const OctData::Series* series);

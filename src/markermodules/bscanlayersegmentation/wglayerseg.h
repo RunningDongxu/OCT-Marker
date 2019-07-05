@@ -63,7 +63,7 @@ class WGLayerSeg : public QWidget
 
 public:
 	WGLayerSeg(BScanLayerSegmentation* parent);
-	~WGLayerSeg();
+	~WGLayerSeg() override;
 
 	void setIconsToSimple(int size);
 

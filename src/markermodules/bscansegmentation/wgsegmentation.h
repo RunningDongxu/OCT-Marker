@@ -132,7 +132,7 @@ class WGSegmentation : public QWidget, Ui::BScanSegmentationWidget
 
 public:
 	WGSegmentation(BScanSegmentation* parent);
-	virtual ~WGSegmentation();
+	~WGSegmentation() override;
 
 
 private slots:

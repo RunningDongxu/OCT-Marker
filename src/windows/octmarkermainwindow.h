@@ -75,7 +75,7 @@ class OCTMarkerMainWindow : public QMainWindow
 
 	static void setMarkersFilters(QFileDialog& fd);
 
-	virtual void closeEvent(QCloseEvent* e);
+	void closeEvent(QCloseEvent* e) override;
 
 	void handleOpenUrl(const QUrl& url, bool singleInput);
 
@@ -83,14 +83,14 @@ class OCTMarkerMainWindow : public QMainWindow
 	void showErrorDialog(bool isError, const std::string& errorMessage);
 
 protected:
-	virtual void dropEvent     (QDropEvent     * event);
-	virtual void dragEnterEvent(QDragEnterEvent* event);
-	virtual void dragLeaveEvent(QDragLeaveEvent* event);
-	virtual void dragMoveEvent (QDragMoveEvent * event);
+	void dropEvent     (QDropEvent     * event) override;
+	void dragEnterEvent(QDragEnterEvent* event) override;
+	void dragLeaveEvent(QDragLeaveEvent* event) override;
+	void dragMoveEvent (QDragMoveEvent * event) override;
 
 public:
 	OCTMarkerMainWindow(bool loadLastFile = true);
-	~OCTMarkerMainWindow();
+	~OCTMarkerMainWindow() override;
 
 	bool loadFile(const QString& filename);
 	bool addFile(const QString& filename);

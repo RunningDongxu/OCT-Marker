@@ -46,7 +46,7 @@ class Option : public QObject
 	QString descriptionShort;
 public:
 	Option(const QString& name, const QString& optClass);
-	virtual ~Option() {}
+	~Option() override {}
 	virtual void resetValue() = 0;
 	const QString& getName()                                  const { return name; }
 	const QString& getClass()                                 const { return optClass; }
@@ -108,7 +108,7 @@ class OptionBool : public Option
 	}
 	
 public:
-	virtual void resetValue()                              override { setValuePrivat(defaultValue); };
+	void resetValue()                              override { setValuePrivat(defaultValue); };
 
 	
 	bool getValue()   const                                         { return value; }
@@ -116,12 +116,12 @@ public:
 
 	QAction* getAction()                                            { return action; }
 	
-	virtual QVariant getVariant()                          override { return QVariant(value); }
-	virtual void setVariant(const QVariant& variant)       override { setValuePrivat(variant.toBool()); }
+	QVariant getVariant()                          override { return QVariant(value); }
+	void setVariant(const QVariant& variant)       override { setValuePrivat(variant.toBool()); }
 
-	virtual bool isDefault() const                         override { return value == defaultValue; }
+	bool isDefault() const                         override { return value == defaultValue; }
 
-	virtual void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
+	void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
 public slots:
 	void setValue(bool v)                                           { setValuePrivat(v); }
 	void setValueInvers(bool v)                                     { setValuePrivat(!v); }
@@ -167,7 +167,7 @@ class OptionInt : public Option
 	OptionInt(const OptionInt&) = delete;
 	OptionInt& operator=(const OptionInt&) = delete;
 public:
-	virtual void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
+	void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
 
 	int getValue()   const                                          { return value; }
 	int operator()() const                                          { return value; }
@@ -175,12 +175,12 @@ public:
 	QAction* getInputDialogAction()                                 { return inputDialogAction; }
 	QSpinBox* createSpinBox(QWidget* parent);
 	
-	virtual QVariant getVariant()                          override { return QVariant(value); }
-	virtual void setVariant(const QVariant& variant)       override { value = variant.toInt(); }
+	QVariant getVariant()                          override { return QVariant(value); }
+	void setVariant(const QVariant& variant)       override { value = variant.toInt(); }
 
-	virtual void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
+	void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
 
-	virtual bool isDefault() const                         override { return value == defaultValue; }
+	bool isDefault() const                         override { return value == defaultValue; }
 public slots:
 	void setValue(int v)                                            { if(value!=v) { value = v; emit(valueChanged(v));} }
 	void showInputDialog();
@@ -214,7 +214,7 @@ class OptionDouble : public Option
 	OptionDouble(const OptionDouble&) = delete;
 	OptionDouble& operator=(const OptionDouble&) = delete;
 public:
-	virtual void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
+	void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
 
 	double getValue()   const                                       { return value; }
 	double operator()() const                                       { return value; }
@@ -222,12 +222,12 @@ public:
 	QAction* getInputDialogAction()                                 { return inputDialogAction; }
 	QSlider* createSlider(Qt::Orientation orientation, QWidget* parent);
 
-	virtual QVariant getVariant()                          override { return QVariant(value); }
-	virtual void setVariant(const QVariant& variant)       override { value = variant.toDouble(); }
+	QVariant getVariant()                          override { return QVariant(value); }
+	void setVariant(const QVariant& variant)       override { value = variant.toDouble(); }
 
-	virtual void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
+	void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
 
-	virtual bool isDefault() const                         override { return value == defaultValue; }
+	bool isDefault() const                         override { return value == defaultValue; }
 public slots:
 	void setValue(double v)                                         { if(value!=v) { value = v; emit(valueChanged(v));} }
 	void showInputDialog();
@@ -254,15 +254,15 @@ class OptionString : public Option
 	OptionString(const OptionString&) = delete;
 	OptionString& operator=(const OptionString&) = delete;
 public:
-	virtual void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
+	void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
 
 	const QString& getValue()   const                               { return value; }
 	const QString& operator()() const                               { return value; }
 	
-	virtual QVariant getVariant()                          override { return QVariant(value); }
-	virtual void setVariant(const QVariant& variant)       override { value = variant.toString(); }
+	QVariant getVariant()                          override { return QVariant(value); }
+	void setVariant(const QVariant& variant)       override { value = variant.toString(); }
 
-	virtual bool isDefault() const                         override { return value == defaultValue; }
+	bool isDefault() const                         override { return value == defaultValue; }
 public slots:
 	void setValue(const QString& v)                                 { value = v; emit(valueChanged(v)); }
 
@@ -295,19 +295,19 @@ class OptionColor : public Option
 	OptionColor(const OptionColor&) = delete;
 	OptionColor& operator=(const OptionColor&) = delete;
 public:
-	virtual void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
+	void resetValue()                              override { value = defaultValue; emit(valueChanged(value)); };
 
 	const QColor& getValue()   const                                { return value; }
 	const QColor& operator()() const                                { return value; }
 
 	QAction* getColorDialogAction()                                 {return colorDialogAction; }
 	
-	virtual QVariant getVariant()                          override { return QVariant(value); }
-	virtual void setVariant(const QVariant& variant)       override { value = variant.value<QColor>(); }
+	QVariant getVariant()                          override { return QVariant(value); }
+	void setVariant(const QVariant& variant)       override { value = variant.value<QColor>(); }
 
-	virtual void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
+	void setDescriptions(const QString& shortDesc, const QString& longDesc) override;
 
-	virtual bool isDefault() const                         override { return value == defaultValue; }
+	bool isDefault() const                         override { return value == defaultValue; }
 public slots:
 	void setValue(const QColor& v)                                  { value = v; emit(valueChanged(v)); }
 	void showColorDialog();

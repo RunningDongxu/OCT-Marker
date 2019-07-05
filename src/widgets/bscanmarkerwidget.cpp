@@ -70,7 +70,7 @@ namespace
 
 		void setImageSize(double x, double y) { imageSizeX = x; imageSizeY = y; updateSize(); }
 	protected:
-		virtual void resizeEvent(QResizeEvent *event) override
+		void resizeEvent(QResizeEvent *event) override
 		{
 			QGraphicsView::resizeEvent(event);
 			updateSize();

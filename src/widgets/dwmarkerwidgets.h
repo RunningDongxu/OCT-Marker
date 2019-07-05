@@ -38,7 +38,7 @@ class DWMarkerWidgets : public QDockWidget
 
 public:
 	explicit DWMarkerWidgets(QWidget* parent);
-	virtual ~DWMarkerWidgets();
+	~DWMarkerWidgets() override;
 
 private slots:
 	void markerChanged(BscanMarkerBase* marker);

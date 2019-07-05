@@ -41,7 +41,7 @@ class DWDebugOutput : public QDockWidget
 	QDialogButtonBox* buttonBox;
 public:
 	explicit DWDebugOutput(QWidget* parent = nullptr);
-	virtual ~DWDebugOutput();
+	~DWDebugOutput() override;
 
 
 protected:

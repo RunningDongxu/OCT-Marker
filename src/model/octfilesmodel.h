@@ -51,7 +51,7 @@ class OctFilesModel : public QAbstractListModel
 	std::vector<OctFileUnloaded*> filelist;
 
 	OctFilesModel();
-	virtual ~OctFilesModel();
+	~OctFilesModel() override;
 
 	bool openFile(const QString& filename);
 

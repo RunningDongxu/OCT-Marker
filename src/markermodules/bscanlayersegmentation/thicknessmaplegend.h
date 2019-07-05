@@ -91,18 +91,18 @@ class ThicknessmapLegend : public QWidget
 
 public:
 	ThicknessmapLegend(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
-	~ThicknessmapLegend();
+	~ThicknessmapLegend() override;
 
 	ThicknessmapLegend(const ThicknessmapLegend& other) = delete;
 	ThicknessmapLegend& operator=(const ThicknessmapLegend& other) = delete;
 
 	void setColormap(const Colormap* map)                           { colormap = map; updateLegend(); }
 
-	virtual QSize minimumSizeHint() const;
+	QSize minimumSizeHint() const override;
 
 protected:
-	virtual void paintEvent(QPaintEvent* event);
-	virtual void resizeEvent(QResizeEvent* event);
+	void paintEvent(QPaintEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
 
 
 	std::vector<BarLabel> thicknessLabels;

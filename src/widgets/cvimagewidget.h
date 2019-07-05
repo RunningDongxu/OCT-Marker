@@ -64,7 +64,7 @@ public:
 	enum class FloatGrayTransform { Auto, Fix, ZeroToOne };
 
 	explicit CVImageWidget(QWidget *parent = 0);
-	virtual ~CVImageWidget();
+	~CVImageWidget() override;
 
 	QSize sizeHint()        const                      override { return scaledSize; }
 	QSize minimumSizeHint() const                      override { return scaledSize/100; }
@@ -93,9 +93,9 @@ public:
 
 	static void drawScaled(const QImage& image, QPainter& painter, const QRect* rect, const ScaleFactor& sf);
 protected:
-	virtual void paintEvent(QPaintEvent* event) override;
-	virtual void wheelEvent(QWheelEvent* event) override;
-	virtual void contextMenuEvent(QContextMenuEvent* event) override;
+	void paintEvent(QPaintEvent* event) override;
+	void wheelEvent(QWheelEvent* event) override;
+	void contextMenuEvent(QContextMenuEvent* event) override;
 
 	QImage   qtImage;
 	cv::Mat  cvImage;

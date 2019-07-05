@@ -84,29 +84,29 @@ class BScanMarkerWidget : public CVImageWidget
 public:
 	BScanMarkerWidget();
 
-	virtual ~BScanMarkerWidget();
+	~BScanMarkerWidget() override;
 
 	static void paintSegmentationLine(QPainter& segPainter, int bScanHeight, const std::vector<double>& segLine, const ScaleFactor& factor);
 
 	void setPaintMarker(const PaintMarker* pm);
 
 protected:
-	virtual void paintEvent(QPaintEvent* event) override;
-	virtual void contextMenuEvent(QContextMenuEvent* event) override;
+	void paintEvent(QPaintEvent* event) override;
+	void contextMenuEvent(QContextMenuEvent* event) override;
 
 
     bool event(QEvent *event) override;
 
-	virtual void mouseMoveEvent   (QMouseEvent*) override;
-	virtual void mousePressEvent  (QMouseEvent*) override;
-	virtual void mouseReleaseEvent(QMouseEvent*) override;
+	void mouseMoveEvent   (QMouseEvent*) override;
+	void mousePressEvent  (QMouseEvent*) override;
+	void mouseReleaseEvent(QMouseEvent*) override;
 
-	virtual void keyPressEvent    (QKeyEvent*  ) override;
-	virtual void keyReleaseEvent  (QKeyEvent*  ) override;
-	virtual void leaveEvent       (QEvent*     ) override;
-	virtual void wheelEvent       (QWheelEvent*) override;
+	void keyPressEvent    (QKeyEvent*  ) override;
+	void keyReleaseEvent  (QKeyEvent*  ) override;
+	void leaveEvent       (QEvent*     ) override;
+	void wheelEvent       (QWheelEvent*) override;
 
-	virtual void resizeEvent      (QResizeEvent* e) override { CVImageWidget::resizeEvent(e); triggerAutoImageFit(); }
+	void resizeEvent      (QResizeEvent* e) override { CVImageWidget::resizeEvent(e); triggerAutoImageFit(); }
 
 
 private slots:
@@ -130,8 +130,8 @@ public slots:
 
 	virtual void saveLatexImage();
 
-	virtual void showImage(const cv::Mat& image) override;
-	virtual void setZoom(double factor) override;
+	void showImage(const cv::Mat& image) override;
+	void setZoom(double factor) override;
 	
 signals:
 	void bscanChangeInkrement(int delta);

@@ -46,7 +46,7 @@ public:
 		bool operator!=(const Parameter& other) const                  { return !operator==(other); }
 	};
 
-	virtual void applyFilter(const cv::Mat& in, cv::Mat& out) const override;
+	void applyFilter(const cv::Mat& in, cv::Mat& out) const override;
 
 	void setParameter(const Parameter& para)                        { if(parameter != para) { parameter = para; calcLut(); } }
 

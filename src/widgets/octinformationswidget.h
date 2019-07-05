@@ -54,7 +54,7 @@ public:
 
 
 	explicit OctInformationsWidget(QWidget *parent = nullptr);
-	virtual ~OctInformationsWidget() = default;
+	~OctInformationsWidget() override = default;
 
 private slots:
 	void setOctFile(QString filename);

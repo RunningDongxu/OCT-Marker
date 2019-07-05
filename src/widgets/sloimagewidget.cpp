@@ -64,7 +64,7 @@ namespace
 
 		void setScaleFactor(double factor) { scaleFactor = factor; }
 	protected:
-		virtual void resizeEvent(QResizeEvent *event) override
+		void resizeEvent(QResizeEvent *event) override
 		{
 			QGraphicsView::resizeEvent(event);
 

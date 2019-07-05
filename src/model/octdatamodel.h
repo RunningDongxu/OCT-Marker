@@ -73,7 +73,7 @@ class OctDataModel : public QAbstractTableModel
 	std::vector<OctSeriesItem*> octSeriesList;
 
 	OctDataModel();
-	virtual ~OctDataModel();
+	~OctDataModel() override;
 	
 	void clearList();
 

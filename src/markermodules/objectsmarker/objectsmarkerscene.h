@@ -43,7 +43,7 @@ class ObjectsmarkerScene : public QGraphicsScene
 	void endInsertItem();
 public:
 	ObjectsmarkerScene(const ObjectsmarkerFactory& factory, QObject* parent = nullptr) : QGraphicsScene(parent), factory(factory) {};
-	~ObjectsmarkerScene();
+	~ObjectsmarkerScene() override;
 
 	void markersToList  (std::vector<RectItem*>& itemslist);
 	void markersFromList(std::vector<RectItem*>& itemslist);
@@ -55,10 +55,10 @@ signals:
 	void addObjectModeChanged(bool v);
 
 protected:
-	virtual void keyPressEvent    (QKeyEvent               * event) override;
-	virtual void mousePressEvent  (QGraphicsSceneMouseEvent* event) override;
-	virtual void mouseMoveEvent   (QGraphicsSceneMouseEvent* event) override;
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+	void keyPressEvent    (QKeyEvent               * event) override;
+	void mousePressEvent  (QGraphicsSceneMouseEvent* event) override;
+	void mouseMoveEvent   (QGraphicsSceneMouseEvent* event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
 };
 
 #endif // OBJECTSMARKERSCENE_H

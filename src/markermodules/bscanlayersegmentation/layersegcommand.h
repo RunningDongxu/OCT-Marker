@@ -42,15 +42,15 @@ class LayerSegCommand : public MarkerCommand
 	bool testAndChangeSegline();
 public:
 	LayerSegCommand(BScanLayerSegmentation* parent, std::size_t start, std::vector<double>&& newPart, std::vector<double>&& oldPart);
-	~LayerSegCommand();
+	~LayerSegCommand() override;
 
 	LayerSegCommand(const LayerSegCommand& other)            = delete;
 	LayerSegCommand& operator=(const LayerSegCommand& other) = delete;
 
 
-	virtual void apply() override;
-	virtual bool undo()  override;
-	virtual bool redo()  override;
+	void apply() override;
+	bool undo()  override;
+	bool redo()  override;
 };
 
 #endif // LAYERSEGCOMMAND_H

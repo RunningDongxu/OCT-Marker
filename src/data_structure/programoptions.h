@@ -39,7 +39,7 @@ class ProgramOptions : public QObject
 	Q_OBJECT
 
 	ProgramOptions();
-	~ProgramOptions();
+	~ProgramOptions() override;
 
 	static ProgramOptions& getInstance() { static ProgramOptions instance; return instance; }
 

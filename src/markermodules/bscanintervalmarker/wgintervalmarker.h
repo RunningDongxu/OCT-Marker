@@ -51,7 +51,7 @@ class WGIntervalMarker : public QWidget
 
 public:
 	WGIntervalMarker(BScanIntervalMarker* parent);
-	~WGIntervalMarker();
+	~WGIntervalMarker() override;
 
 private slots:
 	void changeIntervalCollection(std::size_t index);

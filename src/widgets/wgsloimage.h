@@ -44,12 +44,12 @@ class WgSloImage : public QMainWindow
 	void createMarkerToolbar();
 public:
 	explicit WgSloImage(QWidget* parent = nullptr);
-	~WgSloImage();
+	~WgSloImage() override;
 	
 	SLOImageWidget* getImageWidget();
 
 protected:
-	virtual void wheelEvent       (QWheelEvent*);
+	void wheelEvent       (QWheelEvent*) override;
 
 };
 

@@ -44,7 +44,7 @@ class WGScanClassifier : public QWidget
 
 public:
 	WGScanClassifier(ScanClassifier* parent);
-	~WGScanClassifier();
+	~WGScanClassifier() override;
 
 
 	QAbstractButton* genButton(QAction* action);

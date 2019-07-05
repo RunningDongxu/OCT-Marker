@@ -40,15 +40,15 @@ class FreeFormSegCommand : public MarkerCommand
 
 public:
 	FreeFormSegCommand(BScanSegmentation& parent, const SimpleCvMatCompress& mat);
-	~FreeFormSegCommand();
+	~FreeFormSegCommand() override;
 
 	FreeFormSegCommand(const FreeFormSegCommand &other)            = delete;
 	FreeFormSegCommand &operator=(const FreeFormSegCommand &other) = delete;
 
 
-	virtual void apply();
-	virtual bool undo();
-	virtual bool redo();
+	void apply() override;
+	bool undo() override;
+	bool redo() override;
 };
 
 #endif // FREEFORMSEGCOMMAND_H

@@ -74,7 +74,7 @@ public:
 
 private:
 	OctMarkerManager();
-	virtual ~OctMarkerManager();
+	~OctMarkerManager() override;
 
 	int                    actBScan = 0;
 	const OctData::Series* series   = nullptr;

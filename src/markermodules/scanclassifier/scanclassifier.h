@@ -89,21 +89,21 @@ public:
 	};
 
 	ScanClassifier(OctMarkerManager* markerManager);
-	~ScanClassifier();
+	~ScanClassifier() override;
 
-	virtual QWidget* getWidget   ()          override               { return widgetPtr2WGScanClassifier; }
+	QWidget* getWidget   ()          override               { return widgetPtr2WGScanClassifier; }
 
-	virtual void saveState(boost::property_tree::ptree& markerTree) override;
-	virtual void loadState(boost::property_tree::ptree& markerTree) override;
-	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
+	void saveState(boost::property_tree::ptree& markerTree) override;
+	void loadState(boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
 
-	virtual bool hasChangedSinceLastSave() const override           { return scanClassifierProxys.hasChanges() || slideClassifierProxys.hasChanges(); }
+	bool hasChangedSinceLastSave() const override           { return scanClassifierProxys.hasChanges() || slideClassifierProxys.hasChanges(); }
 
 	ClassifierProxys& getScanClassifierProxys()  { return scanClassifierProxys; }
 	ClassifierProxys& getBScanClassifierProxys() { return slideClassifierProxys; }
 
 
-	virtual void setActBScan(std::size_t bscan) override;
+	void setActBScan(std::size_t bscan) override;
 
 private:
 	void loadBScansState(const boost::property_tree::ptree& markerTree);

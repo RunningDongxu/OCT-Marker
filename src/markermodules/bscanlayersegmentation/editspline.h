@@ -99,15 +99,15 @@ public:
 	EditSpline(BScanLayerSegmentation* base);
 	virtual ~EditSpline() {}
 
-	virtual void drawMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& /*drawrect*/, const ScaleFactor& scaleFactor) const override;
+	void drawMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& /*drawrect*/, const ScaleFactor& scaleFactor) const override;
 
-	virtual BscanMarkerBase::RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual BscanMarkerBase::RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual BscanMarkerBase::RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
-	virtual void contextMenuEvent(QContextMenuEvent* event) override;
+	BscanMarkerBase::RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
+	BscanMarkerBase::RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
+	BscanMarkerBase::RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
+	void contextMenuEvent(QContextMenuEvent* event) override;
 
 
-	virtual bool keyPressEvent(QKeyEvent*, BScanMarkerWidget*) override;
+	bool keyPressEvent(QKeyEvent*, BScanMarkerWidget*) override;
 
 	void segLineChanged(OctData::Segmentationlines::Segmentline* segLine) override;
 };

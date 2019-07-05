@@ -59,7 +59,7 @@ class OctDataManager : public QObject
 	Q_OBJECT
 public:
 	
-	virtual ~OctDataManager();
+	~OctDataManager() override;
 	
 	static OctDataManager& getInstance()                            { static OctDataManager instance; return instance; }
 	
@@ -167,9 +167,9 @@ public:
 	bool hasLoadError()                                      const  { return loadError; }
 
 protected:
-	void run();
+	void run() override;
 
-	virtual bool callback(double frac) override
+	bool callback(double frac) override
 	{
 		emit(stepCalulated(frac));
 		return !breakLoading;

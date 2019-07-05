@@ -45,19 +45,19 @@ public:
 	typedef RectItems::value_type RectItemsTypes;
 
 	explicit SloObjectMarker(OctMarkerManager* markerManager);
-	virtual ~SloObjectMarker();
+	~SloObjectMarker() override;
 
 
 	              QGraphicsScene* getGraphicsScene()       override { return graphicsScene; }
-	virtual const QGraphicsScene* getGraphicsScene() const override { return graphicsScene; }
+	const QGraphicsScene* getGraphicsScene() const override { return graphicsScene; }
 
-	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree& ptree) override
+	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree& ptree) override
 	                                                                { loadState(ptree); }
 
-	virtual bool hasChangedSinceLastSave() const           override { return false; } ///< @todo implement this!
+	bool hasChangedSinceLastSave() const           override { return false; } ///< @todo implement this!
 
-	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
-	virtual void loadState(boost::property_tree::ptree& markerTree)  override;
+	void saveState(boost::property_tree::ptree& markerTree)  override;
+	void loadState(boost::property_tree::ptree& markerTree)  override;
 
 	      RectItem* getRectItem(const std::string& id);
 	const RectItem* getRectItem(const std::string& id) const;

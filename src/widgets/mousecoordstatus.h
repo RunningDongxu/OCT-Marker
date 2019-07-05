@@ -36,7 +36,7 @@ class MouseCoordStatus : public QLabel
 
 public:
 	MouseCoordStatus(BScanMarkerWidget* bscanWidget);
-	virtual ~MouseCoordStatus();
+	~MouseCoordStatus() override;
 
 
 private slots:

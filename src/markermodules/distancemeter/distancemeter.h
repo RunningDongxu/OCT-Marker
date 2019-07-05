@@ -74,18 +74,18 @@ public:
 	};
 
 	DistanceMeter(OctMarkerManager* markerManager);
-	~DistanceMeter();
+	~DistanceMeter() override;
 
-	virtual QWidget* getWidget   ()          override               { return widgetPtr2WGDistanceMeter; }
+	QWidget* getWidget   ()          override               { return widgetPtr2WGDistanceMeter; }
 
-	virtual RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
 
-	virtual bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
-	virtual void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
-	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
+	bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
+	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
+	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
 
-	virtual void setActBScan(std::size_t bscan) override;
+	void setActBScan(std::size_t bscan) override;
 
 	bool isSetNewStartPosition() const                              { return setStartPos; }
 

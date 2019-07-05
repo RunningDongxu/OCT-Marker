@@ -40,7 +40,7 @@ class SloWithLegendWidget : public QWidget
 
 public:
 	explicit SloWithLegendWidget(QWidget* parent);
-	virtual ~SloWithLegendWidget();
+	~SloWithLegendWidget() override;
 
 
 	SLOImageWidget* getImageWidget() { return imageWidget; }

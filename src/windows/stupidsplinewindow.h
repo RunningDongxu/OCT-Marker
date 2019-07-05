@@ -61,7 +61,7 @@ class StupidSplineWindow : public QMainWindow
 
 	bool saved = false;
 
-	virtual void closeEvent(QCloseEvent* e);
+	void closeEvent(QCloseEvent* e) override;
 
 
 	bool saveLayerSegmentation();
@@ -80,7 +80,7 @@ class StupidSplineWindow : public QMainWindow
 	BScanLayerSegmentation* getLayerSegmentationModul();
 public:
 	StupidSplineWindow();
-	~StupidSplineWindow();
+	~StupidSplineWindow() override;
 
 	bool loadFile(const QString& filename);
 signals:

@@ -72,7 +72,7 @@ public:
 	};
 
 	BScanIntervalMarker(OctMarkerManager* markerManager);
-	~BScanIntervalMarker();
+	~BScanIntervalMarker() override;
 
 
 	enum class Method { Paint, Fill };
@@ -91,26 +91,26 @@ public:
 	const Marker& getActMarker() const                              { return actMarker; }
 	
 	QToolBar* createToolbar(QObject* parent) override;
-	virtual QWidget* getWidget   ()          override               { return widgetPtr2WGIntevalMarker; }
+	QWidget* getWidget   ()          override               { return widgetPtr2WGIntevalMarker; }
 	WidgetOverlayLegend* getSloLegendWidget() override              { return &widgetOverlayLegend; }
 	
-	virtual bool drawingBScanOnSLO() const   override               { return true; }
-	virtual void drawBScanSLOLine  (QPainter&, std::size_t bscanNr, const OctData::CoordSLOpx& start_px, const OctData::CoordSLOpx& end_px   , SLOImageWidget*) const override;
-	virtual void drawBScanSLOCircle(QPainter&, std::size_t bscanNr, const OctData::CoordSLOpx& start_px, const OctData::CoordSLOpx& center_px, bool clockwise, SLOImageWidget*) const override;
-	virtual void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
-	virtual bool drawSLOOverlayImage(const cv::Mat& sloImage, cv::Mat& outSloImage, double alpha) const override;
-	virtual bool drawBScan() const                         override { return true;  }
+	bool drawingBScanOnSLO() const   override               { return true; }
+	void drawBScanSLOLine  (QPainter&, std::size_t bscanNr, const OctData::CoordSLOpx& start_px, const OctData::CoordSLOpx& end_px   , SLOImageWidget*) const override;
+	void drawBScanSLOCircle(QPainter&, std::size_t bscanNr, const OctData::CoordSLOpx& start_px, const OctData::CoordSLOpx& center_px, bool clockwise, SLOImageWidget*) const override;
+	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
+	bool drawSLOOverlayImage(const cv::Mat& sloImage, cv::Mat& outSloImage, double alpha) const override;
+	bool drawBScan() const                         override { return true;  }
 	
-	virtual RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
 
-	virtual bool toolTipEvent     (QEvent*     , BScanMarkerWidget*) override;
-	virtual bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
-	virtual bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
+	bool toolTipEvent     (QEvent*     , BScanMarkerWidget*) override;
+	bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
+	bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
 	
-	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
-	virtual void loadState(boost::property_tree::ptree& markerTree)  override;
+	void saveState(boost::property_tree::ptree& markerTree)  override;
+	void loadState(boost::property_tree::ptree& markerTree)  override;
 
 	void setActBScan(std::size_t bscan) override;
 	
@@ -122,12 +122,12 @@ public:
 	const MarkerMap& getMarkers(std::size_t bscan) const;
 	const MarkerMap& getMarkers(const std::string& collection, std::size_t bscan) const;
 
-	virtual bool hasChangedSinceLastSave() const override           { return stateChangedSinceLastSave; }
+	bool hasChangedSinceLastSave() const override           { return stateChangedSinceLastSave; }
 
 	std::size_t getNumBScans() const                                { if(actCollectionValid()) return actCollection->second.markers.size(); return 0; }
 	const std::string& getActMarkerCollectionInternalName()   const { if(actCollectionValid()) return actCollection->first; static std::string nullString; return nullString; }
 
-	virtual void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
 
 	MarkerCollectionWork getMarkerCollection(const std::string& internalName);
 	MarkerCollectionWork getActMarkerCollection()                   { return MarkerCollectionWork(actCollection); }

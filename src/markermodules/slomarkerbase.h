@@ -53,7 +53,7 @@ public:
 
 
 	SloMarkerBase(OctMarkerManager* markerManager) : markerManager(markerManager) {}
-	virtual ~SloMarkerBase()                                        {}
+	~SloMarkerBase() override                                        {}
 
 	virtual QGraphicsScene* getGraphicsScene()                      { return nullptr; }
 	virtual const QGraphicsScene* getGraphicsScene() const          { return nullptr; }

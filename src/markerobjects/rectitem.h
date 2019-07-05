@@ -33,12 +33,12 @@ public:
 
 	void makeValid();
 	void setDescription(const QString& text)                         { descripton = text; }
-	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
+	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
 protected:
-	virtual void mousePressEvent  (QGraphicsSceneMouseEvent* event) override;
-	virtual void mouseMoveEvent   (QGraphicsSceneMouseEvent* event) override;
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+	void mousePressEvent  (QGraphicsSceneMouseEvent* event) override;
+	void mouseMoveEvent   (QGraphicsSceneMouseEvent* event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
 
 private:
 	QString descripton;

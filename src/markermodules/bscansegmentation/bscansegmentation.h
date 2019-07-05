@@ -132,29 +132,29 @@ class BScanSegmentation : public BscanMarkerBase
 public:
 
 	BScanSegmentation(OctMarkerManager* markerManager);
-	virtual ~BScanSegmentation();
+	~BScanSegmentation() override;
 
 	QToolBar* createToolbar(QObject* parent) override;
-	virtual QWidget* getWidget   ()          override               { return widgetPtr2WGSegmentation; }
+	QWidget* getWidget   ()          override               { return widgetPtr2WGSegmentation; }
 	
-	virtual void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
-	virtual bool drawBScan() const                         override { return true;  }
+	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
+	bool drawBScan() const                         override { return true;  }
 	
-	virtual RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
-	virtual RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
-	virtual bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
-	virtual bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
+	RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
+	RedrawRequest mouseReleaseEvent(QMouseEvent*, BScanMarkerWidget*) override;
+	bool keyPressEvent    (QKeyEvent*  , BScanMarkerWidget*) override;
+	bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
 
-	virtual void saveState(boost::property_tree::ptree& markerTree)  override;
-	virtual void loadState(boost::property_tree::ptree& markerTree)  override;
+	void saveState(boost::property_tree::ptree& markerTree)  override;
+	void loadState(boost::property_tree::ptree& markerTree)  override;
 
-	virtual void setActBScan(std::size_t bscan)  override           { setActMat(bscan, true); }
-	virtual bool hasChangedSinceLastSave() const override           { if(stateChangedSinceLastSave) return true; return hasActMatChanged(); }
+	void setActBScan(std::size_t bscan)  override           { setActMat(bscan, true); }
+	bool hasChangedSinceLastSave() const override           { if(stateChangedSinceLastSave) return true; return hasActMatChanged(); }
 
 	std::size_t getNumBScans() const                                { return segments.size(); }
 	
-	virtual void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
 
 	void initBScanFromThreshold (const BScanSegmentationMarker::ThresholdDirectionData& data);
 	void initSeriesFromThreshold(const BScanSegmentationMarker::ThresholdDirectionData& data);

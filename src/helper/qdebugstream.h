@@ -46,7 +46,7 @@ public:
 		pretextEmpty = QString(pretext.length(), ' ');
 	}
 
-	~Q_DebugStream()
+	~Q_DebugStream() override
 	{
 	// output anything that is left
 		if(!m_string.empty())
@@ -71,7 +71,7 @@ private:
 protected:
 
 	//This is called when a std::endl has been inserted into the stream
-	virtual int_type overflow(int_type v)
+	int_type overflow(int_type v) override
 	{
 		if(v == '\n')
 		{
@@ -85,7 +85,7 @@ protected:
 	}
 
 
-	virtual std::streamsize xsputn(const char* p, std::streamsize n)
+	std::streamsize xsputn(const char* p, std::streamsize n) override
 	{
 		m_string.append(p, p + n);
 

@@ -82,14 +82,14 @@ class SLOImageWidget : public CVImageWidget
 public:
 	explicit SLOImageWidget(QWidget* parent = 0);
 
-	virtual ~SLOImageWidget();
+	~SLOImageWidget() override;
 
 	bool getShowBScans() const                                   { return drawBScans; }
 
-	virtual void setImageSize(QSize size) override;
+	void setImageSize(QSize size) override;
 
 protected:
-	virtual void wheelEvent       (QWheelEvent*) override;
+	void wheelEvent       (QWheelEvent*) override;
 
 public slots:
 	void showBScans(bool show);
@@ -99,7 +99,7 @@ public slots:
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
-	virtual void mousePressEvent(QMouseEvent*) override;
+	void mousePressEvent(QMouseEvent*) override;
 
 	void paintBScan      (QPainter& painter, const OctData::BScan& bscan, const SloCoordTranslator& transform, std::size_t bscanNr, bool paintMarker);
 	void paintBScanLine  (QPainter& painter, const OctData::BScan& bscan, const SloCoordTranslator& transform, std::size_t bscanNr, bool paintMarker);

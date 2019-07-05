@@ -34,7 +34,7 @@ class AboutDialog : public QDialog, public Ui::AboutDialog
 	Q_OBJECT
 public:
 	AboutDialog();
-	virtual ~AboutDialog() {};
+	~AboutDialog() override {};
 
 public slots:
 	void showLicense();
