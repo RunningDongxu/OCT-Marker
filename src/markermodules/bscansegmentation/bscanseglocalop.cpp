@@ -22,7 +22,7 @@
 #include "bscansegalgorithm.h"
 
 #include <QPainter>
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #if CV_MAJOR_VERSION >= 3
 	#include <opencv2/imgproc.hpp>
 #endif
@@ -171,10 +171,10 @@ bool BScanSegLocalOpPaint::drawOnCoord(int x, int y)
 	switch(localPaintData.paintMethod)
 	{
 		case BScanSegmentationMarker::PaintData::PaintMethod::Circle:
-			cv::circle(*map, cv::Point(x, y), paintSize, paintValue, CV_FILLED, 8, 0);
+			cv::circle(*map, cv::Point(x, y), paintSize, paintValue, cv::FILLED, 8, 0);
 			break;
 		case BScanSegmentationMarker::PaintData::PaintMethod::Rect:
-			cv::rectangle(*map, cv::Point(x-paintSize, y-paintSize), cv::Point(x+paintSize-1, y+paintSize-1), paintValue, CV_FILLED, 8, 0);
+			cv::rectangle(*map, cv::Point(x-paintSize, y-paintSize), cv::Point(x+paintSize-1, y+paintSize-1), paintValue, cv::FILLED, 8, 0);
 			break;
 		case BScanSegmentationMarker::PaintData::PaintMethod::Pen:
 			if(x>0 && y>0 && x<map->cols && y<map->rows)

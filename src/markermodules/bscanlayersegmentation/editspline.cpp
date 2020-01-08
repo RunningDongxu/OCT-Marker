@@ -31,6 +31,7 @@
 
 #include"findsupportingpoints.h"
 #include"pchip.h"
+#include <widgets/bscanmarkerwidget.h>
 
 // #include<QTime> // TODO
 

@@ -22,7 +22,7 @@
 
 #include <QPainter>
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #include <opencv/ml.h>
 
 #include <octdata/datastruct/bscan.h>

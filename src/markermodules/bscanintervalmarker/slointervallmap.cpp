@@ -20,7 +20,7 @@
 
 #include<algorithm>
 
-#include<opencv/cv.hpp>
+#include<opencv2/opencv.hpp>
 
 #include<octdata/datastruct/series.h>
 #include<octdata/datastruct/bscan.h>

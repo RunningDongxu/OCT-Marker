@@ -23,7 +23,7 @@
 #include <oct_cpp_framework/cvmat/cvmattreestruct.h>
 #include <oct_cpp_framework/cvmat/treestructbin.h>
 
-#include<opencv/cv.h>
+#include<opencv2/opencv.hpp>
 
 
 bool LayerSegmentationIO::saveSegmentation2Bin(const BScanLayerSegmentation& marker, const std::string& filename)

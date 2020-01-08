@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/lexical_cast.hpp>

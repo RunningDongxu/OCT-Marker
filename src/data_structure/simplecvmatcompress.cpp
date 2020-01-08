@@ -18,7 +18,7 @@
 
 #include "simplecvmatcompress.h"
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 
 /// @todo add a check of the datatype of mat
 void SimpleCvMatCompress::readFromMat(const cv::Mat& mat)

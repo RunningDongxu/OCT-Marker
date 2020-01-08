@@ -21,6 +21,7 @@
 #include <algorithm>
 
 #include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 
 #include <oct_cpp_framework/cvmat/cvmattreestruct.h>
 #include <oct_cpp_framework/cvmat/treestructbin.h>
@@ -28,6 +29,7 @@
 #include <octdata/datastruct/bscan.h>
 
 #include "bscanintervalmarker.h"
+
 #include "definedintervalmarker.h"
 #include "intervalmarker.h"
 

@@ -84,7 +84,6 @@ OCTMarkerMainWindow::OCTMarkerMainWindow(bool loadLastFile)
 	QSettings& settings = ProgramOptions::getSettings();
 	restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
 	
-	
 	bscanMarkerWidgetScrollArea = new ScrollAreaPan(this);
 	bscanMarkerWidgetScrollArea->setWidget(bscanMarkerWidget);
 	connect(bscanMarkerWidget, &CVImageWidget::needScrollTo, bscanMarkerWidgetScrollArea, &ScrollAreaPan::scrollTo);

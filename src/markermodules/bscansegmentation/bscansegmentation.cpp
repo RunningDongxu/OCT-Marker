@@ -31,7 +31,7 @@
 #include <octdata/datastruct/bscan.h>
 #include <octdata/datastruct/series.h>
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 
 #include "bscansegmentationptree.h"
 
@@ -253,8 +253,8 @@ void BScanSegmentation::drawMarker(QPainter& p, BScanMarkerWidget* widget, const
 	if(factor.getFactorX() <= 0 || factor.getFactorY() <= 0)
 		return;
 
-	if(ProgramOptions::freeFormedSegmetationShowArea())
-		CVImageWidget::drawScaled(areaImage, p, &rect, factor);
+// 	if(ProgramOptions::freeFormedSegmetationShowArea())
+// 		CVImageWidget::drawScaled(areaImage, p, &rect, factor);
 
 	if(factor.isIdentical())
 	{
@@ -820,7 +820,7 @@ bool BScanSegmentation::setActMat(std::size_t nr, bool saveOldState)
 				const OctData::BScan* bscan = getBScan(nr);
 				if(bscan)
 				{
-					*actMat = cv::Mat(bscan->getHeight(), bscan->getWidth(), cv::DataType<uint8_t>::type, cvScalar(BScanSegmentationMarker::markermatInitialValue));
+					*actMat = cv::Mat(bscan->getHeight(), bscan->getWidth(), cv::DataType<uint8_t>::type, cv::Scalar(BScanSegmentationMarker::markermatInitialValue));
 				}
 			}
 			areaImage = QImage(QSize(actMat->cols, actMat->rows), QImage::Format_ARGB32_Premultiplied);

@@ -253,11 +253,9 @@ void BScanMarkerWidget::paintSegmentations(QPainter& segPainter, const ScaleFact
 }
 
 
-
 void BScanMarkerWidget::paintEvent(QPaintEvent* event)
 {
 	CVImageWidget::paintEvent(event);
-
 	
 	OctDataManager& octdataManager = OctDataManager::getInstance();
 	const OctData::Series* series   = octdataManager.getSeries();
@@ -270,8 +268,9 @@ void BScanMarkerWidget::paintEvent(QPaintEvent* event)
 	paintSegmentations(segPainter, getImageScaleFactor());
 	
 	if(paintMarker)
-		paintMarker->paintMarker(event, this);
+		paintMarker->paintMarker(segPainter, this, event->rect());
 }
+
 
 void BScanMarkerWidget::paintConture(QPainter& painter, const std::vector<ContureSegment>& contours) const
 {
@@ -435,7 +434,7 @@ void BScanMarkerWidget::contextMenuEvent(QContextMenuEvent* event)
 
 void BScanMarkerWidget::mouseMoveEvent(QMouseEvent* event)
 {
-	QWidget::mouseMoveEvent(event);
+	CVImageWidget::mouseMoveEvent(event);
 
 
 	int xImg, yImg;
@@ -465,7 +464,7 @@ void BScanMarkerWidget::mouseMoveEvent(QMouseEvent* event)
 
 void BScanMarkerWidget::mousePressEvent(QMouseEvent* event)
 {
-	QWidget::mousePressEvent(event);
+	CVImageWidget::mousePressEvent(event);
 
 	// TODO: workaround for pan in scrollarea
 	if(checkControlUsed(event))
@@ -490,7 +489,7 @@ void BScanMarkerWidget::mousePressEvent(QMouseEvent* event)
 
 void BScanMarkerWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-	QWidget::mouseReleaseEvent(event);
+	CVImageWidget::mouseReleaseEvent(event);
 
 	if(checkControlUsed(event))
 		return;
@@ -512,7 +511,7 @@ void BScanMarkerWidget::mouseReleaseEvent(QMouseEvent* event)
 
 void BScanMarkerWidget::keyPressEvent(QKeyEvent* e)
 {
-	QWidget::keyPressEvent(e);
+	CVImageWidget::keyPressEvent(e);
 
 // 	checkControlUsed(e);
 
@@ -537,7 +536,7 @@ void BScanMarkerWidget::keyPressEvent(QKeyEvent* e)
 
 void BScanMarkerWidget::keyReleaseEvent(QKeyEvent* e)
 {
-	QWidget::keyReleaseEvent(e);
+	CVImageWidget::keyReleaseEvent(e);
 // 	checkControlUsed(e);
 }
 

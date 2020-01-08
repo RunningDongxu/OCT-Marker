@@ -38,6 +38,7 @@ public:
 
 	double getPureFactorX() const                                   { return x; }
 	double getPureFactorY() const                                   { return y; }
+	double getFactor() const                                        { return factor; }
 
 	void setFactorX(double v)                                       { x = v; }
 	void setFactorY(double v)                                       { y = v; }

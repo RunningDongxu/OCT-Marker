@@ -48,7 +48,6 @@ public:
 
 
 	void paintMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& rect) const;
-	void paintMarker(QPaintEvent* event, BScanMarkerWidget*) const;
 
 signals:
 	void viewChanged();

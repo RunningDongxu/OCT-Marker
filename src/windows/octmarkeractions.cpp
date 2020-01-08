@@ -35,18 +35,18 @@ OctMarkerActions::OctMarkerActions(BScanMarkerWidget* bscanMarkerWidget)
 	OctMarkerManager& markerManager = OctMarkerManager::getInstance();
 
 	connect(&markerManager   , &OctMarkerManager::undoRedoStateChange, this, &OctMarkerActions::updateRedoUndo);
-	connect(bscanMarkerWidget, &CVImageWidget::zoomChanged           , this, &OctMarkerActions::updateZoom    );
+	connect(bscanMarkerWidget, &BScanMarkerWidget::zoomChanged       , this, &OctMarkerActions::updateZoom    );
 }
 
 
-void OctMarkerActions::addZoomAction(int zoom, CVImageWidget* bscanMarkerWidget, QMenu& menue)
+void OctMarkerActions::addZoomAction(int zoom, BScanMarkerWidget* bscanMarkerWidget, QMenu& menue)
 {
 	IntValueAction* actionZoom = new IntValueAction(zoom, this, true);
 	actionZoom->setText(tr("Zoom %1").arg(zoom));
 	actionZoom->setIcon(QIcon(":/icons/zoom.png"));
 	menue.addAction(actionZoom);
-	connect(actionZoom       , &IntValueAction::triggered , bscanMarkerWidget, &CVImageWidget::setZoom      );
-	connect(bscanMarkerWidget, &CVImageWidget::zoomChanged, actionZoom       , &IntValueAction::valueChanged);
+	connect(actionZoom       , &IntValueAction::triggered     , bscanMarkerWidget, &BScanMarkerWidget::setZoom  );
+	connect(bscanMarkerWidget, &BScanMarkerWidget::zoomChanged, actionZoom       , &IntValueAction::valueChanged);
 }
 
 
@@ -57,7 +57,7 @@ QAction* OctMarkerActions::getZoomInAction()
 		zoomInAction = new QAction(this);
 		zoomInAction->setText(tr("Zoom +"));
 		zoomInAction->setIcon(QIcon::fromTheme("zoom-in",  QIcon(":/icons/tango/actions/zoom-in.svgz")));
-		connect(zoomInAction, &QAction::triggered, bscanMarkerWidget, &CVImageWidget::zoom_in);
+		connect(zoomInAction, &QAction::triggered, bscanMarkerWidget, &BScanMarkerWidget::zoom_in);
 	}
 	return zoomInAction;
 }
@@ -69,7 +69,7 @@ QAction* OctMarkerActions::getZoomOutAction()
 		zoomOutAction = new QAction(this);
 		zoomOutAction->setText(tr("Zoom -"));
 		zoomOutAction->setIcon(QIcon::fromTheme("zoom-out",  QIcon(":/icons/tango/actions/zoom-out.svgz")));
-		connect(zoomOutAction, &QAction::triggered, bscanMarkerWidget, &CVImageWidget::zoom_out);
+		connect(zoomOutAction, &QAction::triggered, bscanMarkerWidget, &BScanMarkerWidget::zoom_out);
 	}
 	return zoomOutAction;
 }

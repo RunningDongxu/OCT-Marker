@@ -23,7 +23,7 @@
 #include <cmath>
 
 
-#include<opencv/cv.hpp>
+#include<opencv2/opencv.hpp>
 
 #include <widgets/bscanmarkerwidget.h>
 #include <QPainter>

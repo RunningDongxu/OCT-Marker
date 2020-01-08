@@ -35,14 +35,6 @@ PaintMarker::PaintMarker()
 }
 
 
-
-void PaintMarker::paintMarker(QPaintEvent* event, BScanMarkerWidget* widget) const
-{
-	QPainter painter(widget);
-	paintMarker(painter, widget, event->rect());
-	painter.end();
-}
-
 void PaintMarker::paintMarker(QPainter& painter, BScanMarkerWidget* widget, const QRect& rect) const
 {
 	OctMarkerManager& manager = OctMarkerManager::getInstance();

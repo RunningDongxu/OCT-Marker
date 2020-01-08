@@ -29,7 +29,8 @@
 
 #include <QFileDialog>
 
-#include <opencv/cv.hpp>
+#include 
+#include<opencv2/opencv.hpp>
 
 
 WgSegNN::WgSegNN(WGSegmentation* parent, BScanSegmentation* seg)

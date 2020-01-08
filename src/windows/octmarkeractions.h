@@ -26,7 +26,6 @@ class QMenu;
 class QActionGroup;
 
 class BScanMarkerWidget;
-class CVImageWidget;
 
 
 /**
@@ -54,7 +53,7 @@ class OctMarkerActions : public QObject
 
 
 
-	void addZoomAction(int zoom, CVImageWidget* bscanMarkerWidget, QMenu& menue);
+	void addZoomAction(int zoom, BScanMarkerWidget* bscanMarkerWidget, QMenu& menue);
 
 public:
 	OctMarkerActions(BScanMarkerWidget* bscanMarkerWidget);

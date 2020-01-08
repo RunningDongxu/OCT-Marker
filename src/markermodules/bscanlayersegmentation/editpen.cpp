@@ -18,6 +18,7 @@
 
 #include "editpen.h"
 
+#include<cmath>
 
 #include <QPainter>
 #include <QMouseEvent>

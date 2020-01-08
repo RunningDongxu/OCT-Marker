@@ -675,7 +675,7 @@ void SLOImageWidget::saveLatexImage(const QString& filename) const
 	std::string imageOverlayFilename = cleanFilename + "_overlay.png";
 	std::string imageOverlayLegendFilename = cleanFilename + "_legend.pdf";
 
-	cv::imwrite(path + "/" + imageFilename, series->getSloImage().getImage(), {CV_IMWRITE_JPEG_QUALITY, 75});
+	cv::imwrite(path + "/" + imageFilename, series->getSloImage().getImage(), {cv::IMWRITE_JPEG_QUALITY, 75});
 
 	bool overlayCreated = false;
 	QWidget* overlayLegendWidget = nullptr;

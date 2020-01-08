@@ -101,7 +101,7 @@ void CVImageWidget::showImage(const cv::Mat& image)
 				grayCvImage = true;
 				break;
 			case CV_8UC3:
-				cvtColor(image, cvImage, CV_BGR2RGB);
+				cvtColor(image, cvImage, cv::COLOR_BGR2RGB);
 				grayCvImage = false;
 				break;
 			case CV_32FC1:
@@ -132,7 +132,7 @@ void CVImageWidget::showImage(const cv::Mat& image)
 				std::cout << "2 Channels: " << cvImage.channels() << "\tgr: " << cvImage.rows << " x " << cvImage.cols << std::endl;
 
 				if(cvImage.channels() == 1)
-					cv::cvtColor(cvImage, cvImage, CV_GRAY2BGR);
+					cv::cvtColor(cvImage, cvImage, cv::COLOR_GRAY2BGR);
 
 
 				std::cout << "3 Channels: " << cvImage.channels() << "\tgr: " << cvImage.rows << " x " << cvImage.cols << std::endl;
