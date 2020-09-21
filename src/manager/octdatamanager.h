@@ -131,6 +131,7 @@ private:
 	OctDataManagerThread* loadThread = nullptr;
 	
 	OctDataManager();
+	OctDataManager& operator=(const OctDataManager& other) = delete;
 	
 	boost::property_tree::ptree* getMarkerTreeSeries(const OctData::Series* series);
 	boost::property_tree::ptree* getMarkerTreeSeries(const OctData::Patient* pat, const OctData::Study* study, const OctData::Series*  series);

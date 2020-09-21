@@ -70,9 +70,9 @@ bool OctFilesModel::loadFile(QString filename)
 
 
 
-int OctFilesModel::addFile(QString filename)
+std::size_t OctFilesModel::addFile(QString filename)
 {
-	int count = 0;
+	std::size_t count = 0;
 	for(const OctFileUnloaded* file : filelist)
 	{
 		if(file->sameFile(filename))
@@ -82,7 +82,9 @@ int OctFilesModel::addFile(QString filename)
 		++count;
 	}
 
-	beginInsertRows(QModelIndex(), loadedFilePos, loadedFilePos);
+	beginInsertRows(QModelIndex()
+	              , static_cast<int>(loadedFilePos)
+	              , static_cast<int>(loadedFilePos));
 	filelist.push_back(new OctFileUnloaded(filename));
 	endInsertRows();
 	
@@ -91,13 +93,13 @@ int OctFilesModel::addFile(QString filename)
 
 void OctFilesModel::loadNextFile()
 {
-	std::size_t filesInList = filelist.size();
-	int requestFilePost = loadedFilePos + 1;
-	if(requestFilePost >= 0 && static_cast<std::size_t>(requestFilePost) < filesInList)
+	const std::size_t filesInList = filelist.size();
+	const std::size_t requestFilePost = static_cast<std::size_t>(loadedFilePos) + 1;
+	if(requestFilePost < filesInList)
 	{
 		openFile(filelist[requestFilePost]->getFilename());
 		loadedFilePos = requestFilePost;
-		fileIdLoaded(index(loadedFilePos));
+		sendFileIdLoaded();
 	}
 }
 
@@ -108,10 +110,14 @@ void OctFilesModel::loadPreviousFile()
 	{
 		--loadedFilePos;
 		openFile(filelist[loadedFilePos]->getFilename());
-		fileIdLoaded(index(loadedFilePos));
+		sendFileIdLoaded();
 	}
 }
 
+void OctFilesModel::sendFileIdLoaded()
+{
+		fileIdLoaded(index(static_cast<int>(loadedFilePos)));
+}
 
 
 
@@ -121,8 +127,8 @@ void OctFilesModel::slotClicked(QModelIndex index)
 	if(!index.isValid())
 		return;
 	
-	int row = index.row();
-	if(row < 0 || static_cast<std::size_t>(row) >= filelist.size())
+	std::size_t row = static_cast<std::size_t>(index.row());
+	if(index.row() < 0 || row >= filelist.size())
 		return;
 	
 

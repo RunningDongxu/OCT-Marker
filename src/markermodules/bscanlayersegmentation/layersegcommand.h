@@ -31,7 +31,7 @@ class BScanLayerSegmentation;
  */
 class LayerSegCommand : public MarkerCommand
 {
-	BScanLayerSegmentation* const parent = nullptr;
+	BScanLayerSegmentation& parent;
 
 	OctData::Segmentationlines::SegmentlineType type;
 	std::size_t bscanNr;
@@ -41,7 +41,7 @@ class LayerSegCommand : public MarkerCommand
 
 	bool testAndChangeSegline();
 public:
-	LayerSegCommand(BScanLayerSegmentation* parent, std::size_t start, std::vector<double>&& newPart, std::vector<double>&& oldPart);
+	LayerSegCommand(BScanLayerSegmentation& parent, std::size_t start, std::vector<double>&& newPart, std::vector<double>&& oldPart);
 	~LayerSegCommand() override;
 
 	LayerSegCommand(const LayerSegCommand& other)            = delete;

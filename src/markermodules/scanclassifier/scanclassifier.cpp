@@ -68,7 +68,7 @@ void ScanClassifier::loadBScansState(const boost::property_tree::ptree& markerTr
 		if(bscanId == -1 || static_cast<std::size_t>(bscanId) >= slidesClassifierStates.size())
 			continue;
 
-		slidesClassifierStates[bscanId].loadState(bscanNode);
+		slidesClassifierStates[static_cast<std::size_t>(bscanId)].loadState(bscanNode);
 	}
 }
 

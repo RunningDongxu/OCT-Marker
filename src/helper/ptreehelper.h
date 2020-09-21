@@ -41,7 +41,7 @@ namespace PTreeHelper
 		const std::string name;
 		boost::property_tree::ptree* node =  nullptr;
 
-		NodeCreator* const parentCreator = nullptr;
+		NodeCreator*                  const parentCreator = nullptr;
 		boost::property_tree::ptree*  const parentNode    = nullptr;
 
 		bool createId = false;

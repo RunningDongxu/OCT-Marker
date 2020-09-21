@@ -55,7 +55,7 @@ class OctFilesModel : public QAbstractListModel
 
 	bool openFile(const QString& filename);
 
-	int loadedFilePos = 0;
+	std::size_t loadedFilePos = 0;
 
 public:
 	static OctFilesModel& getInstance()                             { static OctFilesModel instance; return instance;}
@@ -66,12 +66,13 @@ public:
 	QVariant data(const QModelIndex &index, int role) const override;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 	
-
+private:
+	void sendFileIdLoaded();
 private slots:
 	
 public slots:
-	int  addFile (QString filename);
-	bool loadFile(QString filename);
+	std::size_t addFile (QString filename);
+	bool        loadFile(QString filename);
 	
 	void slotClicked(QModelIndex index);
 	void slotDoubleClicked(QModelIndex index);

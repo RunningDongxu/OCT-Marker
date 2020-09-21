@@ -41,11 +41,15 @@ QVariant PaintMarkerModel::data(const QModelIndex& index, int role) const
 	if(!index.isValid())
 		return QVariant();
 
+	std::size_t row = static_cast<std::size_t>(index.row());
+	if(row >= markers.size() || index.row() < 0)
+		return QVariant();
+
 	if(role == Qt::CheckStateRole)
 	{
 		if(index.column() == 1)
 		{
-			const PaintMarkerItem& item = markers.at(index.row());
+			const PaintMarkerItem& item = markers.at(row);
 			return item.isShowed() ? Qt::Checked : Qt::Unchecked;
 		}
 	}
@@ -53,7 +57,7 @@ QVariant PaintMarkerModel::data(const QModelIndex& index, int role) const
 
 	if(role == Qt::DisplayRole)
 	{
-		const PaintMarkerItem& item = markers.at(index.row());
+		const PaintMarkerItem& item = markers.at(row);
 
 		switch(index.column())
 		{
@@ -67,11 +71,18 @@ QVariant PaintMarkerModel::data(const QModelIndex& index, int role) const
 
 bool PaintMarkerModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
+	if(!index.isValid())
+		return false;
+
+	std::size_t row = static_cast<std::size_t>(index.row());
+	if(row >= markers.size() || index.row() < 0)
+		return false;
+
 	if(role == Qt::CheckStateRole)
 	{
 		if(index.column() == 1)
 		{
-			PaintMarkerItem& item = markers.at(index.row());
+			PaintMarkerItem& item = markers.at(row);
 			item.setShow(value.toBool());
 
 			emit(viewChanged());

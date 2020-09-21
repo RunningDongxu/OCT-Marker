@@ -259,7 +259,7 @@ void BScanLayerSegmentation::setActEditLinetype(OctData::Segmentationlines::Segm
 
 	updateEditLine();
 	if(actEditMethod)
-		emit(segLineIdChanged(static_cast<int>(type)));
+		emit(segLineIdChanged(static_cast<std::size_t>(type)));
 
 	requestFullUpdate();
 }
@@ -297,8 +297,8 @@ std::vector<double> BScanLayerSegmentation::getSegPart(const std::vector<double>
 	if(ascanEnd > segLine.size())
 		ascanEnd = segLine.size();
 
-	auto it1 = segLine.begin() + ascanBegin;
-	auto it2 = segLine.begin() + ascanEnd;
+	auto it1 = segLine.begin() + static_cast<std::ptrdiff_t>(ascanBegin);
+	auto it2 = segLine.begin() + static_cast<std::ptrdiff_t>(ascanEnd  );
 
 	return std::vector<double>(it1, it2);
 }
@@ -319,7 +319,7 @@ void BScanLayerSegmentation::rangeModified(std::size_t ascanBegin, std::size_t a
 
 	modifiedSegPart(bscanNr, actEditType, ascanBegin, newSegPart, false);
 
-	LayerSegCommand* command = new LayerSegCommand(this, ascanBegin, std::move(newSegPart), std::move(oldSegPart));
+	LayerSegCommand* command = new LayerSegCommand(*this, ascanBegin, std::move(newSegPart), std::move(oldSegPart));
 	addUndoCommand(command);
 
 }

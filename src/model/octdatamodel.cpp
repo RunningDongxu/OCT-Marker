@@ -50,12 +50,13 @@ QVariant OctDataModel::data(const QModelIndex& index, int role) const
 	if(!index.isValid())
 		return QVariant();
 
-	if(static_cast<std::size_t>(index.row()) >= octSeriesList.size())
+	std::size_t row = static_cast<std::size_t>(index.row());
+	if(row >= octSeriesList.size() || index.row() < 0)
 		return QVariant();
 
 	if(role == Qt::DisplayRole)
 	{
-		OctSeriesItem* item = octSeriesList.at(index.row());
+		OctSeriesItem* item = octSeriesList.at(row);
 		
 		switch(index.column())
 		{

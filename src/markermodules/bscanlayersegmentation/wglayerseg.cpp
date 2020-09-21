@@ -62,6 +62,8 @@ namespace
 		{
 			if(layoutWidget)
 				basisLayout->addWidget(layoutWidget);
+			else
+				delete layoutWidget;
 		}
 
 		void addWidget(QWidget* widget)

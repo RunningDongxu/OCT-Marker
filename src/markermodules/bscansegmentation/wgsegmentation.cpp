@@ -599,14 +599,10 @@ void WGSegmentationThreshold::setupWidgets()
 {
 	QButtonGroup* directionBG = new QButtonGroup(widget);
 
-	if(buttonUp   )
-		directionBG->addButton(buttonUp   );
-	if(buttonDown )
-		directionBG->addButton(buttonDown );
-	if(buttonLeft )
-		directionBG->addButton(buttonLeft );
-	if(buttonRight)
-		directionBG->addButton(buttonRight);
+	if(buttonUp   ) directionBG->addButton(buttonUp   );
+	if(buttonDown ) directionBG->addButton(buttonDown );
+	if(buttonLeft ) directionBG->addButton(buttonLeft );
+	if(buttonRight) directionBG->addButton(buttonRight);
 
 	if(buttonAbsolut && buttonRelativ)
 	{

@@ -69,7 +69,7 @@ BScanSegmentation::BScanSegmentation(OctMarkerManager* markerManager)
 	localOpNN                 = new BScanSegLocalOpNN       (*this);
 #endif
 
-	setLocalMethod(BScanSegmentationMarker::LocalMethod::Paint);
+	BScanSegmentation::setLocalMethod(BScanSegmentationMarker::LocalMethod::Paint);
 
 	widget = new WGSegmentation(this);
 	widgetPtr2WGSegmentation = widget;
