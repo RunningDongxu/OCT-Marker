@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <vector>
+#include <memory>
 
 // #include <boost/property_tree/ptree_fwd.hpp>
 
@@ -49,8 +50,8 @@ public:
 	static OctMarkerManager& getInstance()                          { static OctMarkerManager instance; return instance; }
 
 	int getActBScanNum() const                                      { return actBScan; }
-	const OctData::Series* getSeries() const                        { return series;   }
-	const OctData::BScan * getActBScan () const;
+	const std::shared_ptr<const OctData::Series>& getSeries() const { return series;   }
+	std::shared_ptr<const OctData::BScan> getActBScan () const;
 
 
 	BscanMarkerBase* getActBscanMarker()                            { return actBscanMarker; }
@@ -76,8 +77,9 @@ private:
 	OctMarkerManager();
 	~OctMarkerManager() override;
 
-	int                    actBScan = 0;
-	const OctData::Series* series   = nullptr;
+	int actBScan = 0;
+	
+	std::shared_ptr<const OctData::Series> series;
 	
 	std::vector<BscanMarkerBase*> bscanMarkerObj;
 	BscanMarkerBase* actBscanMarker = nullptr;
@@ -94,8 +96,8 @@ private:
 
 
 private slots:
-	virtual void saveMarkerStateSlot(const OctData::Series* series);
-	virtual void loadMarkerStateSlot(const OctData::Series* series);
+	virtual void saveMarkerStateSlot(const std::shared_ptr<const OctData::Series>& series);
+	virtual void loadMarkerStateSlot(const std::shared_ptr<const OctData::Series>& series);
 	virtual void reloadMarkerStateSlot()                            { loadMarkerStateSlot(series); }
 
 	virtual void udateFromMarkerModul();
@@ -113,7 +115,7 @@ public slots:
 	virtual void nextBScan()                                        { inkrementBScan(+1); }
 	virtual void previousBScan()                                    { inkrementBScan(-1); }
 
-	virtual void showSeries(const OctData::Series* series);
+	virtual void showSeries(const std::shared_ptr<const OctData::Series>& series);
 	
 	virtual void setBscanMarker(int id);
 	virtual void setBscanMarkerTextID(QString id);
@@ -122,8 +124,8 @@ public slots:
 signals:
 	void bscanChanged      (int bscan);
 	void sloViewChanged    ();
-	void newSeriesShowed   (const OctData::Series* series);
-	void newBScanShowed    (const OctData::BScan * series);
+	void newSeriesShowed   (const std::shared_ptr<const OctData::Series>& series);
+	void newBScanShowed    (const std::shared_ptr<const OctData::BScan>&  bscan);
 	void bscanMarkerChanged(BscanMarkerBase* marker);
 	void sloMarkerChanged  (SloMarkerBase  * marker);
 	void sloOverlayChanged ();

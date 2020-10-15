@@ -105,7 +105,7 @@ void ScanClassifier::saveState(boost::property_tree::ptree& markerTree)
 	}
 }
 
-void ScanClassifier::newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& ptree)
+void ScanClassifier::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& ptree)
 {
 	BscanMarkerBase::newSeriesLoaded(series, ptree);
 	slidesClassifierStates.resize(series->bscanCount(), DefinedClassifierMarker::getInstance().getBscanMarkers());

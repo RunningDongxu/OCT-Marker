@@ -19,13 +19,13 @@
 #include "octdatamanager.h"
 
 #include <iostream>
+#include<filesystem>
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include <boost/filesystem.hpp>
 
 #include<QString>
 #include<QTime>
@@ -49,26 +49,20 @@
 #include "octmarkermanager.h"
 
 namespace bpt = boost::property_tree;
-namespace bfs = boost::filesystem;
+namespace bfs = std::filesystem;
 
 
 
 OctDataManager::OctDataManager()
-: markerstree(new bpt::ptree)
-, markerIO(new OctMarkerIO(markerstree))
+: markerstree(std::make_unique<bpt::ptree>())
+, markerIO(std::make_unique<OctMarkerIO>(markerstree.get()))
 {
 	connect(this, &OctDataManager::seriesChanged, this, &OctDataManager::clearSeriesCache);
 }
 
 
 
-OctDataManager::~OctDataManager()
-{
-	delete octData;
-	delete markerstree;
-	delete markerIO;
-	delete seriesSLODistanceMap;
-}
+OctDataManager::~OctDataManager() = default;
 
 
 void OctDataManager::saveMarkersDefault()
@@ -90,11 +84,7 @@ void OctDataManager::triggerSaveMarkersDefault()
 
 void OctDataManagerThread::run()
 {
-	if(!oct)
-	{
-		error = "oct variable is not set";
-		loadSuccess = false;
-	}
+	octData.reset();
 
 	try
 	{
@@ -109,7 +99,8 @@ void OctDataManagerThread::run()
 		octOptions.rotateSlo           = ProgramOptions::loadRotateSlo();
 		octOptions.libPath             = octmarkerPath.dir().absolutePath().toStdString(); // QApplication::applicationFilePath().toStdString();
 
-		*oct = OctData::OctFileRead::openFile(filename.toStdString(), octOptions, this);
+		OctData::OCT oct = OctData::OctFileRead::openFile(filename.toStdString(), octOptions, this);
+		octData = std::make_unique<OctData::OCT>(std::move(oct));
 	}
 	catch(boost::exception& e)
 	{
@@ -176,11 +167,9 @@ void OctDataManager::openFile(const QString& filename)
 	{
 		saveMarkersDefault();
 
-		octData4Loading = new OctData::OCT;
-
-		loadThread = new OctDataManagerThread(*this, filename, octData4Loading);
-		connect(loadThread, &OctDataManagerThread::stepCalulated, this, &OctDataManager::loadOctDataThreadProgress);
-		connect(loadThread, &OctDataManagerThread::finished     , this, &OctDataManager::loadOctDataThreadFinish  );
+		loadThread = std::make_unique<OctDataManagerThread>(*this, filename);
+		connect(loadThread.get(), &OctDataManagerThread::stepCalulated, this, &OctDataManager::loadOctDataThreadProgress);
+		connect(loadThread.get(), &OctDataManagerThread::finished     , this, &OctDataManager::loadOctDataThreadFinish  );
 		loadThread->start();
 	}
 	catch(...)
@@ -197,10 +186,11 @@ void OctDataManager::loadOctDataThreadFinish()
 
 	if(loadThread->success())
 	{
+		std::unique_ptr octData4Loading = loadThread->getOctData();
 		if(octData4Loading->size() == 0)
 		{
 			QMessageBox msgBox;
-			msgBox.setText("OctDataManager::openFile: oct->size() == 0");
+			msgBox.setText(tr("No OCT data read from file"));
 			msgBox.setIcon(QMessageBox::Critical);
 			msgBox.exec();
 		}
@@ -236,12 +226,9 @@ void OctDataManager::loadOctDataThreadFinish()
 				msgBox.exec();
 			}
 
-
 			actFilename = loadThread->getFilename();
 
-			delete octData;
-			octData = octData4Loading;
-			octData4Loading = nullptr;
+			octData = std::move(octData4Loading);
 
 			actPatient = octData->begin()->second;
 			if(actPatient->size() > 0)
@@ -256,7 +243,7 @@ void OctDataManager::loadOctDataThreadFinish()
 
 			emit(octFileChanged());
 			emit(octFileChanged(actFilename));
-			emit(octFileChanged(octData   ));
+			emit(octFileChanged(octData   .get()));
 			emit(patientChanged(actPatient));
 			emit(studyChanged  (actStudy  ));
 			emit(seriesChanged (actSeries ));
@@ -275,15 +262,12 @@ void OctDataManager::loadOctDataThreadFinish()
 		}
 	}
 
-	delete loadThread;
-	delete octData4Loading;
-	loadThread      = nullptr;
-	octData4Loading = nullptr;
+	loadThread.reset();
 }
 
 
 
-void OctDataManager::chooseSeries(const OctData::Series* seriesReq)
+void OctDataManager::chooseSeries(const std::shared_ptr<const OctData::Series>& seriesReq)
 {
 	saveMarkerState(actSeries);
 	
@@ -291,9 +275,7 @@ void OctDataManager::chooseSeries(const OctData::Series* seriesReq)
 	if(seriesReq == actSeries)
 		return;
 	
-	const OctData::Patient* patient;
-	const OctData::Study  * study;
-	octData->findSeries(seriesReq, patient, study);
+	auto [patient, study] = octData->findSeries(seriesReq);
 
 	if(!patient || !study)
 		return;
@@ -309,18 +291,17 @@ void OctDataManager::chooseSeries(const OctData::Series* seriesReq)
 }
 
 
-boost::property_tree::ptree* OctDataManager::getMarkerTreeSeries(const OctData::Series* seriesReq)
+boost::property_tree::ptree* OctDataManager::getMarkerTreeSeries(const std::shared_ptr<const OctData::Series>& seriesReq)
 {
 	if(!seriesReq)
 		return nullptr;
-	const OctData::Patient* patient;
-	const OctData::Study  * study;
-	octData->findSeries(seriesReq, patient, study);
+	
+	auto [patient, study] = octData->findSeries(seriesReq);
 
 	return getMarkerTreeSeries(patient, study, seriesReq);
 }
 
-boost::property_tree::ptree* OctDataManager::getMarkerTreeSeries(const OctData::Patient* patient, const OctData::Study* study, const OctData::Series* series)
+boost::property_tree::ptree* OctDataManager::getMarkerTreeSeries(const std::shared_ptr<const OctData::Patient>& patient, const std::shared_ptr<const OctData::Study>& study, const std::shared_ptr<const OctData::Series>& series)
 {
 	if(!patient || !study || !series)
 		return nullptr;
@@ -370,21 +351,32 @@ const SloBScanDistanceMap* OctDataManager::getSeriesSLODistanceMap() const
 {
 	if(!seriesSLODistanceMap)
 	{
-		seriesSLODistanceMap = new SloBScanDistanceMap();
-		seriesSLODistanceMap->createData(actSeries);
+		seriesSLODistanceMap = std::make_unique<SloBScanDistanceMap>();
+		seriesSLODistanceMap->createData(actSeries.get());
 	}
 
-	return seriesSLODistanceMap;
+	return seriesSLODistanceMap.get();
 }
 
 void OctDataManager::clearSeriesCache()
 {
-	delete seriesSLODistanceMap;
-	seriesSLODistanceMap = nullptr;
+	seriesSLODistanceMap.reset();
 }
 
 void OctDataManager::abortLoadingOctFile()
 {
 	if(loadThread)
 		loadThread->breakLoad();
+}
+
+OctDataManagerThread::OctDataManagerThread(OctDataManager& dataManager, const QString& filename) 
+    : octDataManager(dataManager)
+    , filename(filename)
+{}
+
+OctDataManagerThread::~OctDataManagerThread() = default;
+
+std::unique_ptr<OctData::OCT> OctDataManagerThread::getOctData()
+{
+	return std::move(octData);
 }

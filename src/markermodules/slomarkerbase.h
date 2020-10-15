@@ -62,7 +62,7 @@ public:
 	virtual void saveState(boost::property_tree::ptree&)            {}
 	virtual void loadState(boost::property_tree::ptree&)            {}
 
-	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&)
+	virtual void newSeriesLoaded(const std::shared_ptr<const OctData::Series>&, boost::property_tree::ptree&)
 	                                                                {}
 
 	virtual bool hasChangedSinceLastSave() const                    { return false; }
@@ -80,8 +80,6 @@ protected:
 	OctMarkerManager* const markerManager;
 
 	void connectToolBar(QToolBar* toolbar);
-
-	const OctData::Series* getSeries() const;
 
 	QString name;
 	QString id;

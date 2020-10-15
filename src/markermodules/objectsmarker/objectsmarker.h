@@ -54,11 +54,8 @@ class Objectsmarker : public BscanMarkerBase
 {
 	Q_OBJECT
 	friend class ObjectsMarkerPTree;
+	
 public:
-// 	typedef std::map<std::string, RectItem*> RectItems;
-// 	typedef RectItems::value_type RectItemsTypes;
-
-
 	Objectsmarker(OctMarkerManager* markerManager);
 	~Objectsmarker() override;
 
@@ -78,17 +75,11 @@ public:
 	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect& drawrect) const override;
 
 
-// 	virtual RedrawRequest mouseMoveEvent   (QMouseEvent* event, BScanMarkerWidget* markerWidget) override;
-// 	virtual RedrawRequest mousePressEvent  (QMouseEvent* event, BScanMarkerWidget* markerWidget) override;
-// 	virtual RedrawRequest mouseReleaseEvent(QMouseEvent* event, BScanMarkerWidget* markerWidget) override;
-// 	virtual void contextMenuEvent (QContextMenuEvent* /*event*/) {}
-
-
 	void setActBScan(std::size_t bscan)  override;
-	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree) override;
 
 private:
-	void resetMarkerObjects(const OctData::Series* series);
+	void resetMarkerObjects(const std::shared_ptr<const OctData::Series>& series);
 	void removeAllItems();
 
 
@@ -97,7 +88,6 @@ private:
 
 
 	void removeItems(const QList<QGraphicsItem*>& items);
-// 	RectItems rectItems;
 
 	std::vector<std::vector<RectItem*>> itemsList;
 	std::size_t actBScanSceneNr = 0;

@@ -184,11 +184,11 @@ BscanMarkerBase::RedrawRequest DistanceMeter::mousePressEvent(QMouseEvent* event
 	return r;
 }
 
-void DistanceMeter::newSeriesLoaded(const OctData::Series* s, boost::property_tree::ptree& ptree)
+void DistanceMeter::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& s, boost::property_tree::ptree& ptree)
 {
 	BscanMarkerBase::newSeriesLoaded(s, ptree);
 	series = s;
-	actBScan = nullptr;
+	actBScan.reset();
 	resetPositions();
 }
 

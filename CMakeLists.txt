@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
 project(octmarker DESCRIPTION "A platform independent open source tool for open OCT images and create different labels on it")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_module/)
 
-set( CMAKE_CXX_STANDARD 11 )
+set( CMAKE_CXX_STANDARD 17 )
 
 
 find_package(Boost 1.40 COMPONENTS filesystem serialization system iostreams REQUIRED)
@@ -79,7 +79,7 @@ if(BUILD_QT_PROGRAMM)
 
 
 	if(CMAKE_COMPILER_IS_GNUCXX)
-		string(APPEND CMAKE_CXX_FLAGS "-Werror -Wall -Wextra -Wunreachable-code -Wconversion -Wold-style-cast")        ## Optimize -O3 -Weverything -Weffc++
+		string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wunreachable-code -Wconversion -Wold-style-cast")        ## Optimize -O3 -Weverything -Weffc++
 		if(WIN32)
 			set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -mwindows")
 		endif()

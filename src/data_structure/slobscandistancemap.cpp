@@ -320,7 +320,7 @@ namespace
 		void addBScans(AScanHandler& pixelSetter, bool evaluation)
 		{
 			std::size_t bscanNr = 0;
-			for(const OctData::BScan* bscan : series.getBScans())
+			for(const std::shared_ptr<const OctData::BScan>& bscan : series.getBScans())
 			{
 				actBscanNr = bscanNr;
 				if(bscan)
@@ -495,7 +495,7 @@ namespace
 
 			FindMinAScan fmas(OctData::CoordSLOpx(static_cast<double>(x), static_cast<double>(y)), slideInfo.ascanId);
 
-			const OctData::BScan* bscan = series.getBScan(bscanNr);
+			const std::shared_ptr<const OctData::BScan> bscan = series.getBScan(bscanNr);
 			if(bscan)
 				addBScan(*bscan, fmas);
 

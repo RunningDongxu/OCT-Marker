@@ -36,10 +36,10 @@ std::size_t BscanMarkerBase::getActBScanNr() const
 
 int BscanMarkerBase::getBScanWidth(std::size_t nr) const
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(series)
 	{
-		const OctData::BScan* bscan = series->getBScan(nr);
+		const std::shared_ptr<const OctData::BScan> bscan = series->getBScan(nr);
 		if(bscan)
 			return bscan->getWidth();
 	}
@@ -53,29 +53,29 @@ int BscanMarkerBase::getBScanWidth() const
 
 int BscanMarkerBase::getBScanHight() const
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(series)
 	{
-		const OctData::BScan* bscan = series->getBScan(getActBScanNr());
+		const std::shared_ptr<const OctData::BScan> bscan = series->getBScan(getActBScanNr());
 		if(bscan)
 			return bscan->getHeight();
 	}
 	return 0;
 }
 
-const OctData::Series* BscanMarkerBase::getSeries() const
+const std::shared_ptr<const OctData::Series>& BscanMarkerBase::getSeries() const
 {
 	return markerManager->getSeries();
 }
 
-const OctData::BScan* BscanMarkerBase::getActBScan() const
+std::shared_ptr<const OctData::BScan> BscanMarkerBase::getActBScan() const
 {
 	return getBScan(getActBScanNr());
 }
 
-const OctData::BScan * BscanMarkerBase::getBScan(std::size_t nr) const
+std::shared_ptr<const OctData::BScan> BscanMarkerBase::getBScan(std::size_t nr) const
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(series)
 		return series->getBScan(nr);
 	return nullptr;

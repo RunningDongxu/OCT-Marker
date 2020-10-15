@@ -39,7 +39,7 @@ SloIntervallMap::~SloIntervallMap()
 }
 
 
-void SloIntervallMap::createMap(const SloBScanDistanceMap& distanceMap, const std::vector<BScanIntervalMarker::MarkerMap>& lines, const OctData::Series* series)
+void SloIntervallMap::createMap(const SloBScanDistanceMap& distanceMap, const std::vector<BScanIntervalMarker::MarkerMap>& lines, const std::shared_ptr<const OctData::Series>& series)
 {
 	const SloBScanDistanceMap::PreCalcDataMatrix* distMatrix = distanceMap.getDataMatrix();
 
@@ -49,7 +49,8 @@ void SloIntervallMap::createMap(const SloBScanDistanceMap& distanceMap, const st
 	const std::size_t sizeX = distMatrix->getSizeX();
 	const std::size_t sizeY = distMatrix->getSizeY();
 
-	fillCache(lines, series);
+	if(series)
+		fillCache(lines, *series);
 
 	sloMap->create(static_cast<int>(sizeX), static_cast<int>(sizeY), CV_8UC4);
 
@@ -98,17 +99,14 @@ const SloIntervallMap::Color& SloIntervallMap::getColor(std::size_t bscan, std::
 
 
 
-void SloIntervallMap::fillCache(const std::vector<BScanIntervalMarker::MarkerMap>& lines, const OctData::Series* series)
+void SloIntervallMap::fillCache(const std::vector<BScanIntervalMarker::MarkerMap>& lines, const OctData::Series& series)
 {
-	if(!series)
-		return;
-
-	const std::size_t numBscans = std::min(series->bscanCount(), lines.size());
+	const std::size_t numBscans = std::min(series.bscanCount(), lines.size());
 
 	colorCache.resize(numBscans);
 	for(std::size_t i = 0; i < numBscans; ++i)
 	{
-		const OctData::BScan* bscan = series->getBScan(i);
+		const std::shared_ptr<const OctData::BScan> bscan = series.getBScan(i);
 		if(!bscan)
 			continue;
 

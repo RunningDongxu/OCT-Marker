@@ -139,7 +139,7 @@ void OctDataModel::setOctData(const OctData::OCT* octData)
 
 	for(const OctData::OCT::SubstructurePair& patientPair : *octData)
 	{
-		const OctData::Patient* patient = patientPair.second;
+		const std::shared_ptr<OctData::Patient>& patient = patientPair.second;
 		QString patName = QString("%1, %2").arg(patient->getSurname().c_str()).arg(patient->getForename().c_str());
 		
 		QString surname  = QString::fromStdString(patient->getSurname());
@@ -147,11 +147,11 @@ void OctDataModel::setOctData(const OctData::OCT* octData)
 		
 		for(const OctData::Patient::SubstructurePair& studyPair : *patient)
 		{
-			const OctData::Study* study = studyPair.second;
+			const std::shared_ptr<OctData::Study>& study = studyPair.second;
 			int studyID                 = studyPair.first;
 			for(const OctData::Study::SubstructurePair& seriesPair : *study)
 			{
-				const OctData::Series* series = seriesPair.second;
+				const std::shared_ptr<OctData::Series>& series = seriesPair.second;
 				int seriesID = seriesPair.first;
 				
 				QString description = QString("Pat: %1, Study: %2, Series: %3").arg(patName).arg(studyID).arg(seriesID);

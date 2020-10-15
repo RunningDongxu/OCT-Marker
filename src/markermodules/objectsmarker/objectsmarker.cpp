@@ -106,7 +106,7 @@ void Objectsmarker::removeItems(const QList<QGraphicsItem*>& items)
 const QGraphicsScene* Objectsmarker::getGraphicsScene() const { return graphicsScene; }
 
 
-void Objectsmarker::newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree)
+void Objectsmarker::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree)
 {
 	resetMarkerObjects(series);
 	loadState(markerTree);
@@ -131,7 +131,7 @@ void Objectsmarker::removeAllItems()
 }
 
 
-void Objectsmarker::resetMarkerObjects(const OctData::Series* series)
+void Objectsmarker::resetMarkerObjects(const std::shared_ptr<const OctData::Series>& series)
 {
 	if(!series)
 		return;

@@ -43,8 +43,8 @@ namespace
 		intAction->setText(text);
 		intAction->setIcon(icon);
 		intAction->setChecked(value == intOption());
-		parent->connect(intAction, &IntValueAction::triggered, &intOption    , &OptionInt::setValue         );
-		parent->connect(&intOption    , &OptionInt::valueChanged  , intAction, &IntValueAction::valueChanged);
+		parent->connect(intAction , &IntValueAction::triggered, &intOption, &OptionInt::setValue         );
+		parent->connect(&intOption, &OptionInt::valueChanged  , intAction , &IntValueAction::valueChanged);
 		toolbar->addAction(intAction);
 		if(actionGroup)
 			actionGroup->addAction(intAction);
@@ -100,7 +100,7 @@ WgSloImage::~WgSloImage()
 
 void WgSloImage::wheelEvent(QWheelEvent* wheelE)
 {
-	int deltaWheel = wheelE->delta();
+	int deltaWheel = wheelE->angleDelta().y();
 	if(deltaWheel < 0)
 		markerManager.previousBScan();
 	else

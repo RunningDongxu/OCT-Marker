@@ -425,6 +425,12 @@ QDockWidget* StupidSplineWindow::createStupidControls()
 
 	settingsMenu->addSection(tr("General"));
 	settingsMenu->addAction(ProgramOptions::getResetAction());
+	
+	QAction* actionSaveScreenshot = new QAction(this);
+	actionSaveScreenshot->setText(tr("create screenshot"));
+	actionSaveScreenshot->setIcon(QIcon::fromTheme("document-save-as", QIcon(":/icons/tango/actions/document-save.svgz")));
+	connect(actionSaveScreenshot, &QAction::triggered, this, &StupidSplineWindow::screenshot);
+	settingsMenu->addAction(actionSaveScreenshot);
 
 
 	QToolButton* buttonSettings = new QToolButton(this);
@@ -461,5 +467,30 @@ void StupidSplineWindow::setProgramOptions()
 	ProgramOptions::bscansShowSegmentationslines.setValue(false);
 	ProgramOptions::bscanAspectRatioType.setValue(2); // best fit
 	ProgramOptions::bscanAutoFitImage.setValue(true);
+}
+
+#include<QFileDialog>
+
+void StupidSplineWindow::screenshot()
+{
+
+	QString filename = QFileDialog::getSaveFileName(this, tr("save filename"), "octmarker-spline.pdf", "*.pdf");
+	if(filename.isEmpty())
+		return;
+
+	QPdfWriter generator(filename);
+	generator.setTitle(tr("OCT-Marker - simple spline gui"));;
+	generator.setPageMargins(QMarginsF(0., 0., 0., 0.));
+	generator.setPageSize(QPageSize(size(), QPageSize::Point));
+	generator.setResolution(72);
+
+	QPainter painter;
+	QFont font;
+	font.setPointSizeF(font.pointSizeF()*2);
+	painter.begin(&generator);
+	painter.setFont(font);
+	render(&painter, QPoint(), QRegion(), DrawChildren | DrawWindowBackground | IgnoreMask);
+// 				const QPoint &targetOffset = QPoint(), const QRegion &sourceRegion = QRegion(), RenderFlags renderFlags = RenderFlags( DrawWindowBackground | DrawChildren ))
+	painter.end();
 }
 

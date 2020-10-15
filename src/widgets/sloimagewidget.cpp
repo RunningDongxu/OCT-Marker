@@ -129,19 +129,19 @@ void SLOImageWidget::paintEvent(QPaintEvent* event)
 {
 	CVImageWidget::paintEvent(event);
 
-	const OctData::Series* series = OctDataManager::getInstance().getSeries();
+	const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 	if(!series)
 		return;
 
 	QPainter painter(this);
 	if(drawConvexHull)
-		paintConvexHull(painter, series);
+		paintConvexHull(painter, *series);
 
 	if(drawBScans)
-		paintBScans(painter, series);
+		paintBScans(painter, *series);
 
 	if(ProgramOptions::sloShowGrid())
-		paintAnalyseGrid(painter, series);
+		paintAnalyseGrid(painter, *series);
 
 	if(markPos.show)
 	{
@@ -157,11 +157,9 @@ void SLOImageWidget::paintEvent(QPaintEvent* event)
 }
 
 
-void SLOImageWidget::paintConvexHull(QPainter& painter, const OctData::Series* series)
+void SLOImageWidget::paintConvexHull(QPainter& painter, const OctData::Series& series)
 {
-	if(!series)
-		return;
-	const OctData::Series::BScanSLOCoordList& hull = series->getConvexHull();
+	const OctData::Series::BScanSLOCoordList& hull = series.getConvexHull();
 
 
 	if(hull.size() < 3)
@@ -171,24 +169,22 @@ void SLOImageWidget::paintConvexHull(QPainter& painter, const OctData::Series* s
 	pen.setWidth(2);
 	painter.setPen(pen);
 
-	SloCoordTranslator sct(*series, getImageScaleFactor());
+	SloCoordTranslator sct(series, getImageScaleFactor());
 	sct.setClipShift(OctData::CoordSLOpx(clipX1, clipY1));
-
-	for(std::size_t i = 1; i < hull.size(); ++i)
+	
+	QPolygonF polygon;
+	for(std::size_t i = 0; i < hull.size(); ++i)
 	{
-		const OctData::CoordSLOpx start_px = sct(hull[i-1]);
-		const OctData::CoordSLOpx   end_px = sct(hull[i  ]);
-
-		painter.drawLine(start_px.getX(), start_px.getY(), end_px.getX(), end_px.getY());
+		const OctData::CoordSLOpx pxPos = sct(hull[i]);
+		polygon.push_back(QPointF(pxPos.getXf(), pxPos.getYf()));
 	}
+	painter.setClipRect(QRect(0, 0, scaledImageWidth(), scaledImageHeight()));
+	painter.drawPolygon(polygon);
 }
 
 
-void SLOImageWidget::paintBScans(QPainter& painter, const OctData::Series* series)
+void SLOImageWidget::paintBScans(QPainter& painter, const OctData::Series& series)
 {
-	if(!series)
-		return;
-
 	QPen normalBscanPen;
 	QPen activBscanPen;
 
@@ -201,10 +197,10 @@ void SLOImageWidget::paintBScans(QPainter& painter, const OctData::Series* serie
 
 
 	
-	const OctData::Series::BScanList bscans = series->getBScans();
+	const OctData::Series::BScanList bscans = series.getBScans();
 	std::size_t activBScan                  = static_cast<std::size_t>(markerManger.getActBScanNum());
 
-	SloCoordTranslator coordTranslator(*series, getImageScaleFactor());
+	SloCoordTranslator coordTranslator(series, getImageScaleFactor());
 	coordTranslator.setClipShift(OctData::CoordSLOpx(clipX1, clipY1));
 
 	// std::cout << cscan.getSloImage()->getShift() << " * " << (getImageScaleFactor()) << " = " << shift << std::endl;
@@ -218,7 +214,7 @@ void SLOImageWidget::paintBScans(QPainter& painter, const OctData::Series* serie
 	{
 		if(bscans.size() > activBScan)
 		{
-			const OctData::BScan* actBScan = bscans.at(static_cast<std::size_t>(activBScan));
+			const std::shared_ptr<const OctData::BScan>& actBScan = bscans.at(static_cast<std::size_t>(activBScan));
 			if(actBScan)
 			{
 				if(paintMarker)
@@ -234,13 +230,13 @@ void SLOImageWidget::paintBScans(QPainter& painter, const OctData::Series* serie
 	{
 		std::size_t bscanCounter = 0;
 		const OctData::BScan* actBScan = nullptr;
-		for(const OctData::BScan* bscan : bscans)
+		for(const std::shared_ptr<const OctData::BScan>& bscan : bscans)
 		{
 			if(bscan)
 			{
 				if(bscanCounter == activBScan)
 				{
-					actBScan = bscan;
+					actBScan = bscan.get();
 				}
 				else
 				{
@@ -307,24 +303,21 @@ void SLOImageWidget::paintBScanCircle(QPainter& painter, const OctData::BScan& b
 	}
 }
 
-void SLOImageWidget::paintAnalyseGrid(QPainter& painter, const OctData::Series* series)
+void SLOImageWidget::paintAnalyseGrid(QPainter& painter, const OctData::Series& series)
 {
-	if(!series)
-		return;
-
 	QPen pen;
 	pen.setWidth(2);
 	pen.setColor(QColor(125, 125, 255));
 
 	painter.setPen(pen);
 
-	const OctData::AnalyseGrid& grid = series->getAnalyseGrid();
+	const OctData::AnalyseGrid& grid = series.getAnalyseGrid();
 
 	const std::vector<double>& diameters = grid.getDiametersMM();
 	if(diameters.size() == 0)
 		return;
 
-	SloCoordTranslator sct(*series, getImageScaleFactor());
+	SloCoordTranslator sct(series, getImageScaleFactor());
 	sct.setClipShift(OctData::CoordSLOpx(clipX1, clipY1));
 
 	const OctData::CoordSLOpx centerPx = sct(grid.getCenter());
@@ -343,7 +336,7 @@ void SLOImageWidget::showPosOnBScan(double t)
 		return;
 
 	Rect2DInt rect(markPos.p);
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(actBScan)
 	{
 		if(t<0 || t>1 || !actBScan)
@@ -355,7 +348,7 @@ void SLOImageWidget::showPosOnBScan(double t)
 		}
 	}
 
-	const OctData::Series* series = OctDataManager::getInstance().getSeries();
+	const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 	if(series && actBScan)
 	{
 		SloCoordTranslator sct(*series, getImageScaleFactor());
@@ -376,7 +369,7 @@ void SLOImageWidget::clipAndShowImage(const cv::Mat& img)
 {
 	if(ProgramOptions::sloClipScanArea())
 	{
-		const OctData::Series* series = OctDataManager::getInstance().getSeries();
+		const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 		if(series)
 		{
 			OctData::CoordSLOmm p1 = series->getLeftUpperCoord();
@@ -421,7 +414,7 @@ void SLOImageWidget::clipAndShowImage(const cv::Mat& img)
 
 void SLOImageWidget::updateMarkerOverlayImage()
 {
-	const OctData::Series* series = OctDataManager::getInstance().getSeries();
+	const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 	if(!series)
 		return;
 
@@ -563,7 +556,7 @@ namespace
 
 int SLOImageWidget::getBScanNearPos(int x, int y, double tol)
 {
-	const OctData::Series* series            = OctDataManager::getInstance().getSeries();
+	const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 	if(!series)
 		return -1;
 	const OctData::Series::BScanList bscans  = series->getBScans();
@@ -576,7 +569,7 @@ int SLOImageWidget::getBScanNearPos(int x, int y, double tol)
 	double nearstDist = std::numeric_limits<double>::infinity();
 
 	int bscanCounter = 0;
-	for(const OctData::BScan* bscan : bscans)
+	for(const std::shared_ptr<const OctData::BScan>& bscan : bscans)
 	{
 		if(bscan)
 		{
@@ -609,7 +602,7 @@ void SLOImageWidget::mousePressEvent(QMouseEvent* e)
 
 void SLOImageWidget::wheelEvent(QWheelEvent* wheelE)
 {
-	int deltaWheel = wheelE->delta();
+	const int deltaWheel = wheelE->angleDelta().y();
 	if(deltaWheel < 0)
 		markerManger.previousBScan();
 	else
@@ -644,7 +637,7 @@ void SLOImageWidget::setBScanVisibility(int opt)
 void SLOImageWidget::saveLatexImageSlot()
 {
 	OctDataManager& manager = OctDataManager::getInstance();
-	const OctData::Series* series = manager.getSeries();
+	const std::shared_ptr<const OctData::Series>& series = manager.getSeries();
 	if(!series)
 		return;
 
@@ -659,7 +652,7 @@ void SLOImageWidget::saveLatexImageSlot()
 void SLOImageWidget::saveLatexImage(const QString& filename) const
 {
 	OctDataManager& manager = OctDataManager::getInstance();
-	const OctData::Series* series = manager.getSeries();
+	const std::shared_ptr<const OctData::Series>& series = manager.getSeries();
 	if(!series)
 		return;
 
@@ -796,7 +789,7 @@ void SLOImageWidget::saveLatexImage(const QString& filename) const
 
 		stream <<  " -- cycle;";
 
-		const OctData::BScan* bscan = markerManger.getActBScan();
+		const std::shared_ptr<const OctData::BScan> bscan = markerManger.getActBScan();
 		if(bscan)
 		{
 			if(bscan->getBScanType() == OctData::BScan::BScanType::Line)

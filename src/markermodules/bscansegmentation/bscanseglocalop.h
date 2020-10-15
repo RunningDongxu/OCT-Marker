@@ -23,6 +23,7 @@
 
 #include "configdata.h"
 
+#include<memory>
 
 class QPainter;
 class QPoint;
@@ -60,7 +61,7 @@ protected:
 	BScanSegmentation& segmentation;
 
 	cv::Mat* getActMat();
-	const OctData::BScan* getActBScan();
+	std::shared_ptr<const OctData::BScan> getActBScan();
 
 	std::size_t getBScanNr();
 

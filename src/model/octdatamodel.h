@@ -26,6 +26,7 @@
 
 #include <QString>
 #include <vector>
+#include <memory>
 
 
 namespace OctData
@@ -44,9 +45,10 @@ class OctSeriesItem
 	const QString forename;
 	const int studyId;
 	const int seriesId;
-	const OctData::Series* const serie;
+	const std::shared_ptr<const OctData::Series> serie;
+	
 public:
-	OctSeriesItem(const QString& surename, const QString& forename, int studyId, int seriesId, const OctData::Series* const series)
+	OctSeriesItem(const QString& surename, const QString& forename, int studyId, int seriesId, const std::shared_ptr<const OctData::Series> series)
 	: surename(surename)
 	, forename(forename)
 	, studyId(studyId)
@@ -54,11 +56,11 @@ public:
 	, serie(series)
 	{ }
 	
-	const QString& getSurename()       const                        { return surename; }
-	const QString& getForename()       const                        { return forename; }
-	int getStudyId()                   const                        { return studyId;  }
-	int getSeriesId()                  const                        { return seriesId; }
-	const OctData::Series* getSeries() const                        { return serie;    }
+	const QString& getSurename()                              const { return surename; }
+	const QString& getForename()                              const { return forename; }
+	int getStudyId()                                          const { return studyId;  }
+	int getSeriesId()                                         const { return seriesId; }
+	const std::shared_ptr<const OctData::Series>& getSeries() const { return serie;    }
 };
 
 

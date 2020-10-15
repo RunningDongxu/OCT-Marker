@@ -105,9 +105,9 @@ protected:
 	void paintBScanLine  (QPainter& painter, const OctData::BScan& bscan, const SloCoordTranslator& transform, std::size_t bscanNr, bool paintMarker);
 	void paintBScanCircle(QPainter& painter, const OctData::BScan& bscan, const SloCoordTranslator& transform, std::size_t bscanNr, bool paintMarker);
 
-	void paintAnalyseGrid(QPainter& painter, const OctData::Series* series);
-	void paintBScans     (QPainter& painter, const OctData::Series* series);
-	void paintConvexHull (QPainter& painter, const OctData::Series* series);
+	void paintAnalyseGrid(QPainter& painter, const OctData::Series& series);
+	void paintBScans     (QPainter& painter, const OctData::Series& series);
+	void paintConvexHull (QPainter& painter, const OctData::Series& series);
 
 
 	void saveLatexImage(const QString& filename) const;

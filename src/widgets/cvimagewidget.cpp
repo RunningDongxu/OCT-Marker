@@ -304,6 +304,7 @@ void CVImageWidget::saveBaseImage()
 	{
 		QImage imageTmp;
 		cvImage2qtImage(outputImage, imageTmp);
+		imageTmp.convertTo(QImage::Format_RGB32);
 		imageTmp.save(filename);
 	}
 }
@@ -347,7 +348,7 @@ void CVImageWidget::paintEvent(QPaintEvent* event)
 
 void CVImageWidget::wheelEvent(QWheelEvent* wheelE)
 {
-	int deltaWheel = wheelE->delta();
+	const int deltaWheel = wheelE->angleDelta().y();
 	if(wheelE->modifiers() == Qt::ControlModifier)
 	{
 		QPoint pos = mapToParent(wheelE->pos());

@@ -29,7 +29,8 @@
 #include<QToolButton>
 #include<QComboBox>
 #include<QLabel>
-#include<QDesktopWidget>
+#include<QGuiApplication>
+#include<QScreen>
 
 #include<octdata/datastruct/segmentationlines.h>
 #include <data_structure/programoptions.h>
@@ -49,9 +50,12 @@ namespace
 		LayoutAdder(QLayout* layout, QWidget* parent)
 		: basisLayout(layout)
 		{
-			QDesktopWidget desktop;
-			QRect rect = desktop.availableGeometry();
-			if(rect.height() < 1000)
+			QScreen* screen = QGuiApplication::screenAt(parent->geometry().center());
+			if(!screen)
+				screen = QGuiApplication::primaryScreen();
+			
+			QRect rect = screen->availableGeometry();
+			if(rect.height() < 2000)
 			{
 				layoutWidget = new QWidget(parent);
 				gridLayout = new QGridLayout(layoutWidget);

@@ -46,7 +46,7 @@ public:
 
 	void createMap(const SloBScanDistanceMap& distanceMap
 	             , const std::vector<BScanIntervalMarker::MarkerMap>& lines
-	             , const OctData::Series* series);
+	             , const std::shared_ptr<const OctData::Series>& series);
 
 	const cv::Mat& getSloMap() const { return *sloMap; }
 
@@ -61,7 +61,7 @@ private:
 		uint8_t a = 0;
 	};
 
-	void fillCache(const std::vector<BScanIntervalMarker::MarkerMap>& lines, const OctData::Series* series);
+	void fillCache(const std::vector<BScanIntervalMarker::MarkerMap>& lines, const OctData::Series& series);
 	const Color& getColor(std::size_t bscan, std::size_t ascan) const;
 
 	std::vector<std::vector<Color>> colorCache;

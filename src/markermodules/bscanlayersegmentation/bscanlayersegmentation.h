@@ -108,7 +108,7 @@ public:
 	QWidget* getWidget   ()          override               { return widgetPtr2WGLayerSeg; }
 	WidgetOverlayLegend* getSloLegendWidget() override;
 
-	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& ptree) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& ptree) override;
 
 	OctData::Segmentationlines::SegmentlineType getActEditSeglineType() const { return actEditType; }
 
@@ -138,7 +138,7 @@ private:
 	OctData::Segmentationlines::SegmentlineType acthighlightLineType = OctData::Segmentationlines::SegmentlineType::ILM;
 
 
-	void resetMarkers(const OctData::Series* series);
+	void resetMarkers(const std::shared_ptr<const OctData::Series>& series);
 	void resetMarkers(std::size_t bscanNr);
 
 	QWidget* widgetPtr2WGLayerSeg = nullptr;

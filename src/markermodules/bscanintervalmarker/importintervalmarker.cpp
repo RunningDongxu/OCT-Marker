@@ -20,7 +20,6 @@
 
 #include <algorithm>
 
-#include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
 
 #include <oct_cpp_framework/cvmat/cvmattreestruct.h>

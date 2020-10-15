@@ -123,7 +123,7 @@ void OctMarkerManager::chooseBScan(int bscan)
 }
 
 
-void OctMarkerManager::showSeries(const OctData::Series* s)
+void OctMarkerManager::showSeries(const std::shared_ptr<const OctData::Series>& s)
 {
 	series = s;
 	bpt::ptree* markerTree = OctDataManager::getInstance().getMarkerTree(s);
@@ -234,7 +234,7 @@ void OctMarkerManager::setSloMarker(int id)
 
 
 
-void OctMarkerManager::saveMarkerStateSlot(const OctData::Series* s)
+void OctMarkerManager::saveMarkerStateSlot(const std::shared_ptr<const OctData::Series>& s)
 {
 	if(series != s)
 		return;
@@ -261,7 +261,7 @@ void OctMarkerManager::saveMarkerStateSlot(const OctData::Series* s)
 }
 
 
-void OctMarkerManager::loadMarkerStateSlot(const OctData::Series* s)
+void OctMarkerManager::loadMarkerStateSlot(const std::shared_ptr<const OctData::Series>& s)
 {
 	if(series != s)
 		return;
@@ -338,7 +338,7 @@ void OctMarkerManager::sloOverlayUpdateFromMarkerModul()
 }
 
 
-const OctData::BScan* OctMarkerManager::getActBScan() const
+std::shared_ptr<const OctData::BScan> OctMarkerManager::getActBScan() const
 {
 	if(series)
 		return series->getBScan(actBScan);

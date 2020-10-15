@@ -490,7 +490,7 @@ void BScanIntervalMarker::drawBScanSLOCircle(QPainter& painter, std::size_t bsca
 
 
 
-void BScanIntervalMarker::resetMarkers(const OctData::Series* series)
+void BScanIntervalMarker::resetMarkers(const std::shared_ptr<const OctData::Series>& series)
 {
 	if(!series)
 		return;
@@ -509,11 +509,10 @@ void BScanIntervalMarker::resetMarkers(const OctData::Series* series)
 			markers[i].set(std::make_pair(boost::icl::discrete_interval<int>::closed(0, bscanWidth), IntervalMarker::Marker()));
 		}
 	}
-
 }
 
 
-void BScanIntervalMarker::newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree)
+void BScanIntervalMarker::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree)
 {
 	if(!series)
 		return;
@@ -666,7 +665,7 @@ std::size_t BScanIntervalMarker::getMaxBscanWidth() const
 
 	for(std::size_t bscanNum = 0; bscanNum < numBscans; ++bscanNum)
 	{
-		const OctData::BScan* bscan = getBScan(bscanNum);
+		const std::shared_ptr<const OctData::BScan> bscan = getBScan(bscanNum);
 		if(bscan)
 		{
 			const std::size_t bscanWidth = static_cast<std::size_t>(bscan->getWidth());

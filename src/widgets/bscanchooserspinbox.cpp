@@ -37,8 +37,9 @@ BScanChooserSpinBox::BScanChooserSpinBox(QWidget* parent)
 // 	connect(this, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), &markerManager, &OctMarkerManager::chooseBScan);
 // 	connect(&markerManager, &OctMarkerManager::bscanChanged, this, &QSpinBox::setValue);
 
-	connect(this, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &BScanChooserSpinBox::chooserChanged);
-	connect(&markerManager, &OctMarkerManager::bscanChanged, this, &BScanChooserSpinBox::bscanChanged);
+	connect(this          , static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &BScanChooserSpinBox::chooserChanged);
+	connect(&markerManager, &OctMarkerManager::bscanChanged                             , this, &BScanChooserSpinBox::bscanChanged  );
+
 
 
 	configBscanChooser();
@@ -46,7 +47,7 @@ BScanChooserSpinBox::BScanChooserSpinBox(QWidget* parent)
 
 void BScanChooserSpinBox::configBscanChooser()
 {
-	const OctData::Series* series = OctDataManager::getInstance().getSeries();
+	const std::shared_ptr<const OctData::Series>& series = OctDataManager::getInstance().getSeries();
 
 	std::size_t maxBscan = 0;
 	if(series)

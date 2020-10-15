@@ -95,7 +95,7 @@ public:
 
 	void saveState(boost::property_tree::ptree& markerTree) override;
 	void loadState(boost::property_tree::ptree& markerTree) override;
-	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>&, boost::property_tree::ptree&) override;
 
 	bool hasChangedSinceLastSave() const override           { return scanClassifierProxys.hasChanges() || slideClassifierProxys.hasChanges(); }
 

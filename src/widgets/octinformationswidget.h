@@ -21,6 +21,8 @@
 
 #include<QWidget>
 
+#include<memory>
+
 namespace OctData
 {
 	class Patient;
@@ -58,10 +60,10 @@ public:
 
 private slots:
 	void setOctFile(QString filename);
-	void setPatient(const OctData::Patient* patient);
-	void setStudy  (const OctData::Study  * study  );
-	void setSeries (const OctData::Series * series );
-	void setBScan  (const OctData::BScan  * bscan );
+	void setPatient(const std::shared_ptr<const OctData::Patient>& patient);
+	void setStudy  (const std::shared_ptr<const OctData::Study  >& study  );
+	void setSeries (const std::shared_ptr<const OctData::Series >& series );
+	void setBScan  (const std::shared_ptr<const OctData::BScan  >& bscan  );
 
 private:
 	QFormLayout* octfileInformations = nullptr;

@@ -41,8 +41,7 @@ void MouseCoordStatus::mouseLeaveImage()
 
 void MouseCoordStatus::mousePosInImage(int x, int y)
 {
-	QString text;
-	text.sprintf("X: %4d Y: %4d", x, y);
+	QString text = QString("X: %1 Y: %2").arg(x, 4).arg(y, 4);
 	setText(text);
 }
 

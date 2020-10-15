@@ -20,6 +20,7 @@
 #define THICKNESSMAP_H
 
 #include<vector>
+#include<memory>
 
 #include "bscanlayersegmentation.h"
 
@@ -60,7 +61,7 @@ public:
 	const cv::Mat& getThicknessMap() const { return *thicknessMap; }
 
 private:
-	cv::Mat* thicknessMap = nullptr;
+	std::unique_ptr<cv::Mat> thicknessMap;
 
 	double getSingleValue(const SloBScanDistanceMap::PixelInfo& pinfo) const;
 	double getMixValue(const SloBScanDistanceMap::PixelInfo& pinfo) const;

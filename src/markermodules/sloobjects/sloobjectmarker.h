@@ -47,15 +47,14 @@ public:
 	explicit SloObjectMarker(OctMarkerManager* markerManager);
 	~SloObjectMarker() override;
 
-
-	              QGraphicsScene* getGraphicsScene()       override { return graphicsScene; }
+	      QGraphicsScene* getGraphicsScene()       override { return graphicsScene; }
 	const QGraphicsScene* getGraphicsScene() const override { return graphicsScene; }
 
-	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree& ptree) override
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>&, boost::property_tree::ptree& ptree) override
 	                                                                { loadState(ptree); }
 
-	bool hasChangedSinceLastSave() const           override { return false; } ///< @todo implement this!
-
+	bool hasChangedSinceLastSave() const           override { return false; } // TODO: implement!
+	
 	void saveState(boost::property_tree::ptree& markerTree)  override;
 	void loadState(boost::property_tree::ptree& markerTree)  override;
 

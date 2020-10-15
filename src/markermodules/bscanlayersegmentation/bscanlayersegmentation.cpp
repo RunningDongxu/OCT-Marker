@@ -131,6 +131,8 @@ void BScanLayerSegmentation::drawMarker(QPainter& painter, BScanMarkerWidget* wi
 	penHighlight.setColor(ProgramOptions::layerSegPassivLineColor());
 	penHighlight.setWidth(ProgramOptions::layerSegPassivLineSize ()+3);
 
+	
+	painter.setClipRect(widget->rect());
 
 
 	painter.setPen(penNormal);
@@ -197,7 +199,7 @@ void BScanLayerSegmentation::contextMenuEvent(QContextMenuEvent* event)
 }
 
 
-void BScanLayerSegmentation::newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& ptree)
+void BScanLayerSegmentation::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& ptree)
 {
 	BscanMarkerBase::newSeriesLoaded(series, ptree);
 	*thicknesMapImage = cv::Mat();
@@ -206,7 +208,7 @@ void BScanLayerSegmentation::newSeriesLoaded(const OctData::Series* series, boos
 }
 
 
-void BScanLayerSegmentation::resetMarkers(const OctData::Series* series)
+void BScanLayerSegmentation::resetMarkers(const std::shared_ptr<const OctData::Series>& series)
 {
 	if(!series)
 		return;
@@ -225,7 +227,7 @@ void BScanLayerSegmentation::resetMarkers(const OctData::Series* series)
 void BScanLayerSegmentation::resetMarkers(std::size_t bscanNr)
 {
 	BScanSegData& segData = lines.at(bscanNr);
-	const OctData::BScan* bscan = getBScan(bscanNr);
+	const std::shared_ptr<const OctData::BScan> bscan = getBScan(bscanNr);
 	if(!bscan)
 		return;
 
@@ -426,7 +428,7 @@ void BScanLayerSegmentation::generateThicknessmap()
 // 		QElapsedTimer timer;
 // 		timer.start();
 
-		const OctData::BScan* bscan = getActBScan();
+		const std::shared_ptr<const OctData::BScan> bscan = getActBScan();
 		OctDataManager& manager = OctDataManager::getInstance();
 		const SloBScanDistanceMap* distMap = manager.getSeriesSLODistanceMap();
 		if(bscan && distMap)
@@ -466,7 +468,7 @@ void BScanLayerSegmentation::copySegLinesFromOctData() { copySegLinesFromOctData
 
 void BScanLayerSegmentation::copySegLinesFromOctData(const std::size_t bScanNr)
 {
-	const OctData::BScan* bscan = getBScan(bScanNr);
+	const std::shared_ptr<const OctData::BScan> bscan = getBScan(bScanNr);
 	if(!bscan)
 		return;
 
@@ -561,12 +563,12 @@ bool BScanLayerSegmentation::saveSegmentation2Bin(const std::string& filename)
 
 std::size_t BScanLayerSegmentation::getMaxBscanWidth() const // TODO: Codedopplung mit IntervalMarker
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(!series)
 		return 0;
 
 	std::size_t maxBscanWidth = 0;
-	for(const OctData::BScan* bscan : series->getBScans())
+	for(const std::shared_ptr<const OctData::BScan>& bscan : series->getBScans())
 	{
 		if(bscan)
 		{

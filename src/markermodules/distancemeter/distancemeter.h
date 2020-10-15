@@ -59,7 +59,7 @@ public:
 		int y_px = 0;
 		std::size_t bscanNr = 0;
 
-		const OctData::BScan* bscan = nullptr;
+		std::shared_ptr<const OctData::BScan> bscan;
 
 		double distance(const Position& other) const;
 		double pxDistance(const Position& other) const;
@@ -81,9 +81,9 @@ public:
 	RedrawRequest mouseMoveEvent   (QMouseEvent*, BScanMarkerWidget*) override;
 	RedrawRequest mousePressEvent  (QMouseEvent*, BScanMarkerWidget*) override;
 
-	bool leaveWidgetEvent (QEvent*     , BScanMarkerWidget*) override;
+	bool leaveWidgetEvent (QEvent*, BScanMarkerWidget*) override;
 	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
-	void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree&) override;
 
 	void setActBScan(std::size_t bscan) override;
 
@@ -102,8 +102,8 @@ private:
 	QWidget* widgetPtr2WGDistanceMeter = nullptr;
 	WGDistanceMeter* wgDistanceMeter = nullptr;
 
-	const OctData::Series* series = nullptr;
-	const OctData::BScan*  actBScan = nullptr;
+	std::shared_ptr<const OctData::Series> series;
+	std::shared_ptr<const OctData::BScan>  actBScan;
 	std::size_t actBscanNr = 0;
 
 	Position calcPosition(QMouseEvent* event, BScanMarkerWidget* widget);

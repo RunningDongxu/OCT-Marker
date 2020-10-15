@@ -63,7 +63,7 @@ class BScanMarkerWidget : public CVImageWidget
 	
 	int fdSaveRaw(QString& filename);
 	void updateRawExport();
-	bool existsRaw(const OctData::BScan* bscan) const;
+	bool existsRaw(const std::shared_ptr<const OctData::BScan>& bscan) const;
 	bool rawSaveableAsImage() const;
 
 	bool checkControlUsed(QMouseEvent* event);

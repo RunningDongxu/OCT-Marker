@@ -197,7 +197,7 @@ void OctInformationsWidget::setOctFile(QString filename)
 
 
 
-void OctInformationsWidget::setPatient(const OctData::Patient* patient)
+void OctInformationsWidget::setPatient(const std::shared_ptr<const OctData::Patient>& patient)
 {
 	clearQLayout(patientInformations);
 	
@@ -241,7 +241,7 @@ void OctInformationsWidget::setPatient(const OctData::Patient* patient)
 }
 
 
-void OctInformationsWidget::setStudy(const OctData::Study* study)
+void OctInformationsWidget::setStudy(const std::shared_ptr<const OctData::Study>& study)
 {
 	clearQLayout(studyInformations);
 	
@@ -258,7 +258,7 @@ void OctInformationsWidget::setStudy(const OctData::Study* study)
 }
 
 
-void OctInformationsWidget::setSeries(const OctData::Series* series)
+void OctInformationsWidget::setSeries(const std::shared_ptr<const OctData::Series>& series)
 {
 	clearQLayout(seriesInformations);
 	
@@ -363,7 +363,7 @@ void OctInformationsWidget::setSeries(const OctData::Series* series)
 	}
 }
 
-void OctInformationsWidget::setBScan(const OctData::BScan* bscan)
+void OctInformationsWidget::setBScan(const std::shared_ptr<const OctData::BScan>& bscan)
 {
 	LayoutFiller filler(this);
 

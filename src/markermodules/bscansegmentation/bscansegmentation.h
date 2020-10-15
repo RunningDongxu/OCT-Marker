@@ -106,7 +106,7 @@ class BScanSegmentation : public BscanMarkerBase
 
 	void clearSegments();
 	void createSegments();
-	void createSegments(const OctData::Series* series);
+	void createSegments(const std::shared_ptr<const OctData::Series>& series);
 
 	template<typename Painter, typename Transformer>
 	void drawSegmentLine(Painter& painter, Transformer& transform, const ScaleFactor& factor, const QRect& rect) const;
@@ -135,7 +135,7 @@ public:
 	~BScanSegmentation() override;
 
 	QToolBar* createToolbar(QObject* parent) override;
-	QWidget* getWidget   ()          override               { return widgetPtr2WGSegmentation; }
+	QWidget* getWidget()                     override               { return widgetPtr2WGSegmentation; }
 	
 	void drawMarker(QPainter&, BScanMarkerWidget*, const QRect&) const override;
 	bool drawBScan() const                         override { return true;  }
@@ -149,12 +149,12 @@ public:
 	void saveState(boost::property_tree::ptree& markerTree)  override;
 	void loadState(boost::property_tree::ptree& markerTree)  override;
 
-	void setActBScan(std::size_t bscan)  override           { setActMat(bscan, true); }
-	bool hasChangedSinceLastSave() const override           { if(stateChangedSinceLastSave) return true; return hasActMatChanged(); }
+	void setActBScan(std::size_t bscan)  override                   { setActMat(bscan, true); }
+	bool hasChangedSinceLastSave() const override                   { if(stateChangedSinceLastSave) return true; return hasActMatChanged(); }
 
 	std::size_t getNumBScans() const                                { return segments.size(); }
 	
-	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree) override;
 
 	void initBScanFromThreshold (const BScanSegmentationMarker::ThresholdDirectionData& data);
 	void initSeriesFromThreshold(const BScanSegmentationMarker::ThresholdDirectionData& data);

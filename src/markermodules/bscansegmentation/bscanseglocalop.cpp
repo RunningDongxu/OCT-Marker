@@ -55,7 +55,7 @@ cv::Mat* BScanSegLocalOp::getActMat()
 	return segmentation.actMat;
 }
 
-const OctData::BScan* BScanSegLocalOp::getActBScan()
+std::shared_ptr<const OctData::BScan> BScanSegLocalOp::getActBScan()
 {
 	return segmentation.getActBScan();
 }
@@ -327,7 +327,7 @@ bool BScanSegLocalOpThresholdDirection::applyThreshold(int x, int y)
 	if(y0>=y1)
 		return false;
 
-	const OctData::BScan* bscan = getActBScan();
+	std::shared_ptr<const OctData::BScan> bscan = getActBScan();
 	if(!bscan)
 		return false;
 
@@ -412,7 +412,7 @@ bool BScanSegLocalOpThreshold::getLocalImageMat(int x, int y, cv::Mat& image, cv
 	if(y0>=y1)
 		return false;
 
-	const OctData::BScan* bscan = getActBScan();
+	std::shared_ptr<const OctData::BScan> bscan = getActBScan();
 	if(!bscan)
 		return false;
 

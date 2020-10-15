@@ -202,28 +202,37 @@ void BScanMarkerWidget::updateAspectRatio()
 
 void BScanMarkerWidget::paintSegmentationLine(QPainter& segPainter, int bScanHeight, const std::vector<double>& segLine, const ScaleFactor& factor)
 {
-	double lastEnt = std::numeric_limits<OctData::Segmentationlines::SegmentlineDataType>::quiet_NaN();
 	int xCoord = 0;
 
 	const double factorX = factor.getFactorX();
 	const double factorY = factor.getFactorY();
 
+	QPolygonF polyline;
 	for(OctData::Segmentationlines::SegmentlineDataType value : segLine)
 	{
-		// std::cout << value << '\n';
-		if(!std::isnan(lastEnt) && lastEnt < bScanHeight && lastEnt > 0 && value < bScanHeight && value > 0)
+		if(std::isnan(value) || value > bScanHeight || value < 0)
 		{
-			segPainter.drawLine(QLineF((xCoord-1)*factorX, lastEnt*factorY, xCoord*factorX, value*factorY));
+			if(!polyline.empty())
+			{
+				segPainter.drawPolyline(polyline);
+				polyline.clear();
+			}
 		}
-		lastEnt = value;
+		else
+		{
+			polyline.push_back(QPointF(xCoord*factorX, value*factorY));
+		}
 		++xCoord;
 	}
+	
+	if(!polyline.empty())
+		segPainter.drawPolyline(polyline);
 }
 
 
 void BScanMarkerWidget::paintSegmentations(QPainter& segPainter, const ScaleFactor& scaleFactor) const
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 
 	QPen pen;
 	pen.setColor(ProgramOptions::bscanSegmetationLineColor());
@@ -258,8 +267,8 @@ void BScanMarkerWidget::paintEvent(QPaintEvent* event)
 	CVImageWidget::paintEvent(event);
 	
 	OctDataManager& octdataManager = OctDataManager::getInstance();
-	const OctData::Series* series   = octdataManager.getSeries();
-	const OctData::BScan * actBScan = markerManger  .getActBScan();
+	const std::shared_ptr<const OctData::Series>& series   = octdataManager.getSeries();
+	const std::shared_ptr<const OctData::BScan >  actBScan = markerManger  .getActBScan();
 	
 	if(!series || !actBScan)
 		return;
@@ -302,7 +311,7 @@ void BScanMarkerWidget::paintConture(QPainter& painter, const std::vector<Contur
 }
 
 
-bool BScanMarkerWidget::existsRaw(const OctData::BScan* bscan) const
+bool BScanMarkerWidget::existsRaw(const std::shared_ptr<const OctData::BScan>& bscan) const
 {
 	if(!bscan)
 		return false;
@@ -311,7 +320,7 @@ bool BScanMarkerWidget::existsRaw(const OctData::BScan* bscan) const
 
 bool BScanMarkerWidget::rawSaveableAsImage() const
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(!actBScan)
 		return false;
 	cv::Mat rawImage = actBScan->getRawImage();
@@ -328,7 +337,7 @@ bool BScanMarkerWidget::rawSaveableAsImage() const
 
 void BScanMarkerWidget::updateRawExport()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 
 	bool rawExists       = existsRaw(actBScan);
 	bool saveableAsImage = rawSaveableAsImage();
@@ -342,7 +351,7 @@ void BScanMarkerWidget::updateRawExport()
 
 void BScanMarkerWidget::imageChanged()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 
 	updateRawExport();
 	if(actBScan)
@@ -406,7 +415,7 @@ bool BScanMarkerWidget::event(QEvent* event)
 void BScanMarkerWidget::wheelEvent(QWheelEvent* wheelE)
 {
 	CVImageWidget::wheelEvent(wheelE);
-	int deltaWheel = wheelE->delta();
+	const int deltaWheel = wheelE->angleDelta().y();
 	if(!wheelE->isAccepted())
 	{
 		if(deltaWheel < 0)
@@ -606,7 +615,7 @@ void BScanMarkerWidget::markersMethodChanged(BscanMarkerBase* marker)
 
 void BScanMarkerWidget::saveRawImage()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(actBScan && rawSaveableAsImage())
 	{
 		QString filename;
@@ -625,7 +634,7 @@ void BScanMarkerWidget::saveRawImage()
 
 void BScanMarkerWidget::saveRawMat()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(actBScan && existsRaw(actBScan))
 	{
 		QString filename = QFileDialog::getSaveFileName(this, tr("Save raw data as matrix"), "", "CV (*.xml *.jml)");
@@ -640,7 +649,7 @@ void BScanMarkerWidget::saveRawMat()
 
 void BScanMarkerWidget::saveRawBin()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(actBScan && existsRaw(actBScan))
 	{
 		QString filename = QFileDialog::getSaveFileName(this, tr("Save raw data as bin"), "", "Binary (*.bin)");
@@ -653,7 +662,7 @@ void BScanMarkerWidget::saveRawBin()
 
 void BScanMarkerWidget::saveImageBin()
 {
-	const OctData::BScan* actBScan = markerManger.getActBScan();
+	const std::shared_ptr<const OctData::BScan> actBScan = markerManger.getActBScan();
 	if(actBScan)
 	{
 		QString filename = QFileDialog::getSaveFileName(this, tr("Save image data as bin"), "", "Binary (*.bin)");

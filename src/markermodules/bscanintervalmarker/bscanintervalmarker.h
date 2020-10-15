@@ -90,8 +90,8 @@ public:
 	
 	const Marker& getActMarker() const                              { return actMarker; }
 	
-	QToolBar* createToolbar(QObject* parent) override;
-	QWidget* getWidget   ()          override               { return widgetPtr2WGIntevalMarker; }
+	QToolBar* createToolbar(QObject* parent)  override;
+	QWidget* getWidget   ()                   override              { return widgetPtr2WGIntevalMarker; }
 	WidgetOverlayLegend* getSloLegendWidget() override              { return &widgetOverlayLegend; }
 	
 	bool drawingBScanOnSLO() const   override               { return true; }
@@ -127,7 +127,7 @@ public:
 	std::size_t getNumBScans() const                                { if(actCollectionValid()) return actCollection->second.markers.size(); return 0; }
 	const std::string& getActMarkerCollectionInternalName()   const { if(actCollectionValid()) return actCollection->first; static std::string nullString; return nullString; }
 
-	void newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree) override;
+	void newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree) override;
 
 	MarkerCollectionWork getMarkerCollection(const std::string& internalName);
 	MarkerCollectionWork getActMarkerCollection()                   { return MarkerCollectionWork(actCollection); }
@@ -197,7 +197,7 @@ private:
 	void createMarkerMethodActions();
 	QRect getWidgetPaintSize(const QPoint& p1, const QPoint& p2, const ScaleFactor& factor, const QPoint* p3 = nullptr);
 // 	void addMarkerCollection2Toolbar(const IntervalMarker& markers, QToolBar& markerToolbar, QActionGroup& actionGroupMarker, std::vector<QAction*>& actionList, QObject* parent);
-	void resetMarkers(const OctData::Series* series);
+	void resetMarkers(const std::shared_ptr<const OctData::Series>& series);
 
 	void generateSloMap();
 	void autoGenerateSloMap();

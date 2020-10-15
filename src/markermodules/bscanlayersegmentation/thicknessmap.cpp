@@ -45,18 +45,13 @@ using SegmentlineDataType = OctData::Segmentationlines::SegmentlineDataType;
 
 
 ThicknessMap::ThicknessMap()
-: thicknessMap(new cv::Mat)
+: thicknessMap(std::make_unique<cv::Mat>())
 {
 }
 
 
 
-ThicknessMap::~ThicknessMap()
-{
-	delete thicknessMap;
-}
-
-
+ThicknessMap::~ThicknessMap() = default;
 
 void ThicknessMap::createMap(const SloBScanDistanceMap& distMap
                            , const std::vector<BScanLayerSegmentation::BScanSegData>& lines

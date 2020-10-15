@@ -19,6 +19,7 @@
 #pragma once
 
 #include<vector>
+#include<memory>
 
 #include <QObject>
 #include <QIcon>
@@ -111,7 +112,7 @@ public:
 	virtual void saveState(boost::property_tree::ptree&)            {}
 	virtual void loadState(boost::property_tree::ptree&)            { clearUndoRedo(); }
 	
-	virtual void newSeriesLoaded(const OctData::Series*, boost::property_tree::ptree&)
+	virtual void newSeriesLoaded(const std::shared_ptr<const OctData::Series>&, boost::property_tree::ptree&)
 	                                                                { clearUndoRedo(); }
 
 	std::size_t numUndoSteps()                                const { return undoList.size(); }
@@ -140,9 +141,9 @@ protected:
 	int getBScanHight() const;
 	int getBScanWidth(std::size_t nr) const;
 	
-	const OctData::Series* getSeries() const;
-	const OctData::BScan * getActBScan() const;
-	const OctData::BScan * getBScan(std::size_t nr) const;
+	const std::shared_ptr<const OctData::Series>& getSeries() const;
+	      std::shared_ptr<const OctData::BScan >  getActBScan() const;
+	      std::shared_ptr<const OctData::BScan >  getBScan(std::size_t nr) const;
 
 	bool drawSLOOverlayImage(const cv::Mat& sloImage, cv::Mat& outSloImage, double alpha, const cv::Mat& sloOverlay) const;
 

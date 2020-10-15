@@ -18,6 +18,8 @@
 
 #include "octmarkerio.h"
 
+#include<filesystem>
+
 #ifndef MEX_COMPILE
 	#include <data_structure/programoptions.h>
 	#define DEBUG_OUT(X) qDebug(X);
@@ -35,23 +37,21 @@
 
 #include <boost/iostreams/device/file_descriptor.hpp>
 #include <boost/iostreams/stream.hpp>
-#include <boost/filesystem.hpp>
 #include <iostream>
 
 #include<string>
 
 namespace pt = boost::property_tree;
 namespace io = boost::iostreams;
-namespace fs = boost::filesystem;
+namespace fs = std::filesystem;
 
 
 #include <boost/lexical_cast.hpp>
 
-#include <boost/filesystem.hpp>
 
 
 namespace bpt = boost::property_tree;
-namespace bfs = boost::filesystem;
+namespace bfs = std::filesystem;
 
 namespace
 {
@@ -132,7 +132,7 @@ OctMarkerFileformat OctMarkerIO::getFormatFromExtension(const std::string& filen
 	return getFormatFromExtension(markersPath);
 }
 
-OctMarkerFileformat OctMarkerIO::getFormatFromExtension(const boost::filesystem::path& markersPath)
+OctMarkerFileformat OctMarkerIO::getFormatFromExtension(const std::filesystem::path& markersPath)
 {
 	std::string extension = markersPath.extension().generic_string();
 	if(extension.length() == 0)
@@ -211,7 +211,7 @@ bool OctMarkerIO::saveDefaultMarker(const std::string& octFilename)
 		return saveMarkers(loadedDefaultFilename, defaultLoadedFormat);
 }
 
-bool OctMarkerIO::loadMarkers(const boost::filesystem::path& markersPath, OctMarkerFileformat format)
+bool OctMarkerIO::loadMarkers(const std::filesystem::path& markersPath, OctMarkerFileformat format)
 {
 	if(format == OctMarkerFileformat::Auto)
 		format = getFormatFromExtension(markersPath);
@@ -227,7 +227,7 @@ bool OctMarkerIO::loadMarkers(const boost::filesystem::path& markersPath, OctMar
 
 	bpt::ptree loadTree;
 
-    io::file_descriptor_source fs(markersPath);
+    io::file_descriptor_source fs(markersPath.generic_string());
     io::stream<io::file_descriptor_source> fsstream(fs);
 
 	switch(format)
@@ -272,7 +272,7 @@ bool OctMarkerIO::loadMarkers(const boost::filesystem::path& markersPath, OctMar
 
 bool OctMarkerIO::loadMarkers(const std::string& markersFilename, OctMarkerFileformat format)
 {
-	boost::filesystem::path markersPath(filenameConv(markersFilename));
+	std::filesystem::path markersPath(filenameConv(markersFilename));
 	return loadMarkers(markersPath, format);
 }
 
@@ -300,8 +300,8 @@ bool OctMarkerIO::saveMarkersPrivat(const std::string& markersFilename, OctMarke
     markerTree.add_child("Markers", *markerstree);
 
 
-	boost::filesystem::path p(filenameConv(markersFilename));
-    io::file_descriptor_sink fs(p);
+	std::filesystem::path p(filenameConv(markersFilename));
+    io::file_descriptor_sink fs(p.generic_string());
     io::stream<io::file_descriptor_sink> fsstream(fs);
 
 

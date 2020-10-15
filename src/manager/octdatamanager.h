@@ -61,14 +61,13 @@ public:
 	
 	~OctDataManager() override;
 	
-	static OctDataManager& getInstance()                            { static OctDataManager instance; return instance; }
-	
-	const QString& getLoadedFilename() const                        { return actFilename; }
-	const OctData::Patient* getPatient() const                      { return actPatient ; }
-	const OctData::Study  * getStudy  () const                      { return actStudy   ; }
-	const OctData::Series * getSeries () const                      { return actSeries  ; }
-	boost::property_tree::ptree* getMarkerTree(const OctData::Series* series)
-	                                                                { return getMarkerTreeSeries(series); }
+	static OctDataManager& getInstance()                                      { static OctDataManager instance; return instance; }
+	                                                                          
+	const QString& getLoadedFilename() const                                  { return actFilename; }
+	const std::shared_ptr<const OctData::Patient>& getPatient() const         { return actPatient ; }
+	const std::shared_ptr<const OctData::Study  >& getStudy  () const         { return actStudy   ; }
+	const std::shared_ptr<const OctData::Series >& getSeries () const         { return actSeries  ; }
+	boost::property_tree::ptree* getMarkerTree(const std::shared_ptr<const OctData::Series>& series) { return getMarkerTreeSeries(series); }
 	
 	void saveMarkersDefault();
 	bool checkAndAskSaveBeforContinue();
@@ -81,7 +80,7 @@ private slots:
 public slots:
 	void openFile(const QString& filename);
 	
-	void chooseSeries(const OctData::Series* seriesReq);
+	void chooseSeries(const std::shared_ptr<const OctData::Series>& seriesReq);
 
 
 	const SloBScanDistanceMap* getSeriesSLODistanceMap() const;
@@ -100,12 +99,12 @@ signals:
 	void octFileChanged();
 	void octFileChanged(QString filename);
 	void octFileChanged(const OctData::OCT*    );
-	void patientChanged(const OctData::Patient*);
-	void studyChanged  (const OctData::Study*  );
-	void seriesChanged (const OctData::Series* );
+	void patientChanged(const std::shared_ptr<const OctData::Patient>&);
+	void studyChanged  (const std::shared_ptr<const OctData::Study  >&);
+	void seriesChanged (const std::shared_ptr<const OctData::Series >&);
 
-	void saveMarkerState(const OctData::Series*);
-	void loadMarkerState(const OctData::Series*);
+	void saveMarkerState(const std::shared_ptr<const OctData::Series>&);
+	void loadMarkerState(const std::shared_ptr<const OctData::Series>&);
 
 	void loadMarkerStateAll();
 
@@ -115,26 +114,25 @@ signals:
 
 private:
 	
-	boost::property_tree::ptree* const markerstree = nullptr;
-	OctMarkerIO*                 const markerIO    = nullptr;
+	const std::unique_ptr<boost::property_tree::ptree> markerstree;
+	const std::unique_ptr<OctMarkerIO                > markerIO   ;
 
-	OctData::OCT* octData         = nullptr;
-	OctData::OCT* octData4Loading = nullptr; // is nullptr when no file is loading by task
 	QString actFilename;
 	
-	const OctData::Patient* actPatient = nullptr;
-	const OctData::Study*   actStudy   = nullptr;
-	const OctData::Series*  actSeries  = nullptr;
+	std::unique_ptr<OctData::OCT>           octData   ;
+	std::shared_ptr<const OctData::Patient> actPatient;
+	std::shared_ptr<const OctData::Study  > actStudy  ;
+	std::shared_ptr<const OctData::Series > actSeries ;
 
-	mutable SloBScanDistanceMap* seriesSLODistanceMap = nullptr;
+	mutable std::unique_ptr<SloBScanDistanceMap> seriesSLODistanceMap;
 	
-	OctDataManagerThread* loadThread = nullptr;
+	std::unique_ptr<OctDataManagerThread> loadThread;
 	
 	OctDataManager();
 	OctDataManager& operator=(const OctDataManager& other) = delete;
 	
-	boost::property_tree::ptree* getMarkerTreeSeries(const OctData::Series* series);
-	boost::property_tree::ptree* getMarkerTreeSeries(const OctData::Patient* pat, const OctData::Study* study, const OctData::Series*  series);
+	boost::property_tree::ptree* getMarkerTreeSeries(const std::shared_ptr<const OctData::Series>& series);
+	boost::property_tree::ptree* getMarkerTreeSeries(const std::shared_ptr<const OctData::Patient>& pat, const std::shared_ptr<const OctData::Study>& study, const std::shared_ptr<const OctData::Series>& series);
 };
 
 /**
@@ -152,13 +150,14 @@ class OctDataManagerThread : public QThread, public CppFW::Callback
 	bool loadSuccess  = true;
 	bool loadError    = false;
 
-	OctData::OCT* oct = nullptr;
+	std::unique_ptr<OctData::OCT> octData;
 
 	const QString filename;
 	QString  error;
 
 public:
-	OctDataManagerThread(OctDataManager& dataManager, const QString& filename, OctData::OCT* oct) : octDataManager(dataManager), oct(oct), filename(filename) {}
+	OctDataManagerThread(OctDataManager& dataManager, const QString& filename);
+	~OctDataManagerThread();
 
 	void breakLoad()                                                { breakLoading = true; }
 
@@ -166,6 +165,8 @@ public:
 	const QString& getError()                                const  { return error; }
 	const QString& getFilename()                             const  { return filename; }
 	bool hasLoadError()                                      const  { return loadError; }
+	
+	std::unique_ptr<OctData::OCT> getOctData();
 
 protected:
 	void run() override;

@@ -568,7 +568,7 @@ void BScanSegmentation::extendLeftRightSpace()
 
 void BScanSegmentation::seriesRemoveUnconectedAreas()
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	for(std::size_t i=0; i<series->bscanCount(); ++i)
 	{
 		if(setActMat(i))
@@ -584,7 +584,7 @@ void BScanSegmentation::seriesRemoveUnconectedAreas()
 
 void BScanSegmentation::seriesExtendLeftRightSpace()
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	for(std::size_t i=0; i<series->bscanCount(); ++i)
 	{
 		if(setActMat(i))
@@ -611,7 +611,7 @@ void BScanSegmentation::clearSegments()
 
 void BScanSegmentation::createSegments()
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 
 	if(!series)
 		return;
@@ -621,17 +621,16 @@ void BScanSegmentation::createSegments()
 }
 
 
-void BScanSegmentation::createSegments(const OctData::Series* series)
+void BScanSegmentation::createSegments(const std::shared_ptr<const OctData::Series>& series)
 {
 	if(!series)
 		return;
 
 	clearSegments();
 
-	for(std::size_t i=0; i<series->bscanCount(); ++i)
+	for(const std::shared_ptr<const OctData::BScan>& bscan : series->getBScans())
 	{
 		SimpleCvMatCompress* mat;
-		const OctData::BScan* bscan = getBScan(i);
 		if(bscan)
 			mat = new SimpleCvMatCompress(bscan->getHeight(), bscan->getWidth(), BScanSegmentationMarker::markermatInitialValue);
 		else
@@ -641,7 +640,7 @@ void BScanSegmentation::createSegments(const OctData::Series* series)
 }
 
 
-void BScanSegmentation::newSeriesLoaded(const OctData::Series* series, boost::property_tree::ptree& markerTree)
+void BScanSegmentation::newSeriesLoaded(const std::shared_ptr<const OctData::Series>& series, boost::property_tree::ptree& markerTree)
 {
 	BscanMarkerBase::newSeriesLoaded(series, markerTree);
 
@@ -683,11 +682,11 @@ void BScanSegmentation::initBScanFromThreshold(const BScanSegmentationMarker::Th
 	if(!actMat || actMat->empty())
 		return;
 
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(!series)
 		return;
 
-	const OctData::BScan* bscan = series->getBScan(getActBScanNr());
+	const std::shared_ptr<const OctData::BScan> bscan = series->getBScan(getActBScanNr());
 	if(!bscan)
 		return;
 
@@ -705,10 +704,10 @@ void BScanSegmentation::initBScanFromThreshold(const BScanSegmentationMarker::Th
 
 void BScanSegmentation::initSeriesFromThreshold(const BScanSegmentationMarker::ThresholdDirectionData& data)
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 
 	std::size_t bscanCount = 0;
-	for(const OctData::BScan* bscan : series->getBScans())
+	for(const std::shared_ptr<const OctData::BScan>& bscan : series->getBScans())
 	{
 		const cv::Mat& image = bscan->getImage();
 
@@ -730,11 +729,11 @@ void BScanSegmentation::initBScanFromSegline(OctData::Segmentationlines::Segment
 	if(!actMat || actMat->empty())
 		return;
 
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 	if(!series)
 		return;
 
-	const OctData::BScan* bscan = series->getBScan(getActBScanNr());
+	const std::shared_ptr<const OctData::BScan> bscan = series->getBScan(getActBScanNr());
 	if(!bscan)
 		return;
 
@@ -746,11 +745,11 @@ void BScanSegmentation::initBScanFromSegline(OctData::Segmentationlines::Segment
 
 void BScanSegmentation::initSeriesFromSegline(OctData::Segmentationlines::SegmentlineType type)
 {
-	const OctData::Series* series = getSeries();
+	const std::shared_ptr<const OctData::Series>& series = getSeries();
 
 
 	std::size_t bscanCount = 0;
-	for(const OctData::BScan* bscan : series->getBScans())
+	for(const std::shared_ptr<const OctData::BScan>& bscan : series->getBScans())
 	{
 		if(!bscan)
 			continue;
@@ -817,7 +816,7 @@ bool BScanSegmentation::setActMat(std::size_t nr, bool saveOldState)
 
 			if(actMat->empty())
 			{
-				const OctData::BScan* bscan = getBScan(nr);
+				const std::shared_ptr<const OctData::BScan> bscan = getBScan(nr);
 				if(bscan)
 				{
 					*actMat = cv::Mat(bscan->getHeight(), bscan->getWidth(), cv::DataType<uint8_t>::type, cv::Scalar(BScanSegmentationMarker::markermatInitialValue));

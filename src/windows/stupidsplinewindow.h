@@ -93,5 +93,7 @@ private slots:
 	void loadFileProgress(double frac);
 
 	void setProgramOptions();
+	
+	void screenshot();
 };
 

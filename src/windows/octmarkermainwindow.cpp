@@ -416,12 +416,13 @@ void OCTMarkerMainWindow::setupMenu()
 
 
 
-	menuBar()->addMenu(fileMenu);
-	menuBar()->addMenu(markerMenu);
-	menuBar()->addMenu(viewMenu);
-	menuBar()->addMenu(extrasMenu);
+	menuBar()->addMenu(fileMenu   );
+	menuBar()->addMenu(markerMenu );
+	menuBar()->addMenu(viewMenu   );
+	menuBar()->addMenu(extrasMenu );
 	menuBar()->addMenu(optionsMenu);
-	menuBar()->addMenu(helpMenu);
+	menuBar()->addMenu(helpMenu   );
+
 
 
 	//
@@ -985,9 +986,10 @@ void OCTMarkerMainWindow::screenshot()
 		return;
 
 	QPdfWriter generator(filename);
-	generator.setTitle(tr("overlay legend"));;
-	generator.setPageSize(QPageSize(size()));
-	generator.setResolution(100);
+	generator.setTitle(tr("OCT-Marker"));
+	generator.setPageMargins(QMarginsF(0., 0., 0., 0.));
+	generator.setPageSize(QPageSize(size(), QPageSize::Point));
+	generator.setResolution(72);
 
 	QPainter painter;
 	QFont font;
@@ -997,7 +999,6 @@ void OCTMarkerMainWindow::screenshot()
 	render(&painter, QPoint(), QRegion(), DrawChildren | DrawWindowBackground | IgnoreMask);
 // 				const QPoint &targetOffset = QPoint(), const QRegion &sourceRegion = QRegion(), RenderFlags renderFlags = RenderFlags( DrawWindowBackground | DrawChildren ))
 	painter.end();
-
 }
 
 void OCTMarkerMainWindow::triggerSaveMarkersDefaultCatchErrors()

@@ -83,7 +83,6 @@ int main(int argc, char **argv)
 	app.installTranslator(&qtTranslator);
 	app.installTranslator(&translator);
 
-
 	QCommandLineParser parser;
     parser.setApplicationDescription("Ein Programm um verschiedene Dinge in OCT-Daten zu markieren und zu segmentieren.\n\nOCT-Marker  Copyright (C) 2018 Kay Gawlik\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions; for details type ‘--license’.");
 	parser.addOptions({
